@@ -40,7 +40,7 @@ namespace CinemaTickets
                 // Infants go free
                 price = 0.0;
             }
-            else if ((ticketType == "student" || ticketType == "senior") && member == true)
+            else if ((ticketType == "student" || ticketType == "senior") && member)
             {
                 price *= 0.7;
                 extras = "Premier seats, Popcorn";
@@ -49,7 +49,7 @@ namespace CinemaTickets
             {
                 price *= 0.8;
             }
-            else if (member == true)
+            else if (member)
             {
                 ticketType = "Adult";
                 price *= 0.9;
