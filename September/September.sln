@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "13-TemperatureConversion", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "15H-Errors", "15H-Errors\15H-Errors.csproj", "{7B62C0CE-84F3-46CD-AF15-263033C9374A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "20-CardGame", "20-CardGame\20-CardGame.csproj", "{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "20-CardGame", "20-CardGame\20-CardGame.csproj", "{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "22-NumberGuess", "22-NumberGuess\22-NumberGuess.csproj", "{4AA264CD-7EF3-40FB-954E-02E27E1D119F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
