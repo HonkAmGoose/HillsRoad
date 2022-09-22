@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace circle
+namespace Circle
 {
-    class Circle
+    class Program
     {
 
         /* Program to calculate the circumference of a circle

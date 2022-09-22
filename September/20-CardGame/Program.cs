@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace PCardGameIncomplete
+namespace CardGame
 {
-    public class PCardGameIncomplete
+    public class Program
     {
         public static void Main(string[] args)
         {
