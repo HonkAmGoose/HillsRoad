@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "20-CardGame", "20-CardGame\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "22-NumberGuess", "22-NumberGuess\22-NumberGuess.csproj", "{4AA264CD-7EF3-40FB-954E-02E27E1D119F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "22-TimesTables", "22-TimesTables\22-TimesTables.csproj", "{F9573F0C-C707-41CC-BE03-99155ED2FBA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AA264CD-7EF3-40FB-954E-02E27E1D119F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9573F0C-C707-41CC-BE03-99155ED2FBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9573F0C-C707-41CC-BE03-99155ED2FBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9573F0C-C707-41CC-BE03-99155ED2FBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9573F0C-C707-41CC-BE03-99155ED2FBA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
