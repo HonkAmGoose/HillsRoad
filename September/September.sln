@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "15H-Errors", "15H-Errors\15
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "20-CardGame", "20-CardGame\20-CardGame.csproj", "{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "22-NumberGuess", "22-NumberGuess\22-NumberGuess.csproj", "{4AA264CD-7EF3-40FB-954E-02E27E1D119F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-NumberGuess", "22-NumberGuess\22-NumberGuess.csproj", "{4AA264CD-7EF3-40FB-954E-02E27E1D119F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "22-TimesTables", "22-TimesTables\22-TimesTables.csproj", "{F9573F0C-C707-41CC-BE03-99155ED2FBA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-TimesTables", "22-TimesTables\22-TimesTables.csproj", "{F9573F0C-C707-41CC-BE03-99155ED2FBA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "22H-MathsQuiz", "22H-MathsQuiz\22H-MathsQuiz.csproj", "{7E196256-2F22-4864-8A9D-F3283D2B57E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22H-MathsQuiz", "22H-MathsQuiz\22H-MathsQuiz.csproj", "{7E196256-2F22-4864-8A9D-F3283D2B57E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "27-SpaceName", "27-SpaceName\27-SpaceName.csproj", "{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{7E196256-2F22-4864-8A9D-F3283D2B57E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E196256-2F22-4864-8A9D-F3283D2B57E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E196256-2F22-4864-8A9D-F3283D2B57E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
