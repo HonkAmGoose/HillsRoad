@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22H-MathsQuiz", "22H-MathsQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "27-SpaceName", "27-SpaceName\27-SpaceName.csproj", "{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "27-StringCheck", "27-StringCheck\27-StringCheck.csproj", "{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
