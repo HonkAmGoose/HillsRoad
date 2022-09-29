@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace CinemaTickets
+﻿namespace CinemaTickets
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {

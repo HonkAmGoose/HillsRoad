@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace FibbonacciGen
+﻿namespace FibbonacciGen
 {
-    class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Enter how many terms of the fibbonacci sequence you would like to generate");
             int num = Convert.ToInt32(Console.ReadLine());

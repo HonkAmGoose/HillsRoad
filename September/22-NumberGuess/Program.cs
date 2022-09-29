@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace NumberGuess
+﻿namespace NumberGuess
 {
-    public class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             bool again;
             int guess, target, numGuesses;

@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace TimesTables
+﻿namespace TimesTables
 {
-    public class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Enter a times table to generate:");
             int table = Convert.ToInt32(Console.ReadLine());

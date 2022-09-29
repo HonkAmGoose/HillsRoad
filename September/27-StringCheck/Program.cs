@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-
-namespace StringCheck
+﻿namespace StringCheck
 {
-    class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             // Set sentence and split on spaces into seperate words
             string toCheck = "I am going to check every word of this sentence for the keywords";

@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace CardGame
+﻿namespace CardGame
 {
-    public class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Enter the number of cards to generate (with replacement)");
             int count = Convert.ToInt32(Console.ReadLine());

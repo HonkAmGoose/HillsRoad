@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace MathsQuiz
+﻿namespace MathsQuiz
 {
-    class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             int correct = 0;
             int a, b, answer;

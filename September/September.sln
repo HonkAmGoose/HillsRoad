@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-2FibonnaciGen", "Fibonna
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-3LetterCounter", "29-3LetterCounter\29-3LetterCounter.csproj", "{A18D27B7-DB70-4547-B979-9C0798CF7B4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-4ColouredTriangles", "29-4ColouredTriangles[\29-4ColouredTriangles.csproj", "{53FE7653-FD9E-4296-BBE5-6D1F467020F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53FE7653-FD9E-4296-BBE5-6D1F467020F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FE7653-FD9E-4296-BBE5-6D1F467020F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FE7653-FD9E-4296-BBE5-6D1F467020F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FE7653-FD9E-4296-BBE5-6D1F467020F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

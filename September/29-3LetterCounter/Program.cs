@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace LetterCounter
+﻿namespace LetterCounter
 {
-    class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Enter a sentence to count vowels and consonants:");
             string sentence = Console.ReadLine().ToLower();

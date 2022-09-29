@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace TemperatureConversion
+﻿namespace TemperatureConversion
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        void Main(string[] args)
         {
             while (true)
             {

@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace SpaceName
+﻿namespace SpaceName
 {
-    class Program
+    internal class Program
     {
         public static string Input(string prompt)
         {
             Console.WriteLine(prompt);
             return Console.ReadLine();
         }
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             string firstName = Input("What is your first name?");
             string lastName = Input("What is your last name?");

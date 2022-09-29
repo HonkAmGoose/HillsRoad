@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace ReduceNumber
+﻿namespace ReduceNumber
 {
-    class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Enter a number to see how many steps it requires to reduce to zero:");
             int num = Convert.ToInt32(Console.ReadLine());
