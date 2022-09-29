@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-TimesTables", "22-TimesT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22H-MathsQuiz", "22H-MathsQuiz\22H-MathsQuiz.csproj", "{7E196256-2F22-4864-8A9D-F3283D2B57E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "27-SpaceName", "27-SpaceName\27-SpaceName.csproj", "{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "27-SpaceName", "27-SpaceName\27-SpaceName.csproj", "{BA4A5E81-25E5-4364-9C92-9F2ED3FA279B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "27-StringCheck", "27-StringCheck\27-StringCheck.csproj", "{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "27-StringCheck", "27-StringCheck\27-StringCheck.csproj", "{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-ReduceNumber", "29-ReduceNumber\29-ReduceNumber.csproj", "{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
