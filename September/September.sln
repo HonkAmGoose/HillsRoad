@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "15H-Errors", "15H-Errors\15
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "20-CardGame", "20-CardGame\20-CardGame.csproj", "{277C8E50-E3F4-4F0B-ADA0-A4D56DB95921}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-NumberGuess", "22-NumberGuess\22-NumberGuess.csproj", "{4AA264CD-7EF3-40FB-954E-02E27E1D119F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-2NumberGuess", "22-NumberGuess\22-2NumberGuess.csproj", "{4AA264CD-7EF3-40FB-954E-02E27E1D119F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-TimesTables", "22-TimesTables\22-TimesTables.csproj", "{F9573F0C-C707-41CC-BE03-99155ED2FBA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22-1TimesTables", "22-TimesTables\22-1TimesTables.csproj", "{F9573F0C-C707-41CC-BE03-99155ED2FBA0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "22H-MathsQuiz", "22H-MathsQuiz\22H-MathsQuiz.csproj", "{7E196256-2F22-4864-8A9D-F3283D2B57E1}"
 EndProject
@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "27-SpaceName", "27-SpaceNam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "27-StringCheck", "27-StringCheck\27-StringCheck.csproj", "{1D1622C4-6891-4D6A-B3B6-E1D9BD77C15A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-ReduceNumber", "29-ReduceNumber\29-ReduceNumber.csproj", "{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-1ReduceNumber", "29-ReduceNumber\29-1ReduceNumber.csproj", "{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-2FibonnaciGen", "FibonnaciGen\29-2FibonnaciGen.csproj", "{F5DE17BD-97B7-4446-A31C-64D45FECCF26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "29-3LetterCounter", "29-3LetterCounter\29-3LetterCounter.csproj", "{A18D27B7-DB70-4547-B979-9C0798CF7B4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77C975E5-EB77-471A-BC84-B1EA5B1B3B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DE17BD-97B7-4446-A31C-64D45FECCF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DE17BD-97B7-4446-A31C-64D45FECCF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DE17BD-97B7-4446-A31C-64D45FECCF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DE17BD-97B7-4446-A31C-64D45FECCF26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18D27B7-DB70-4547-B979-9C0798CF7B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
