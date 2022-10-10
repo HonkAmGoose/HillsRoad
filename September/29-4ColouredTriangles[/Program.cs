@@ -10,14 +10,20 @@ namespace ColouredTriangles
             Console.WriteLine("Enter the first line of the triangle");
             string input = Console.ReadLine();
             int length = input.Length;
-            char[] Colours = { 'R', 'G', 'B' };
+            char[] ConstColours = { 'R', 'G', 'B' };
             List<char> colours;
 
             // Convert input to array
+
+            /*
+            PROBLEM
+            This results in an array of length 0 and line.append doesn't work either so ???
+            */
             char[] line = Array.Empty<char>();
-            foreach (char c in input)
+            for (int i = 0; i <= length; i++)
             {
-                line.Append(c);
+                line[i] = input[i];
+                Console.WriteLine(line);
             }
 
             for (int i = 1; i <= length; i++)
@@ -26,7 +32,7 @@ namespace ColouredTriangles
                 {
                     if (line[j] != line[j + 1])
                     {
-                        colours = Colours.ToList();
+                        colours = ConstColours.ToList();
                         colours.Remove(line[j]);
                         colours.Remove(line[j + 1]);
                         line[j] = colours[0];
