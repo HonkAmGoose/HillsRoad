@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04-CaesarCipher", "CaesarCipher\04-CaesarCipher.csproj", "{BEE30D08-A0A7-4BE3-8295-0B1AA0B74353}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-CaesarCipher", "CaesarCipher\04-CaesarCipher.csproj", "{BEE30D08-A0A7-4BE3-8295-0B1AA0B74353}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06-1TopFilms", "06-1TopFilms\06-1TopFilms.csproj", "{1CC03B83-49B5-446E-B327-B5BF87BD3BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06-1TopFilms", "06-1TopFilms\06-1TopFilms.csproj", "{1CC03B83-49B5-446E-B327-B5BF87BD3BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06-2SubjectEntry", "06-2SubjectEntry\06-2SubjectEntry.csproj", "{615AE6A2-33EF-4AB3-8FB9-A37962D35C13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06-2SubjectEntry", "06-2SubjectEntry\06-2SubjectEntry.csproj", "{615AE6A2-33EF-4AB3-8FB9-A37962D35C13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11-1TestMarks", "11-1TestMarks\11-1TestMarks.csproj", "{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11-2ASCIIArt", "11-2ASCIIArt\11-2ASCIIArt.csproj", "{5AB52577-80A0-48F4-988E-2D3D9BE17B34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{615AE6A2-33EF-4AB3-8FB9-A37962D35C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{615AE6A2-33EF-4AB3-8FB9-A37962D35C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{615AE6A2-33EF-4AB3-8FB9-A37962D35C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
