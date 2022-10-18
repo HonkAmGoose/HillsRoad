@@ -19,32 +19,42 @@
 
                 // Output the menu options
                 Console.WriteLine("\nEnter the menu number of the calculation to perform: ");
-                Console.WriteLine("1 - Addition\n");
-                Console.WriteLine("2 - Subtraction\n");
-                Console.WriteLine("3 - Multiplication\n");
-                Console.WriteLine("4 - Division\n");
+                Console.WriteLine("A - Addition\n");
+                Console.WriteLine("S - Minus/Subtraction\n");
+                Console.WriteLine("T - Times/Multiplication\n");
+                Console.WriteLine("D - Division\n");
+                Console.WriteLine("I - Integer Division\n");
+                Console.WriteLine("M - Modulus\n");
                 Console.WriteLine("q - Quit\n");
 
                 // Ask for the menu option
-                string menuOption = Console.ReadLine();
+                string menuOption = Console.ReadLine().ToLower();
 
                 // Perform a subroutine based on the menu option
                 switch (menuOption)
                 {
-                    case "1":
+                    case "a":
                         Addition(number1, number2);
                         break;
 
-                    case "2":
+                    case "s":
                         Subtraction(number1, number2);
                         break;
 
-                    case "3":
+                    case "t":
                         Division(number1, number2);
                         break;
 
-                    case "4":
+                    case "d":
                         Multiplication(number1, number2);
+                        break;
+
+                    case "i":
+                        IntDiv(number1, number2);
+                        break;
+
+                    case "m":
+                        Modulus(number1, number2);
                         break;
 
                     case "q":
@@ -75,6 +85,14 @@
         static void Division(float num1, float num2)
         {
             Console.WriteLine("\nThe result is: " + (num1 / num2));
+        }
+        static void IntDiv(float num1, float num2)
+        {
+            Console.WriteLine("\nThe result is: " + Math.Floor(num1 / num2));
+        }
+        static void Modulus(float num1, float num2)
+        {
+            Console.WriteLine("\nThe result is: " + (num1 % num2));
         }
     }
 }
