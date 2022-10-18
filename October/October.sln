@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06-1TopFilms", "06-1TopFilm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06-2SubjectEntry", "06-2SubjectEntry\06-2SubjectEntry.csproj", "{615AE6A2-33EF-4AB3-8FB9-A37962D35C13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11-1TestMarks", "11-1TestMarks\11-1TestMarks.csproj", "{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "11-1TestMarks", "11-1TestMarks\11-1TestMarks.csproj", "{AEDD3CF6-FE9C-4FF8-BFC5-03EB62C49CE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11-2ASCIIArt", "11-2ASCIIArt\11-2ASCIIArt.csproj", "{5AB52577-80A0-48F4-988E-2D3D9BE17B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "11-2ASCIIArt", "11-2ASCIIArt\11-2ASCIIArt.csproj", "{5AB52577-80A0-48F4-988E-2D3D9BE17B34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18-1Calculator", "18-1Calculator\18-1Calculator.csproj", "{9A6BF0A6-1CDA-4918-AD1D-1BF83FD987CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AB52577-80A0-48F4-988E-2D3D9BE17B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6BF0A6-1CDA-4918-AD1D-1BF83FD987CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6BF0A6-1CDA-4918-AD1D-1BF83FD987CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6BF0A6-1CDA-4918-AD1D-1BF83FD987CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6BF0A6-1CDA-4918-AD1D-1BF83FD987CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
