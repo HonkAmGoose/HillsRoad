@@ -31,27 +31,27 @@
                 switch (menuOption)
                 {
                     case "a":
-                        Console.WriteLine(Addition(number1, number2));
+                        Addition(number1, number2);
                         break;
 
                     case "s":
-                        Console.WriteLine(Subtraction(number1, number2));
+                        Subtraction(number1, number2);
                         break;
 
                     case "t":
-                        Console.WriteLine(Division(number1, number2));
+                        Division(number1, number2);
                         break;
 
                     case "d":
-                        Console.WriteLine(Multiplication(number1, number2));
+                        Multiplication(number1, number2);
                         break;
 
                     case "i":
-                        Console.WriteLine(IntDiv(number1, number2));
+                        IntDiv(number1, number2);
                         break;
 
                     case "m":
-                        Console.WriteLine(Modulus(number1, number2));
+                        Modulus(number1, number2);
                         break;
 
                     case "q":
@@ -103,29 +103,29 @@
         }
 
         // The addition procedure has two floats as parameters, adds them together and outputs the result
-        static float Addition(float num1, float num2)
+        static void Addition(float num1, float num2)
         {
-            return num1 + num2;
+            Console.WriteLine("\nThe result is: " + ((float)num1 + num2));
         }
-        static float Subtraction(float num1, float num2)
+        static void Subtraction(float num1, float num2)
         {
-            return num1 - num2;
+            Console.WriteLine("\nThe result is: " + (num1 - num2));
         }
-        static float Multiplication(float num1, float num2)
+        static void Multiplication(float num1, float num2)
         {
-            return num1 * num2;
+            Console.WriteLine("\nThe result is: " + (num1 * num2));
         }
-        static float Division(float num1, float num2)
+        static void Division(float num1, float num2)
         {
-            return num1 / num2;
+            Console.WriteLine("\nThe result is: " + (num1 / num2));
         }
-        static float IntDiv(float num1, float num2)
+        static void IntDiv(float num1, float num2)
         {
-            return (float)Math.Floor(num1 / num2);
+            Console.WriteLine("\nThe result is: " + Math.Floor(num1 / num2));
         }
-        static float Modulus(float num1, float num2)
+        static void Modulus(float num1, float num2)
         {
-            return num1 % num2;
+            Console.WriteLine("\nThe result is: " + (num1 % num2));
         }
     }
 }
