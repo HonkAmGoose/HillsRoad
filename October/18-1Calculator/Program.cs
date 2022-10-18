@@ -11,20 +11,17 @@
             while (again)
             {
                 // Ask the user for two number and store them as floats
-                Console.WriteLine("Enter the first number: ");
-                float number1 = float.Parse(Console.ReadLine());
-
-                Console.WriteLine("Enter the second number: ");
-                float number2 = float.Parse(Console.ReadLine());
+                float number1 = SafeFloatInput("Enter the first number: ", "You must enter a valid number.");
+                float number2 = SafeFloatInput("Enter the second number: ", "You must enter a valid number.");
 
                 // Output the menu options
                 Console.WriteLine("\nEnter the menu number of the calculation to perform: ");
-                Console.WriteLine("A - Addition\n");
-                Console.WriteLine("S - Minus/Subtraction\n");
-                Console.WriteLine("T - Times/Multiplication\n");
-                Console.WriteLine("D - Division\n");
-                Console.WriteLine("I - Integer Division\n");
-                Console.WriteLine("M - Modulus\n");
+                Console.WriteLine("A - Addition");
+                Console.WriteLine("S - Minus/Subtraction");
+                Console.WriteLine("T - Times/Multiplication");
+                Console.WriteLine("D - Division");
+                Console.WriteLine("I - Integer Division");
+                Console.WriteLine("M - Modulus");
                 Console.WriteLine("q - Quit\n");
 
                 // Ask for the menu option
@@ -68,11 +65,47 @@
             }
         }
 
+        //Get a safe input
+        static string SafeInput(string prompt)
+        {
+            string response;
+            Console.WriteLine(prompt);
+            response = Console.ReadLine();
+            if (response == null)
+            {
+                response = "";
+            }
+            return response;
+        }
+        static int SafeFloatInput(string prompt)
+        {
+            return SafeFloatInput(prompt, "Enter a float");
+        }
+        static int SafeFloatInput(string prompt, string failMessage)
+        {
+            bool ok = false;
+            int response = 0;
+            Console.WriteLine(prompt);
+            while (ok == false)
+            {
+                try
+                {
+                    response = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine(failMessage);
+                    continue;
+                }
+                ok = true;
+            }
+            return response;
+        }
 
         // The addition procedure has two floats as parameters, adds them together and outputs the result
         static void Addition(float num1, float num2)
         {
-            Console.WriteLine("\nThe result is: " + (num1 + num2));
+            Console.WriteLine("\nThe result is: " + ((float)num1 + num2));
         }
         static void Subtraction(float num1, float num2)
         {
