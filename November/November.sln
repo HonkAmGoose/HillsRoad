@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-1PalindromeChecker", "01
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07-1FrequencyAnalysis", "07-1FrequencyAnalysis\07-1FrequencyAnalysis.csproj", "{00D55972-78B3-497D-AAE5-009A3064E7C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07-2RC4Vernam", "07-2RC4Vernam\07-2RC4Vernam.csproj", "{FDB87041-7AD9-47D4-BAD4-0B96771E1515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{00D55972-78B3-497D-AAE5-009A3064E7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00D55972-78B3-497D-AAE5-009A3064E7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00D55972-78B3-497D-AAE5-009A3064E7C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB87041-7AD9-47D4-BAD4-0B96771E1515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB87041-7AD9-47D4-BAD4-0B96771E1515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB87041-7AD9-47D4-BAD4-0B96771E1515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB87041-7AD9-47D4-BAD4-0B96771E1515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
