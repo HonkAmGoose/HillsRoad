@@ -33,8 +33,12 @@ namespace MeasurementConversion
             }
             while (choice < 1 || choice > 3);
 
-            Console.WriteLine("Enter the number you want to convert: ");
-            double toConvert = Convert.ToDouble(Console.ReadLine());
+            double? num = 0;
+            if (choice != 3)
+            {
+                Console.WriteLine("Enter the number you want to convert: ");
+                num = Convert.ToDouble(Console.ReadLine());
+            }
             double result = 0;
 
             // Call the approriate subroutine
@@ -42,13 +46,13 @@ namespace MeasurementConversion
             {
                 case 1:
                     {
-                        result = CmToInches(toConvert);
+                        result = (double)CmToInches(num);
                         break;
                     }
 
                 case 2:
                     {
-                        result = InchesToCm(toConvert);
+                        result = (double)InchesToCm(num);
                         break;
                     }
 
@@ -62,19 +66,19 @@ namespace MeasurementConversion
             Console.WriteLine($"Your answer was {result}");
         }
 
-        static double CmToInches(double cm)
+        static double? CmToInches(double? num)
         {
             // Convert cm to inches and return
-            double inches = cm * 0.393700787;
+            num *= 0.393700787;
 
-            return inches;
+            return num;
         }
-        static double InchesToCm(double inches)
+        static double? InchesToCm(double? num)
         {
             // Convert inches to cm and return
-            double cm = inches * 2.54;
+            num *= 2.54;
 
-            return cm;
+            return num;
         }
     }
 }
