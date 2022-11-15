@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07-2RC4Vernam", "07-2RC4Ver
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "08-1BaseConversions", "08-1BaseConversions\08-1BaseConversions.csproj", "{571ACDE9-A202-4732-A5B6-6CB4D44334A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15-1MeasurementConversion", "15-1MeasurementConversion\15-1MeasurementConversion.csproj", "{FEF3F7C8-133D-4B17-A1DA-60D9ABEBF35F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{571ACDE9-A202-4732-A5B6-6CB4D44334A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{571ACDE9-A202-4732-A5B6-6CB4D44334A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{571ACDE9-A202-4732-A5B6-6CB4D44334A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF3F7C8-133D-4B17-A1DA-60D9ABEBF35F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF3F7C8-133D-4B17-A1DA-60D9ABEBF35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF3F7C8-133D-4B17-A1DA-60D9ABEBF35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF3F7C8-133D-4B17-A1DA-60D9ABEBF35F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
