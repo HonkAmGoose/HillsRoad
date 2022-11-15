@@ -9,8 +9,10 @@ namespace MeasurementConversion
 
         static void Main(string[] args)
         {
-            // Call the Menu() procedure
-            Menu();
+            while (true)
+            {
+                Menu();
+            }
         }
 
         // Procedure to present a menu of choices to the user
@@ -31,18 +33,22 @@ namespace MeasurementConversion
             }
             while (choice < 1 || choice > 3);
 
+            Console.WriteLine("Enter the number you want to convert: ");
+            double toConvert = Convert.ToDouble(Console.ReadLine());
+            double result = 0;
+
             // Call the approriate subroutine
             switch (choice)
             {
                 case 1:
                     {
-                        CmToInches();
+                        result = CmToInches(toConvert);
                         break;
                     }
 
                 case 2:
                     {
-                        InchesToCm();
+                        result = InchesToCm(toConvert);
                         break;
                     }
 
@@ -52,36 +58,23 @@ namespace MeasurementConversion
                         break;
                     }
             }
+
+            Console.WriteLine($"Your answer was {result}");
         }
 
-        // Procedure to convert cm to inches
-        static void CmToInches()
+        static double CmToInches(double cm)
         {
-            // Ask the user to input cm
-            Console.Write("\nEnter cm: ");
-            double cm = Convert.ToDouble(Console.ReadLine());
-
-            // Convert cm to inches
+            // Convert cm to inches and return
             double inches = cm * 0.393700787;
-            Console.WriteLine(inches + " inches");
 
-            // Call the Menu() procedure
-            Menu();
+            return inches;
         }
-
-        // Procedure to convert inches to cm
-        static void InchesToCm()
+        static double InchesToCm(double inches)
         {
-            // Ask the user to input inches
-            Console.Write("\nEnter inches: ");
-            double inches = Convert.ToDouble(Console.ReadLine());
-
-            // Convert inches to cm
+            // Convert inches to cm and return
             double cm = inches * 2.54;
-            Console.WriteLine(cm + " cm");
 
-            // Call the Menu() procedure
-            Menu();
+            return cm;
         }
     }
 }
