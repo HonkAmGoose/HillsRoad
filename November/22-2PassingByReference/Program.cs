@@ -8,13 +8,17 @@ namespace PassingByReference
         {
             double pay;
             pay = 2000;
+            Console.WriteLine(pay);
 
             CalculatePay(ref pay);
+            Console.WriteLine(pay);
+
+            Bonus(ref pay);
             Console.WriteLine(pay);
         }
 
         // Function to calculate deductions from pay
-        static double SubtractDeductions(double pay, double percent)
+        static double CalculatePercentage(double pay, double percent)
         {
             return (pay * percent) / 100;
         }
@@ -22,7 +26,12 @@ namespace PassingByReference
         static void CalculatePay(ref double pay)
         {
             // Subtract tax on pay at 22%
-            pay = pay - SubtractDeductions(pay, 22);
+            pay -= CalculatePercentage(pay, 22);
+        }
+        static void Bonus(ref double pay)
+        {
+            // Add bonus of 5%
+            pay += CalculatePercentage(pay, 5);
         }
     }
 }
