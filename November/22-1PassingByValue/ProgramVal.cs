@@ -2,7 +2,7 @@
 
 namespace PassingByValue
 {
-    class Program
+    class ProgramVal
     {
         static void Main()
         {

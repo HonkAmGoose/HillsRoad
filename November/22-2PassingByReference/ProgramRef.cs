@@ -2,7 +2,7 @@
 
 namespace PassingByReference
 {
-    class Program
+    class ProgramRef
     {
         static void Main()
         {
