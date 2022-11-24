@@ -115,7 +115,14 @@ namespace FantasyFootball
         }
         static void CountTeam(string filename) // Method to count the value of the team and output details, handling any number of footballers
         {
+            if (File.Exists(filename))
+            {
 
+            }
+            else
+            {
+                Console.WriteLine("Team doesn't currently exist.");
+            }
         }
     }
 }
