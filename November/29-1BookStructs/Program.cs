@@ -16,6 +16,7 @@ namespace BookStructs
 
     class Program
     {
+        const string FILENAME = "books.bin";
         static void Main(string[] args)
         {
             // Declare Book1 of type Book
@@ -53,6 +54,13 @@ namespace BookStructs
             Console.WriteLine("The isbn is: " + book.isbn);
             Console.WriteLine("The price is: " + book.price);
             Console.WriteLine("The number of pages is: " + book.pages);
+        }
+        static void OverwriteBook(Book book)
+        {
+            using (BinaryWriter bw = new BinaryWriter(File.Open(FILENAME, FileMode.Create)))
+            {
+
+            }
         }
     }
 }
