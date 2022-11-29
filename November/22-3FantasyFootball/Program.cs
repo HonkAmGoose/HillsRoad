@@ -14,21 +14,22 @@ namespace FantasyFootball
 
             while (!quit)
             {
-                switch (Menu(menuBeforePrompt, menuAfterPrompt, menuOptions))
+                switch (Menu(menuBeforePrompt, menuAfterPrompt, menuOptions)) // Display menu and get input from user
                 {
                     case 1:
-                        StoreNewPlayer(filename);
+                        StoreNewPlayer(filename); // Add a footballer to the team
                         break;
 
                     case 2:
-                        ViewTeam(filename);
+                        ViewTeam(filename); // Output the current team
                         break;
 
                     case 3:
+                        CountTeam(filename); // Calculate and output the score for the team
                         break;
 
                     case 4:
-                        quit = true;
+                        quit = true; // Quit
                         break;
     
                     default:
@@ -36,13 +37,13 @@ namespace FantasyFootball
                 }
             }
         }
-        static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) // Function to get int input
+        static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) // Function to get bounded integer input
         {
             Console.WriteLine(enterPrompt);
             int response;
             while (true)
             {
-                try
+                try // Check if it is an integer
                 {
                     response = Convert.ToInt32(Console.ReadLine());
                 }
@@ -51,7 +52,7 @@ namespace FantasyFootball
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                if (response > upperBound | response < lowerBound)
+                if (response > upperBound | response < lowerBound) // Check whether it is within the bounds
                 {
                     Console.WriteLine(outOfBoundErrorPrompt);
                     continue;
@@ -65,7 +66,7 @@ namespace FantasyFootball
         {
             int length = options.Length;
             Console.WriteLine(beforePrompt);
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++) // Output options from array
             {
                 Console.WriteLine($"\t{i+1}. {options[i]}");
             }
@@ -81,7 +82,7 @@ namespace FantasyFootball
             else // File doesn't exist or has less than 5 players so allow adding another
             {
                 Console.WriteLine("Enter the details of the new player:");
-                string[] prompts = { "Player name: ", "Goals scored: ", "Yellow cards: ", "Red cards: " };
+                string[] prompts = { "Player name:\t", "Goals scored:\t", "Yellow cards:\t", "Red cards:\t" };
                 using (StreamWriter sw = new StreamWriter(filename, true))
                 {
                     foreach (string prompt in prompts) // Iterate through prompts and get input for them
@@ -89,7 +90,7 @@ namespace FantasyFootball
                         Console.Write("\t" + prompt);
                         sw.WriteLine(prompt + Console.ReadLine());
                     }
-                    sw.WriteLine("\n"); // Separate players with new line
+                    sw.WriteLine(); // Separate players with new line
                 }
                 Console.WriteLine();
             }
@@ -108,20 +109,40 @@ namespace FantasyFootball
                     }
                 }
             }
-            else
+            else // File doesn't exist
             {
                 Console.WriteLine("Team doesn't currently exist.\n");
             }
         }
         static void CountTeam(string filename) // Method to count the value of the team and output details, handling any number of footballers
         {
-            if (File.Exists(filename))
+            Console.WriteLine("Here is the score for your current team:");
+            if (File.Exists(filename)) // Check whether the team exists
             {
-
+                int total = 0;
+                int numberOfPlayers = File.ReadAllLines(filename).Count() / 5; // Each player takes up five lines
+                using (StreamReader sr = new StreamReader(filename))
+                {
+                    int goals, yellows, reds;
+                    string[] vals = new string[5];
+                    for (int i = 0; i < numberOfPlayers; i++) // Iterate through players
+                    {
+                        for (int j = 0; j < 4; j++) // Iterate through 4 lines of input
+                        {
+                            vals[j] = sr.ReadLine().Split("\t")[1].Replace(" ", ""); // Take anything after the tab, removing whitespace
+                        }
+                        sr.ReadLine(); // Read the separating line
+                        goals = Convert.ToInt32(vals[1]);
+                        yellows = Convert.ToInt32(vals[2]);
+                        reds = Convert.ToInt32(vals[3]);
+                        total += ((10 * goals) + (-2 * yellows) + (-5 * reds)); // Calculate score for player and add to total
+                    }
+                }
+                Console.WriteLine(total + "\n"); // Output total
             }
-            else
+            else // File doesn't exist
             {
-                Console.WriteLine("Team doesn't currently exist.");
+                Console.WriteLine("Team doesn't currently exist.\n");
             }
         }
     }
