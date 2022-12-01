@@ -45,6 +45,12 @@ namespace BookStructs
             OutputBook(books[0]);
             Console.WriteLine();
             OutputBook(books[1]);
+            Console.WriteLine();
+
+            AppendBook(book1);
+            Book readbook = new Book();
+            readbook = ReadBook();
+            OutputBook(readbook);
         }
         static void OutputBook(Book book)
         {
@@ -55,12 +61,31 @@ namespace BookStructs
             Console.WriteLine("The price is: " + book.price);
             Console.WriteLine("The number of pages is: " + book.pages);
         }
-        static void OverwriteBook(Book book)
+        static void AppendBook(Book book)
         {
             using (BinaryWriter bw = new BinaryWriter(File.Open(FILENAME, FileMode.Create)))
             {
-
+                bw.Write(book.title);
+                bw.Write(book.author);
+                bw.Write(book.genre);
+                bw.Write(book.isbn);
+                bw.Write(book.price);
+                bw.Write(book.pages);
             }
+        }
+        static Book ReadBook()
+        {
+            Book book = new Book();
+            using (BinaryReader br = new BinaryReader(File.Open(FILENAME, FileMode.Open)))
+            {
+                book.title = br.ReadString();
+                book.author = br.ReadString();
+                book.genre = br.ReadString();
+                book.isbn = br.ReadInt64();
+                book.price = br.ReadDouble();
+                book.pages = br.ReadInt32();
+            }
+            return book;
         }
     }
 }
