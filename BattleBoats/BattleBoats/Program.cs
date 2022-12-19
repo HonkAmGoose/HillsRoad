@@ -58,16 +58,18 @@ namespace BattleBoats
         }
         static void OutputGrid(char[,] grid) // Function to output grid in a pretty format
         {
-            Console.WriteLine(" |A|B|C|D|E|F|G|H");
+            Console.WriteLine("   | A | B | C | D | E | F | G | H");
             for (int i = 0; i < grid.GetLength(0); i++)
             {
-                Console.WriteLine("-----------------");
-                Console.Write(i);
-                for (int j = 0; j < grid.GetLength(1); i++)
+                Console.WriteLine("---+---+---+---+---+---+---+---+---");
+                Console.Write($" {i} ");
+                for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    Console.Write($"|{grid[i, j]}");
+                    Console.Write($"| {grid[i, j]} ");
                 }
+                Console.WriteLine("");
             }
+            Console.WriteLine();
         }
         static int ConvertXCoord(char coord) // Function to convert a letter X coordinate to number, throwing FormatException if not between A and H
         {
