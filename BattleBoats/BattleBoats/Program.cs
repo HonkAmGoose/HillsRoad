@@ -206,7 +206,7 @@ namespace BattleBoats
             for (int i = 0; i < 5; i++)
             {
                 length = allCoords.Count();
-                coord = allCoords[rand.Next(length) - 1];
+                coord = allCoords[rand.Next(length)];
                 ComputerFleetGrid[coord[0], coord[1]] = 'B';
                 allCoords.Remove(coord);
             }
