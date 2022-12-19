@@ -4,6 +4,7 @@ namespace BattleBoats
 {
     public class Program
     {
+        // All grids are referenced with grid[Y-coord (number), X-coord (letter)] 
         static char[,] PlayerFleetGrid = new char[8,8];
         static char[,] PlayerTargetTracker = new char[8, 8];
         static char[,] ComputerFleetGrid = new char[8, 8];
@@ -62,7 +63,7 @@ namespace BattleBoats
             for (int i = 0; i < grid.GetLength(0); i++)
             {
                 Console.WriteLine("---+---+---+---+---+---+---+---+---");
-                Console.Write($" {i} ");
+                Console.Write($" {i+1} ");
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     Console.Write($"| {grid[i, j]} ");
@@ -86,7 +87,7 @@ namespace BattleBoats
         {
             Console.WriteLine(enterPrompt);
             string response;
-            int row, col;
+            int Ynumber, Xletter;
             while (true)
             {
                 response = Console.ReadLine().ToUpper();
@@ -96,27 +97,27 @@ namespace BattleBoats
                     {
                         throw new FormatException();
                     }
-                    col = ConvertXCoord(response[0]); // Throws FormatException if not between A and H
-                    row = Convert.ToInt32(response[1]); // Throws FormatException if not integer
+                    Xletter = ConvertXCoord(response[0]); // Throws FormatException if not between A and H
+                    Ynumber = Convert.ToInt32(response[1].ToString()) - 1; // Throws FormatException if not integer
                 }
                 catch (FormatException) // Prompt to try again
                 {
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                if (col < 1 | col > 8) // Prompt to try again if not within bounds
+                if (Xletter < 0 | Xletter > 7) // Prompt to try again if not within bounds
                 {
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                if (toCheck[col,row] != ' ')
+                if (toCheck[Ynumber,Xletter] != ' ')
                 {
                     Console.WriteLine(alreadyExistsErrorPrompt);
                     continue;
                 }
                 break; // If it makes it to this point, the input is valid so break out of loop
             }
-            int[] value = { col, row };
+            int[] value = { Ynumber, Xletter };
             return value;
         }
         static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) // Function to get inclusive bounded integer input
@@ -167,7 +168,7 @@ namespace BattleBoats
             const string AlreadyExistsErrorPrompt = "Sorry, a boat already exists at that coordinate";
             List<int[]> allCoords = new List<int[]>();
 
-            // Initialise all char[] to contain spaces and coords to contain each coordinate
+            // Initialise all char[8,8] to contain spaces and append every unique coordinate to allCoords (used for rand gen)
             int[] coord = new int[2];
             for (int i = 0; i < 8; i++)
             {
@@ -187,15 +188,25 @@ namespace BattleBoats
             // Get 5 boat spaces for the player
             for (int i = 0; i < 5; i++)
             {
-                OutputGrid(PlayerFleetGrid);
-                coord = GetCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
-                PlayerFleetGrid[coord[0], coord[1]] = 'B';
+                // FOR TESTING ONLY, DON'T BOTHER WITH PROMPTING FOR PLAYER COORDS
+                //OutputGrid(PlayerFleetGrid);
+                //coord = GetCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
+                //PlayerFleetGrid[coord[0], coord[1]] = 'B';
+                PlayerFleetGrid[0, 0] = 'B';
+                PlayerFleetGrid[0, 7] = 'B';
+                PlayerFleetGrid[7, 0] = 'B';
+                PlayerFleetGrid[7, 7] = 'B';
+                PlayerFleetGrid[4, 4] = 'B';
             }
+            // FOR TESTING ONLY, output player fleet grid
+            OutputGrid(PlayerFleetGrid);
 
             Random rand = new();
+            int length;
             for (int i = 0; i < 5; i++)
             {
-                coord = allCoords[rand.Next(allCoords.Count)];
+                length = allCoords.Count();
+                coord = allCoords[rand.Next(length) - 1];
                 ComputerFleetGrid[coord[0], coord[1]] = 'B';
                 allCoords.Remove(coord);
             }
