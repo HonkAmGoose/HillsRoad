@@ -163,6 +163,7 @@ namespace BattleBoats
         }
         static void SetupNewGame() 
         {
+            // FOR TESTING ONLY, currently unused
             const string PlaceEnterPrompt = "Please enter the coordinate to place a boat";
             const string CoordinateFormatErrorPrompt = "Sorry, enter a coordinate between A1 and H8";
             const string AlreadyExistsErrorPrompt = "Sorry, a boat already exists at that coordinate";
@@ -181,7 +182,7 @@ namespace BattleBoats
 
                     coord[0] = i;
                     coord[1] = j;
-                    allCoords.Append(coord);
+                    allCoords.Add(coord);
                 }
             }
 
@@ -202,11 +203,9 @@ namespace BattleBoats
             OutputGrid(PlayerFleetGrid);
 
             Random rand = new();
-            int length;
             for (int i = 0; i < 5; i++)
             {
-                length = allCoords.Count();
-                coord = allCoords[rand.Next(length)];
+                coord = allCoords[rand.Next(allCoords.Count())];
                 ComputerFleetGrid[coord[0], coord[1]] = 'B';
                 allCoords.Remove(coord);
             }
