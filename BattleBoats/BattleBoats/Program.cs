@@ -163,33 +163,31 @@ namespace BattleBoats
         }
         static void SetupNewGame() 
         {
-            // FOR TESTING ONLY, currently unused
+            // FOR TESTING ONLY currently unused, will be used in production
             const string PlaceEnterPrompt = "Please enter the coordinate to place a boat";
             const string CoordinateFormatErrorPrompt = "Sorry, enter a coordinate between A1 and H8";
             const string AlreadyExistsErrorPrompt = "Sorry, a boat already exists at that coordinate";
-            List<int[]> allCoords = new List<int[]>();
+            const int Xsize = 8;
+            const int Ysize = 8;
+            const int NumberOfBoats = 5;
+            int[] coord = new int[2]; // Helper coordinate variable
 
-            // Initialise all char[8,8] to contain spaces and append every unique coordinate to allCoords (used for rand gen)
-            int[] coord = new int[2];
-            for (int i = 0; i < 8; i++)
+            // Initialise all char[8,8] to contain spaces
+            for (int i = 0; i < Ysize; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < Xsize; j++)
                 {
                     PlayerFleetGrid[i, j] = ' ';
                     PlayerTargetTracker[i, j] = ' ';
                     ComputerFleetGrid[i, j] = ' ';
                     ComputerTargetTracker[i, j] = ' ';
-
-                    coord[0] = i;
-                    coord[1] = j;
-                    allCoords.Add(coord);
                 }
             }
 
             // Get 5 boat spaces for the player
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < NumberOfBoats; i++)
             {
-                // FOR TESTING ONLY, DON'T BOTHER WITH PROMPTING FOR PLAYER COORDS
+                // FOR TESTING ONLY, don't bother with prompting for player coords
                 //OutputGrid(PlayerFleetGrid);
                 //coord = GetCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
                 //PlayerFleetGrid[coord[0], coord[1]] = 'B';
@@ -202,12 +200,16 @@ namespace BattleBoats
             // FOR TESTING ONLY, output player fleet grid
             OutputGrid(PlayerFleetGrid);
 
+            int Xletter, Ynumber;
             Random rand = new();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < NumberOfBoats; i++)
             {
-                coord = allCoords[rand.Next(allCoords.Count())];
-                ComputerFleetGrid[coord[0], coord[1]] = 'B';
-                allCoords.Remove(coord);
+                do
+                {
+                    Ynumber = rand.Next(Ysize);
+                    Xletter = rand.Next(Xsize);
+                } while (ComputerFleetGrid[Ynumber, Xletter] != ' ');
+                ComputerFleetGrid[Ynumber, Xletter] = 'B';
             }
             // FOR TESTING ONLY, output computer fleet grid
             OutputGrid(ComputerFleetGrid);
