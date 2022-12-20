@@ -4,7 +4,18 @@ namespace BattleBoats
 {
     public class Program
     {
-        //// All global grids are referenced with grid[Y-coord (number), X-coord (letter)] ////
+        /*  
+         *  This program allows you to play the game Battle Boats against a random computer
+         *  
+         *  Random notes to self for programming:
+         *  All global grids are referenced with grid[Y-coord (number), X-coord (letter)]
+         *  Statuses are as follows:
+         *      1 for keep going
+         *      2 for quit due to user input
+         *      3 for quit due to player win
+         *      4 for quit due to computer win
+         */
+
 
         static char[,] PlayerFleetGrid = new char[8,8];
         static char[,] PlayerTargetTracker = new char[8, 8];
@@ -23,7 +34,7 @@ namespace BattleBoats
                 "Resume game from save",
                 "Read instructions",
                 "Quit game"
-            }; // MAKE SURE TO UPDATE SWITCH CASE STATEMENT WHEN UPDATING MENUoPTIONS
+            }; // MAKE SURE TO UPDATE SWITCH CASE STATEMENT WHEN UPDATING MENUOPTIONS
             const string WelcomePrompt = "Welcome to this Battle Boats game!";
             const string MenuEnterPrompt = "Please select what you would like to do:";
             const string MenuFormatErrorPrompt = "Sorry, you need to enter an integer";
@@ -221,14 +232,21 @@ namespace BattleBoats
         // Function to display menu and return input using GetIntInput()
         static int Menu(string beforePrompt, string afterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, string[] options) 
         {
+            // Variables
             int length = options.Length;
+
+            // Prompt user
             Console.WriteLine(beforePrompt);
-            for (int i = 0; i < length; i++) // Output options from array
+
+            // Output options from array
+            for (int i = 0; i < length; i++) 
             {
                 Console.WriteLine($"\t{i + 1}. {options[i]}");
             }
             Console.WriteLine();
-            return GetIntInput(afterPrompt, formatErrorPrompt, outOfBoundErrorPrompt, 1, length); // Get integer input corresponding to a menu item and return it
+
+            // Get integer input corresponding to a menu item and return it
+            return GetIntInput(afterPrompt, formatErrorPrompt, outOfBoundErrorPrompt, 1, length); 
         }
 
         // Function to play a completely new game
@@ -237,6 +255,8 @@ namespace BattleBoats
             SetupNewGame();
             PlayGame();
         }
+        
+        // Function to set up grids with user input and random computer coordinates
         static void SetupNewGame() 
         {
             // FOR TESTING ONLY currently unused, will be used in production
@@ -246,7 +266,7 @@ namespace BattleBoats
             const int Xsize = 8;
             const int Ysize = 8;
             const int NumberOfBoats = 5;
-            int[] coord = new int[2]; // Helper coordinate variable
+            int[] coord = new int[2];
 
             // Initialise all char[8,8] to contain spaces
             for (int i = 0; i < Ysize; i++)
@@ -260,7 +280,7 @@ namespace BattleBoats
                 }
             }
 
-            // Get 5 boat spaces for the player
+            // Get 5 boat spaces for the player with input
             for (int i = 0; i < NumberOfBoats; i++)
             {
                 // FOR TESTING ONLY, don't bother with prompting for player coords
@@ -273,9 +293,9 @@ namespace BattleBoats
                 PlayerFleetGrid[7, 7] = 'B';
                 PlayerFleetGrid[4, 4] = 'B';
             }
-            // FOR TESTING ONLY, output player fleet grid
             OutputGrid(PlayerFleetGrid);
 
+            // Get 5 random boat spaces for the computer
             int Xletter, Ynumber;
             Random rand = new();
             for (int i = 0; i < NumberOfBoats; i++)
@@ -292,17 +312,18 @@ namespace BattleBoats
         }
         
         
-        static void ResumeSavedGame()  // Function to play a game from a save file 
+        static void ResumeSavedGame() 
         {
             SetupGameFromFile();
             PlayGame();
         }
         static void SetupGameFromFile() { }
-        
-        
-        static void PlayGame() // Function to play the game, taking turns and saving periodically 
+
+
+        // Function to play the game, taking turns and saving periodically
+        static void PlayGame()  
         {
-            int status = 1; // 1 for keep going, 2 for quit due to user input, 3 for quit due to player win, 4 for quit due to computer win
+            int status = 1; 
             while (status == 1)
             {
                 PlayerTurn();
@@ -329,8 +350,11 @@ namespace BattleBoats
                 }
             }
         }
+        
+        // Function to take a player turn with input coordinates
         static void PlayerTurn()
         {
+            // Variables
             const string ShootEnterPrompt = "Please enter the coordinate to shoot at";
             const string CoordinateFormatErrorPrompt = "Sorry, enter a coordinate between A1 and H8";
             const string AlreadyTriedErrorPrompt = "Sorry, you have already tried shooting at that coordinate";
@@ -338,10 +362,12 @@ namespace BattleBoats
             const string MissMessage = "Splash... You missed";
             int[] coord;
 
+            // Display grid and get coordinate input
             OutputGrid(PlayerTargetTracker);
-
             coord = GetCheckedCoordinateInput(ShootEnterPrompt, CoordinateFormatErrorPrompt, AlreadyTriedErrorPrompt, PlayerTargetTracker);
+            Console.WriteLine();
 
+            // Check hit or miss, update target tracker and output to user
             if (ComputerFleetGrid[coord[0], coord[1]] == 'B')
             {
                 Console.WriteLine(HitMessage);
@@ -356,13 +382,18 @@ namespace BattleBoats
             {
                 throw new Exception("Fleet grid should only contain 'B' or ' '");
             }
+            Console.WriteLine();
         }
+        
+        // Function to take a computer turn with random coordinates
         static void ComputerTurn() 
         {
+            // Variables
             const string HitMessage = "Boom! One of your boats was hit by the enemy";
             const string MissMessage = "Splash... Your enemy missed";
             int[] coord = new int[2];
 
+            // Get random coordinates that haven't been tried already
             Random rand = new();
             do
             {
@@ -370,6 +401,7 @@ namespace BattleBoats
                 coord[1] = rand.Next(8);
             } while (ComputerFleetGrid[coord[0], coord[1]] != ' ');
 
+            // Check hit or miss, update target tracker and output to user
             if (PlayerFleetGrid[coord[0], coord[1]] == 'B')
             {
                 Console.WriteLine(HitMessage);
@@ -384,6 +416,7 @@ namespace BattleBoats
             {
                 throw new Exception("Fleet grid should only contain 'B' or ' '");
             }
+            Console.WriteLine();
         }
         
         
