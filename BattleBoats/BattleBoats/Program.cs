@@ -4,11 +4,15 @@ namespace BattleBoats
 {
     public class Program
     {
-        // All grids are referenced with grid[Y-coord (number), X-coord (letter)] 
+        //// All global grids are referenced with grid[Y-coord (number), X-coord (letter)] ////
+
         static char[,] PlayerFleetGrid = new char[8,8];
         static char[,] PlayerTargetTracker = new char[8, 8];
         static char[,] ComputerFleetGrid = new char[8, 8];
         static char[,] ComputerTargetTracker = new char[8, 8];
+
+
+        //// Main function ////
 
         public static void Main(String[] args)
         {
@@ -57,25 +61,39 @@ namespace BattleBoats
             Console.WriteLine(ExitPrompt);
             Console.ReadKey(); // Wait for user to press a key to exit
         }
-        static void OutputGrid(char[,] grid) // Function to output grid in a pretty format
+
+
+        //// Helper functions (used in multiple places) ////
+
+        // Function to output grid in a pretty format
+        static void OutputGrid(char[,] grid) 
         {
+            // Output column headings
             Console.WriteLine("   | A | B | C | D | E | F | G | H");
+
+            // Iterate through lines in the grid
             for (int i = 0; i < grid.GetLength(0); i++)
             {
+                // Output line separator and row heading
                 Console.WriteLine("---+---+---+---+---+---+---+---+---");
                 Console.Write($" {i+1} ");
+
+                // Iterate through the row and output the values
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     Console.Write($"| {grid[i, j]} ");
                 }
-                Console.WriteLine("");
+                Console.WriteLine();
             }
             Console.WriteLine();
         }
-        static int ConvertXCoord(char coord) // Function to convert a letter X coordinate to number, throwing FormatException if not between A and H
+
+        // Function to convert a letter X coordinate to number, throwing FormatException if not between A and H
+        static int ConvertXCoord(char coord) 
         {
             if ('A' <= coord && coord <= 'H')
             {
+                // Convert to ASCII and subtract 65 because 'A' has ASCII value 65
                 return (int)coord - 65;
             }
             else
@@ -83,20 +101,30 @@ namespace BattleBoats
                 throw new FormatException("This function only takes in a char between A and H");
             }
         }
-        static int[] GetCoordinateInput(string enterPrompt, string formatErrorPrompt) // Function to get coordinate input between A1 and H8 if not already on grid
+
+        // Function to get coordinate input between A1 and H8
+        static int[] GetCoordinateInput(string enterPrompt, string formatErrorPrompt) 
         {
-            Console.WriteLine(enterPrompt);
+            // Variables
             string response;
             int Ynumber, Xletter;
+
+            // Ask for input and get a response
+            Console.WriteLine(enterPrompt);
             while (true)
             {
                 response = Console.ReadLine().ToUpper();
+
+                // Check for length of 2
+                if (response.Length != 2)
+                {
+                    Console.WriteLine(formatErrorPrompt);
+                    continue;
+                }
+
+                // Check whether characters are correct type
                 try
                 {
-                    if (response.Length != 2)
-                    {
-                        throw new FormatException();
-                    }
                     Xletter = ConvertXCoord(response[0]); // Throws FormatException if not between A and H
                     Ynumber = Convert.ToInt32(response[1].ToString()) - 1; // Throws FormatException if not integer
                 }
@@ -105,60 +133,93 @@ namespace BattleBoats
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                if (Xletter < 0 | Xletter > 7) // Prompt to try again if not within bounds
+
+                // Check if coordinate is within bounds
+                if ((Xletter < 0 | Xletter > 7) | (Ynumber < 0 | Ynumber > 7))
                 {
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                break; // If it makes it to this point, the input is valid so break out of loop
+
+                // If it makes it to this point, the input is valid so break out of loop
+                break;
             }
+
+            // Return the valid coordinate
             int[] value = { Ynumber, Xletter };
             return value;
         }
+
+        // Function using GetCoordinateInput, checking against a grid for a blank space
         static int[] GetCheckedCoordinateInput(string enterPrompt, string formatErrorPrompt, string alreadyExistsErrorPrompt, char[,] toCheck)
         {
-            //
-            // Summary:
-            // Gets a user's coordinate input and checks whether it is valid according to if the corresponding coordinate in the array is a space character (' ')
+            // Variables
             int[] coord;
+
+            // Use GetCoordinateInput to do the main checks
             while (true)
             {
                 coord = GetCoordinateInput(enterPrompt, formatErrorPrompt);
-                if (toCheck[coord[0], coord[1]] != ' ') // Prompt to try again if it already exists
+
+                // Do additional check for if it already exists
+                if (toCheck[coord[0], coord[1]] != ' ')
                 {
                     Console.WriteLine(alreadyExistsErrorPrompt);
                     continue;
                 }
-                break; // If it makes it to this point, the input is valid so break out of loop
+
+                // If it makes it to this point, the input is valid so break out of loop
+                break;
             }
+
+            // Return the valid coordinate
             return coord;
         }
-        static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) // Function to get inclusive bounded integer input
+
+        // Function to get inclusive bounded integer input
+        static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) 
         {
-            Console.WriteLine(enterPrompt);
+            // Variables
             int response;
+
+            // Get input and get a response
+            Console.WriteLine(enterPrompt);
             while (true)
             {
-                try // Attempt conversion to integer
+                // Attempt conversion to integer
+                try
                 {
                     response = Convert.ToInt32(Console.ReadLine());
                 }
-                catch (FormatException) // If not integer, prompt to try again
+
+                // If not integer, prompt to try again and restart the loop
+                catch (FormatException) 
                 {
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                if (response > upperBound | response < lowerBound) // Check whether it is outside of the bounds, if not, prompt to try again
+
+                // Check whether it is outside of the bounds, if not, prompt to try again and restart the loop
+                if (response > upperBound | response < lowerBound) 
                 {
                     Console.WriteLine(outOfBoundErrorPrompt);
                     continue;
                 }
-                break; // If it makes it to this point, the input is valid so break out of loop
+
+                // If it makes it to this point, the input is valid so break out of loop
+                break; 
             }
+
+            // Return the integer representation of the input
             Console.WriteLine();
-            return response; // Return the integer representation of the input
+            return response; 
         }
-        static int Menu(string beforePrompt, string afterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, string[] options) // Function to display menu and return input using GetIntInput()
+
+
+        //// Procedural functions (used once) ////
+
+        // Function to display menu and return input using GetIntInput()
+        static int Menu(string beforePrompt, string afterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, string[] options) 
         {
             int length = options.Length;
             Console.WriteLine(beforePrompt);
@@ -169,7 +230,9 @@ namespace BattleBoats
             Console.WriteLine();
             return GetIntInput(afterPrompt, formatErrorPrompt, outOfBoundErrorPrompt, 1, length); // Get integer input corresponding to a menu item and return it
         }
-        static void PlayNewGame() // Function to play a completely new game 
+
+        // Function to play a completely new game
+        static void PlayNewGame() 
         {
             SetupNewGame();
             PlayGame();
@@ -229,12 +292,16 @@ namespace BattleBoats
 
             return;
         }
+        
+        
         static void ResumeSavedGame()  // Function to play a game from a save file 
         {
             SetupGameFromFile();
             PlayGame();
         }
         static void SetupGameFromFile() { }
+        
+        
         static void PlayGame() // Function to play the game, taking turns and saving periodically 
         {
             int status = 1; // 1 for keep going, 2 for quit due to user input, 3 for quit due to player win, 4 for quit due to computer win
@@ -266,10 +333,14 @@ namespace BattleBoats
         }
         static void PlayerTurn() { }
         static void ComputerTurn() { }
+        
+        
         static void SaveGameToFile() { }
+        static void WipeFile() { }
+        
+        
         static int CheckForWin() { return 1; }
         static void DisplayEndGame(int status) { }
-        static void WipeFile() { }
         static void ReadInstructions() { }
     }
 }
