@@ -83,7 +83,7 @@ namespace BattleBoats
                 throw new FormatException("This function only takes in a char between A and H");
             }
         }
-        static int[] GetCoordinateInput(string enterPrompt, string formatErrorPrompt, string alreadyExistsErrorPrompt, char[,] toCheck) // Function to get coordinate input between A1 and H8 if not already on grid
+        static int[] GetCoordinateInput(string enterPrompt, string formatErrorPrompt) // Function to get coordinate input between A1 and H8 if not already on grid
         {
             Console.WriteLine(enterPrompt);
             string response;
@@ -110,15 +110,28 @@ namespace BattleBoats
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
-                if (toCheck[Ynumber,Xletter] != ' ')
+                break; // If it makes it to this point, the input is valid so break out of loop
+            }
+            int[] value = { Ynumber, Xletter };
+            return value;
+        }
+        static int[] GetCheckedCoordinateInput(string enterPrompt, string formatErrorPrompt, string alreadyExistsErrorPrompt, char[,] toCheck)
+        {
+            //
+            // Summary:
+            // Gets a user's coordinate input and checks whether it is valid according to if the corresponding coordinate in the array is a space character (' ')
+            int[] coord;
+            while (true)
+            {
+                coord = GetCoordinateInput(enterPrompt, formatErrorPrompt);
+                if (toCheck[coord[0], coord[1]] != ' ') // Prompt to try again if it already exists
                 {
                     Console.WriteLine(alreadyExistsErrorPrompt);
                     continue;
                 }
                 break; // If it makes it to this point, the input is valid so break out of loop
             }
-            int[] value = { Ynumber, Xletter };
-            return value;
+            return coord;
         }
         static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) // Function to get inclusive bounded integer input
         {
@@ -189,7 +202,7 @@ namespace BattleBoats
             {
                 // FOR TESTING ONLY, don't bother with prompting for player coords
                 //OutputGrid(PlayerFleetGrid);
-                //coord = GetCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
+                //coord = GetCheckedCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
                 //PlayerFleetGrid[coord[0], coord[1]] = 'B';
                 PlayerFleetGrid[0, 0] = 'B';
                 PlayerFleetGrid[0, 7] = 'B';
