@@ -16,11 +16,18 @@ namespace BattleBoats
          *      4 for quit due to computer win
          */
 
-
+        //// Global Variables ////
+        
+        // Grids
         static char[,] PlayerFleetGrid = new char[8,8];
         static char[,] PlayerTargetTracker = new char[8, 8];
         static char[,] ComputerFleetGrid = new char[8, 8];
         static char[,] ComputerTargetTracker = new char[8, 8];
+
+        // Hit counters and status
+        static int PlayerHits = 0;
+        static int ComputerHits = 0;
+        static int Status = 1;
 
 
         //// Main function ////
@@ -367,11 +374,12 @@ namespace BattleBoats
             coord = GetCheckedCoordinateInput(ShootEnterPrompt, CoordinateFormatErrorPrompt, AlreadyTriedErrorPrompt, PlayerTargetTracker);
             Console.WriteLine();
 
-            // Check hit or miss, update target tracker and output to user
+            // Check hit or miss, update target tracker and hit counter and output to user
             if (ComputerFleetGrid[coord[0], coord[1]] == 'B')
             {
                 Console.WriteLine(HitMessage);
                 PlayerTargetTracker[coord[0], coord[1]] = 'H';
+                PlayerHits++;
             }
             else if (ComputerFleetGrid[coord[0], coord[1]] == ' ')
             {
@@ -401,11 +409,12 @@ namespace BattleBoats
                 coord[1] = rand.Next(8);
             } while (ComputerFleetGrid[coord[0], coord[1]] != ' ');
 
-            // Check hit or miss, update target tracker and output to user
+            // Check hit or miss, update target tracker and hit counter and output to user
             if (PlayerFleetGrid[coord[0], coord[1]] == 'B')
             {
                 Console.WriteLine(HitMessage);
                 ComputerTargetTracker[coord[0], coord[1]] = 'H';
+                ComputerHits++;
             }
             else if (PlayerFleetGrid[coord[0], coord[1]] == ' ')
             {
@@ -422,10 +431,8 @@ namespace BattleBoats
         
         static void SaveGameToFile() { }
         static void WipeFile() { }
-        
-        
-        static int CheckForWin() { return 1; } // NOTE TO SELF: output how many ships of each player have been sunk so far
-        static void DisplayEndGame(int status) { }
+
+        static void DisplayEndGame() { }
         static void ReadInstructions() { }
     }
 }
