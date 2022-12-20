@@ -289,8 +289,6 @@ namespace BattleBoats
             }
             // FOR TESTING ONLY, output computer fleet grid
             OutputGrid(ComputerFleetGrid);
-
-            return;
         }
         
         
@@ -317,13 +315,13 @@ namespace BattleBoats
                 }
                 else if (status == 2) // User quit
                 {
-                    return; // Go back to menu
+                    break; // Exit loop and go back to menu
                 }
                 else if (status == 3 || status == 4) // Win
                 {
                     DisplayEndGame(status); // Pass who won to display the end game screen
                     WipeFile();
-                    return; // Go back to menu
+                    break; // Exit loop and go back to menu
                 }
                 else
                 {
@@ -331,15 +329,69 @@ namespace BattleBoats
                 }
             }
         }
-        static void PlayerTurn() { }
-        static void ComputerTurn() { }
+        static void PlayerTurn()
+        {
+            const string ShootEnterPrompt = "Please enter the coordinate to shoot at";
+            const string CoordinateFormatErrorPrompt = "Sorry, enter a coordinate between A1 and H8";
+            const string AlreadyTriedErrorPrompt = "Sorry, you have already tried shooting at that coordinate";
+            const string HitMessage = "Boom! You hit an enemy boat and sunk it";
+            const string MissMessage = "Splash... You missed";
+            int[] coord;
+
+            OutputGrid(PlayerTargetTracker);
+
+            coord = GetCheckedCoordinateInput(ShootEnterPrompt, CoordinateFormatErrorPrompt, AlreadyTriedErrorPrompt, PlayerTargetTracker);
+
+            if (ComputerFleetGrid[coord[0], coord[1]] == 'B')
+            {
+                Console.WriteLine(HitMessage);
+                PlayerTargetTracker[coord[0], coord[1]] = 'H';
+            }
+            else if (ComputerFleetGrid[coord[0], coord[1]] == ' ')
+            {
+                Console.WriteLine(MissMessage);
+                PlayerTargetTracker[coord[0], coord[1]] = 'M';
+            }
+            else
+            {
+                throw new Exception("Fleet grid should only contain 'B' or ' '");
+            }
+        }
+        static void ComputerTurn() 
+        {
+            const string HitMessage = "Boom! One of your boats was hit by the enemy";
+            const string MissMessage = "Splash... Your enemy missed";
+            int[] coord = new int[2];
+
+            Random rand = new();
+            do
+            {
+                coord[0] = rand.Next(8);
+                coord[1] = rand.Next(8);
+            } while (ComputerFleetGrid[coord[0], coord[1]] != ' ');
+
+            if (PlayerFleetGrid[coord[0], coord[1]] == 'B')
+            {
+                Console.WriteLine(HitMessage);
+                ComputerTargetTracker[coord[0], coord[1]] = 'H';
+            }
+            else if (PlayerFleetGrid[coord[0], coord[1]] == ' ')
+            {
+                Console.WriteLine(MissMessage);
+                ComputerTargetTracker[coord[0], coord[1]] = 'M';
+            }
+            else
+            {
+                throw new Exception("Fleet grid should only contain 'B' or ' '");
+            }
+        }
         
         
         static void SaveGameToFile() { }
         static void WipeFile() { }
         
         
-        static int CheckForWin() { return 1; }
+        static int CheckForWin() { return 1; } // NOTE TO SELF: output how many ships of each player have been sunk so far
         static void DisplayEndGame(int status) { }
         static void ReadInstructions() { }
     }
