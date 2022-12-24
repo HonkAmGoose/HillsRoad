@@ -9,17 +9,12 @@ namespace BattleBoats
          *  
          *  Random notes to self for programming:
          *  All global grids are referenced with grid[Y-coord (number), X-coord (letter)]
-         *  Statuses are as follows:
-         *      1 for keep going
-         *      2 for quit due to user input
-         *      3 for quit due to player win
-         *      4 for quit due to computer win
          */
 
         //// Global Variables ////
-        
+
         // Grids
-        static char[,] PlayerFleetGrid = new char[8,8];
+        static char[,] PlayerFleetGrid = new char[8, 8];
         static char[,] PlayerTargetTracker = new char[8, 8];
         static char[,] ComputerFleetGrid = new char[8, 8];
         static char[,] ComputerTargetTracker = new char[8, 8];
@@ -32,7 +27,7 @@ namespace BattleBoats
 
 
         //// Main function ////
-
+        //  Production Main
         public static void Main(String[] args)
         {
             // Setting up constants
@@ -81,11 +76,17 @@ namespace BattleBoats
             Console.ReadKey(); // Wait for user to press a key to exit
         }
 
+        //  Testing Main
+        public static void TestMain(string[] args)
+        {
+            ;
+        }
+
 
         //// Helper functions (used in multiple places) ////
 
         // Function to output grid in a pretty format
-        static void OutputGrid(char[,] grid) 
+        static void OutputGrid(char[,] grid)
         {
             // Output column headings
             Console.WriteLine("   | A | B | C | D | E | F | G | H");
@@ -95,7 +96,7 @@ namespace BattleBoats
             {
                 // Output line separator and row heading
                 Console.WriteLine("---+---+---+---+---+---+---+---+---");
-                Console.Write($" {i+1} ");
+                Console.Write($" {i + 1} ");
 
                 // Iterate through the row and output the values
                 for (int j = 0; j < grid.GetLength(1); j++)
@@ -108,7 +109,7 @@ namespace BattleBoats
         }
 
         // Function to convert a letter X coordinate to number, throwing FormatException if not between A and H
-        static int ConvertXCoord(char coord) 
+        static int ConvertXCoord(char coord)
         {
             if ('A' <= coord && coord <= 'H')
             {
@@ -122,7 +123,7 @@ namespace BattleBoats
         }
 
         // Function to get coordinate input between A1 and H8
-        static int[] GetCoordinateInput(string enterPrompt, string formatErrorPrompt) 
+        static int[] GetCoordinateInput(string enterPrompt, string formatErrorPrompt)
         {
             // Variables
             string response;
@@ -196,7 +197,7 @@ namespace BattleBoats
         }
 
         // Function to get inclusive bounded integer input
-        static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound) 
+        static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound)
         {
             // Variables
             int response;
@@ -212,33 +213,33 @@ namespace BattleBoats
                 }
 
                 // If not integer, prompt to try again and restart the loop
-                catch (FormatException) 
+                catch (FormatException)
                 {
                     Console.WriteLine(formatErrorPrompt);
                     continue;
                 }
 
                 // Check whether it is outside of the bounds, if not, prompt to try again and restart the loop
-                if (response > upperBound | response < lowerBound) 
+                if (response > upperBound | response < lowerBound)
                 {
                     Console.WriteLine(outOfBoundErrorPrompt);
                     continue;
                 }
 
                 // If it makes it to this point, the input is valid so break out of loop
-                break; 
+                break;
             }
 
             // Return the integer representation of the input
             Console.WriteLine();
-            return response; 
+            return response;
         }
 
 
         //// Procedural functions (used once) ////
 
         // Function to display menu and return input using GetIntInput()
-        static int Menu(string beforePrompt, string afterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, string[] options) 
+        static int Menu(string beforePrompt, string afterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, string[] options)
         {
             // Variables
             int length = options.Length;
@@ -247,25 +248,25 @@ namespace BattleBoats
             Console.WriteLine(beforePrompt);
 
             // Output options from array
-            for (int i = 0; i < length; i++) 
+            for (int i = 0; i < length; i++)
             {
                 Console.WriteLine($"\t{i + 1}. {options[i]}");
             }
             Console.WriteLine();
 
             // Get integer input corresponding to a menu item and return it
-            return GetIntInput(afterPrompt, formatErrorPrompt, outOfBoundErrorPrompt, 1, length); 
+            return GetIntInput(afterPrompt, formatErrorPrompt, outOfBoundErrorPrompt, 1, length);
         }
 
         // Function to play a completely new game
-        static void PlayNewGame() 
+        static void PlayNewGame()
         {
             SetupNewGame();
             PlayGame();
         }
-        
+
         // Function to set up grids with user input and random computer coordinates
-        static void SetupNewGame() 
+        static void SetupNewGame()
         {
             // Variables
             // FOR TESTING ONLY currently unused, will be used in production
@@ -324,10 +325,10 @@ namespace BattleBoats
             // FOR TESTING ONLY, output computer fleet grid
             OutputGrid(ComputerFleetGrid);
         }
-        
-        
+
+
         // Function to play a game, resuming from a file
-        static void ResumeSavedGame() 
+        static void ResumeSavedGame()
         {
             // Variables
             const string FileNotFoundError = "No save file exists, please create a new game\n";
@@ -342,7 +343,7 @@ namespace BattleBoats
             {
                 // Alert user and don't go on to PlayGame() because no game has been initialised
                 Console.WriteLine(FileNotFoundError);
-                return; 
+                return;
             }
             catch (EndOfStreamException)
             {
@@ -392,7 +393,7 @@ namespace BattleBoats
 
 
         // Function to play the game, taking turns and saving periodically
-        static void PlayGame()  
+        static void PlayGame()
         {
             // Variables
             const string ContinuePrompt = "Do you want to continue? (Y/n)";
@@ -433,7 +434,7 @@ namespace BattleBoats
                 }
             }
         }
-        
+
         // Function to take a player turn with input coordinates
         static void PlayerTurn()
         {
@@ -468,9 +469,9 @@ namespace BattleBoats
             }
             Console.WriteLine();
         }
-        
+
         // Function to take a computer turn with random coordinates
-        static void ComputerTurn() 
+        static void ComputerTurn()
         {
             // Variables
             const string HitMessage = "Boom! One of your boats was hit by the enemy";
@@ -506,7 +507,7 @@ namespace BattleBoats
 
 
         // Function to save the current game to the save file
-        static void SaveGameToFile() 
+        static void SaveGameToFile()
         {
             // Variables
             const int Xsize = 8;
@@ -526,10 +527,10 @@ namespace BattleBoats
                     for (int j = 0; j < Xsize; j++)
                     {
                         // Write value from each grid
-                        bw.Write(PlayerFleetGrid[i,j]);
-                        bw.Write(PlayerTargetTracker[i,j]);
-                        bw.Write(ComputerFleetGrid[i,j]);
-                        bw.Write(ComputerTargetTracker[i,j]);
+                        bw.Write(PlayerFleetGrid[i, j]);
+                        bw.Write(PlayerTargetTracker[i, j]);
+                        bw.Write(ComputerFleetGrid[i, j]);
+                        bw.Write(ComputerTargetTracker[i, j]);
                     }
                 }
             }
