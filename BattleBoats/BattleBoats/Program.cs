@@ -290,7 +290,7 @@ namespace BattleBoats
                 }
             }
 
-            // Initialise other variables
+            // Initialise other variables (in case two games are played successively without restart)
             playerHits = 0;
             computerHits = 0;
             turns = 0;
@@ -339,14 +339,16 @@ namespace BattleBoats
             {
                 SetupGameFromFile();
             }
+            // Alert user and don't go on to PlayGame() because no game has been initialised
             catch (FileNotFoundException)
             {
-                // Alert user and don't go on to PlayGame() because no game has been initialised
+                // Due to no file
                 Console.WriteLine(FileNotFoundError);
                 return;
             }
             catch (EndOfStreamException)
             {
+                // Due to incorrect file length
                 Console.WriteLine(FileCorruptError);
                 WipeFile();
                 return;
@@ -408,7 +410,7 @@ namespace BattleBoats
                 turns++;
                 SaveGameToFile();
 
-                // Check if either player has won
+                // Check if either player has won, display end game, wipe file and break out of loop
                 if (playerHits == 5)
                 {
                     DisplayEndGame(true);
@@ -422,7 +424,7 @@ namespace BattleBoats
                     cont = false;
                 }
 
-                // Ask whether to continue
+                // Ask whether to continue, with default yes, if not, break out of loop
                 else
                 {
                     Console.WriteLine(ContinuePrompt);
@@ -451,7 +453,7 @@ namespace BattleBoats
             coord = GetCheckedCoordinateInput(ShootEnterPrompt, CoordinateFormatErrorPrompt, AlreadyTriedErrorPrompt, PlayerTargetTracker);
             Console.WriteLine();
 
-            // Check hit or miss, update target tracker and hit counter and output to user
+            // Check hit or miss, update target tracker and hit counter (if hit) and output to user
             if (ComputerFleetGrid[coord[0], coord[1]] == 'B')
             {
                 Console.WriteLine(HitMessage);
@@ -486,7 +488,7 @@ namespace BattleBoats
                 coord[1] = rand.Next(8);
             } while (ComputerFleetGrid[coord[0], coord[1]] != ' ');
 
-            // Check hit or miss, update target tracker and hit counter and output to user
+            // Check hit or miss, update target tracker and hit counter (if hit) and output to user
             if (PlayerFleetGrid[coord[0], coord[1]] == 'B')
             {
                 Console.WriteLine(HitMessage);
@@ -539,10 +541,12 @@ namespace BattleBoats
         // Function to wipe the save file
         static void WipeFile()
         {
-            // Truncates file to 0 bytes and then closes it
+            // Truncates file to 0 bytes and then closes it (note to self: semi-colon is the same as "pass" in python)
             using (File.Open(SaveFile, FileMode.Truncate)) ;
         }
 
+
+        // Function to display end game messages to the user
         static void DisplayEndGame(bool playerWon)
         {
             // Variables
@@ -562,6 +566,11 @@ namespace BattleBoats
             // Output statistics
             Console.WriteLine($"You sunk {playerHits} boats and the computer sunk {computerHits} in {turns} turns\n");
         }
-        static void ReadInstructions() { }
+
+        // Function to display instructions to the user
+        static void ReadInstructions()
+        {
+            
+        }
     }
 }
