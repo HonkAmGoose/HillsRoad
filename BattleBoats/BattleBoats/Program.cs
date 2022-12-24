@@ -23,11 +23,12 @@ namespace BattleBoats
         static char[,] PlayerTargetTracker = new char[8, 8];
         static char[,] ComputerFleetGrid = new char[8, 8];
         static char[,] ComputerTargetTracker = new char[8, 8];
+        const string SaveFile = "BattleBoats.save";
 
         // Hit counters and status
-        static int PlayerHits = 0;
-        static int ComputerHits = 0;
-        static int Status = 1;
+        static int playerHits = 0;
+        static int computerHits = 0;
+        static int turns = 0;
 
 
         //// Main function ////
@@ -266,6 +267,7 @@ namespace BattleBoats
         // Function to set up grids with user input and random computer coordinates
         static void SetupNewGame() 
         {
+            // Variables
             // FOR TESTING ONLY currently unused, will be used in production
             const string PlaceEnterPrompt = "Please enter the coordinate to place a boat";
             const string CoordinateFormatErrorPrompt = "Sorry, enter a coordinate between A1 and H8";
@@ -319,41 +321,103 @@ namespace BattleBoats
         }
         
         
+        // Function to play a game, resuming from a file
         static void ResumeSavedGame() 
         {
-            SetupGameFromFile();
+            // Variables
+            const string FileNotFoundError = "No save file exists, please create a new game";
+            const string FileCorruptError = "The save file seems to be corrupted, please create a new game";
+
+            // Try to setup game from file
+            try
+            {
+                SetupGameFromFile();
+            }
+            catch (FileNotFoundException)
+            {
+                // Alert user and don't go on to PlayGame() because no game has been initialised
+                Console.WriteLine(FileNotFoundError);
+                return; 
+            }
+            catch (EndOfStreamException)
+            {
+                Console.WriteLine(FileCorruptError);
+                WipeFile();
+                return;
+            }
+
             PlayGame();
         }
-        static void SetupGameFromFile() { }
+
+        // Function to setup grids, resuming from a file
+        static void SetupGameFromFile()
+        {
+            // Variables
+            const int Xsize = 8;
+            const int Ysize = 8;
+
+            // Attempt to read from file (throws FileNotFound if it doesn't exist)
+            using (BinaryReader br = new BinaryReader(File.Open(SaveFile, FileMode.Open)))
+            {
+                // Iterate through the grids
+                for (int i = 0; i < Ysize; i++)
+                {
+                    for (int j = 0; j < Xsize; j++)
+                    {
+                        // Read a char for each grid (throws EndOfStream if file too short)
+                        PlayerFleetGrid[i, j] = br.ReadChar();
+                        PlayerTargetTracker[i, j] = br.ReadChar();
+                        ComputerFleetGrid[i, j] = br.ReadChar();
+                        ComputerTargetTracker[i, j] = br.ReadChar();
+                    }
+                }
+
+                // Manually throw EndOfStream if file too long
+                if (br.BaseStream.Position < br.BaseStream.Length)
+                {
+                    throw new EndOfStreamException();
+                }
+            }
+        }
 
 
         // Function to play the game, taking turns and saving periodically
         static void PlayGame()  
         {
-            int status = 1; 
-            while (status == 1)
+            // Variables
+            const string ContinuePrompt = "Do you want to continue? (Y/n)";
+            bool cont = true;
+
+            // Loop until player exit
+            while (cont)
             {
+                // Take turns and save
                 PlayerTurn();
                 ComputerTurn();
                 SaveGameToFile();
-                status = CheckForWin();
-                if (status == 1) // Most likely status so optimised to keep going and not bother checking status code against other numbers
+
+                // Check if either player has won
+                if (playerHits == 5)
                 {
-                    continue; // Next set of turns
-                }
-                else if (status == 2) // User quit
-                {
-                    break; // Exit loop and go back to menu
-                }
-                else if (status == 3 || status == 4) // Win
-                {
-                    DisplayEndGame(status); // Pass who won to display the end game screen
+                    DisplayEndGame(true);
                     WipeFile();
-                    break; // Exit loop and go back to menu
+                    cont = false;
                 }
+                else if (computerHits == 5)
+                {
+                    DisplayEndGame(false);
+                    WipeFile();
+                    cont = false;
+                }
+
+                // Ask whether to continue
                 else
                 {
-                    throw new Exception("This should be unreachable (status should always remain between 1 and 4 inclusive)");
+                    Console.WriteLine(ContinuePrompt);
+                    if (Console.ReadLine().ToLower() == "n")
+                    {
+                        cont = false;
+                    }
                 }
             }
         }
@@ -379,7 +443,7 @@ namespace BattleBoats
             {
                 Console.WriteLine(HitMessage);
                 PlayerTargetTracker[coord[0], coord[1]] = 'H';
-                PlayerHits++;
+                playerHits++;
             }
             else if (ComputerFleetGrid[coord[0], coord[1]] == ' ')
             {
@@ -414,7 +478,7 @@ namespace BattleBoats
             {
                 Console.WriteLine(HitMessage);
                 ComputerTargetTracker[coord[0], coord[1]] = 'H';
-                ComputerHits++;
+                computerHits++;
             }
             else if (PlayerFleetGrid[coord[0], coord[1]] == ' ')
             {
@@ -427,12 +491,62 @@ namespace BattleBoats
             }
             Console.WriteLine();
         }
-        
-        
-        static void SaveGameToFile() { }
-        static void WipeFile() { }
 
-        static void DisplayEndGame() { }
+
+        // Function to save the current game to the save file
+        static void SaveGameToFile() 
+        {
+            // Variables
+            const int Xsize = 8;
+            const int Ysize = 8;
+
+            // Open file in create mode (overwrites if already exists)
+            using (BinaryWriter bw = new BinaryWriter(File.Open(SaveFile, FileMode.Create)))
+            {
+                // Iterate through grid
+                for (int i = 0; i < Ysize; i++)
+                {
+                    for (int j = 0; j < Xsize; j++)
+                    {
+                        // Write value from each grid
+                        bw.Write(PlayerFleetGrid[i,j]);
+                        bw.Write(PlayerTargetTracker[i,j]);
+                        bw.Write(ComputerFleetGrid[i,j]);
+                        bw.Write(ComputerTargetTracker[i,j]);
+                    }
+                }
+            }
+
+            // Increment turn counter
+            turns++;
+        }
+
+        // Function to wipe the save file
+        static void WipeFile()
+        {
+            // Truncates file to 0 bytes and then closes it
+            using (File.Open(SaveFile, FileMode.Truncate)) ;
+        }
+
+        static void DisplayEndGame(bool playerWon)
+        {
+            // Variables
+            const string PlayerWinMessage = "Well done, you won!";
+            const string ComputerWinMessage = "Better luck next time, you lost...";
+
+            // Check who won based on argument and output appropriate message
+            if (playerWon)
+            {
+                Console.WriteLine(PlayerWinMessage);
+            }
+            else
+            {
+                Console.WriteLine(ComputerWinMessage);
+            }
+
+            // Output statistics
+            Console.WriteLine($"You sunk {playerHits} boats and the computer sunk {computerHits} in {turns} turns");
+        }
         static void ReadInstructions() { }
     }
 }
