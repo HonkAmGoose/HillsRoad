@@ -289,6 +289,11 @@ namespace BattleBoats
                 }
             }
 
+            // Initialise other variables
+            playerHits = 0;
+            computerHits = 0;
+            turns = 0;
+
             // Get 5 boat spaces for the player with input
             for (int i = 0; i < NumberOfBoats; i++)
             {
@@ -325,8 +330,8 @@ namespace BattleBoats
         static void ResumeSavedGame() 
         {
             // Variables
-            const string FileNotFoundError = "No save file exists, please create a new game";
-            const string FileCorruptError = "The save file seems to be corrupted, please create a new game";
+            const string FileNotFoundError = "No save file exists, please create a new game\n";
+            const string FileCorruptError = "The save file seems to be corrupted, please create a new game\n";
 
             // Try to setup game from file
             try
@@ -359,6 +364,11 @@ namespace BattleBoats
             // Attempt to read from file (throws FileNotFound if it doesn't exist)
             using (BinaryReader br = new BinaryReader(File.Open(SaveFile, FileMode.Open)))
             {
+                // Setup non-grid variables
+                playerHits = br.ReadInt32();
+                computerHits = br.ReadInt32();
+                turns = br.ReadInt32();
+
                 // Iterate through the grids
                 for (int i = 0; i < Ysize; i++)
                 {
@@ -394,6 +404,7 @@ namespace BattleBoats
                 // Take turns and save
                 PlayerTurn();
                 ComputerTurn();
+                turns++;
                 SaveGameToFile();
 
                 // Check if either player has won
@@ -418,6 +429,7 @@ namespace BattleBoats
                     {
                         cont = false;
                     }
+                    Console.WriteLine();
                 }
             }
         }
@@ -503,6 +515,11 @@ namespace BattleBoats
             // Open file in create mode (overwrites if already exists)
             using (BinaryWriter bw = new BinaryWriter(File.Open(SaveFile, FileMode.Create)))
             {
+                // Save non-grid variables
+                bw.Write(playerHits);
+                bw.Write(computerHits);
+                bw.Write(turns);
+
                 // Iterate through grid
                 for (int i = 0; i < Ysize; i++)
                 {
@@ -516,9 +533,6 @@ namespace BattleBoats
                     }
                 }
             }
-
-            // Increment turn counter
-            turns++;
         }
 
         // Function to wipe the save file
@@ -545,7 +559,7 @@ namespace BattleBoats
             }
 
             // Output statistics
-            Console.WriteLine($"You sunk {playerHits} boats and the computer sunk {computerHits} in {turns} turns");
+            Console.WriteLine($"You sunk {playerHits} boats and the computer sunk {computerHits} in {turns} turns\n");
         }
         static void ReadInstructions() { }
     }
