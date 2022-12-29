@@ -570,7 +570,15 @@ namespace BattleBoats
         // Function to display instructions to the user
         static void ReadInstructions()
         {
-            
+            Console.WriteLine
+                (
+                    "Battle Boats is played as follows:\n\n" +
+                    "\t1.\tChoose a location for your five boats\n" +
+                    "\t\t(the computer will also randomly select five locations for its boats)\n\n" +
+                    "\t2.\tTaking alternate turns, you will select a coordinate to shoot\n" +
+                    "\t\tYou will be told whether you've hit your target and it will be shown on your grid\n\n" +
+                    "\t3.\tThe first player to sink all 5 of their opponents boats wins!\n"
+                );
         }
     }
 }
