@@ -98,23 +98,6 @@ namespace BattleBoats
             computerHits = 2;
             turns = 25;
 
-            Console.WriteLine($"P: {playerHits}, C: {computerHits}, T: {turns}");
-            OutputGrid(PlayerFleetGrid);
-            OutputGrid(PlayerTargetTracker);
-            OutputGrid(ComputerFleetGrid);
-            OutputGrid(ComputerTargetTracker);
-
-            SaveGameToFile();
-            Console.WriteLine("Saved");
-            SetupGameFromFile();
-            Console.WriteLine("Loaded");
-
-            Console.WriteLine($"P: {playerHits}, C: {computerHits}, T: {turns}");
-            OutputGrid(PlayerFleetGrid);
-            OutputGrid(PlayerTargetTracker);
-            OutputGrid(ComputerFleetGrid);
-            OutputGrid(ComputerTargetTracker);
-
         }
 
 
@@ -402,6 +385,12 @@ namespace BattleBoats
             // Attempt to read from file (throws FileNotFound if it doesn't exist)
             using (BinaryReader br = new BinaryReader(File.Open(SaveFile, FileMode.Open)))
             {
+                // If no data in file, treat as no save file and manually throw FileNotFound
+                if (br.BaseStream.Length <= 1)
+                {
+                    throw new FileNotFoundException();
+                }
+
                 // Setup non-grid variables
                 playerHits = br.ReadInt32();
                 computerHits = br.ReadInt32();
