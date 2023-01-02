@@ -28,7 +28,7 @@ namespace BattleBoats
 
         //// Main function ////
         //  Production Main
-        public static void Main(String[] args)
+        public static void RealMain(String[] args)
         {
             // Setting up constants
             string[] menuOptions =
@@ -77,9 +77,44 @@ namespace BattleBoats
         }
 
         //  Testing Main
-        public static void TestMain(string[] args)
+        public static void Main(string[] args)
         {
-            ;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    PlayerFleetGrid[i, j] = ' ';
+                    PlayerTargetTracker[i, j] = ' ';
+                    ComputerFleetGrid[i, j] = ' ';
+                    ComputerTargetTracker[i, j] = ' ';
+                }
+            }
+            PlayerFleetGrid[2, 2] = 'X';
+            PlayerTargetTracker[1, 5] = 'H';
+            ComputerFleetGrid[0, 7] = 'B';
+            ComputerTargetTracker[7, 7] = 'M';
+
+            playerHits = 3;
+            computerHits = 2;
+            turns = 25;
+
+            Console.WriteLine($"P: {playerHits}, C: {computerHits}, T: {turns}");
+            OutputGrid(PlayerFleetGrid);
+            OutputGrid(PlayerTargetTracker);
+            OutputGrid(ComputerFleetGrid);
+            OutputGrid(ComputerTargetTracker);
+
+            SaveGameToFile();
+            Console.WriteLine("Saved");
+            SetupGameFromFile();
+            Console.WriteLine("Loaded");
+
+            Console.WriteLine($"P: {playerHits}, C: {computerHits}, T: {turns}");
+            OutputGrid(PlayerFleetGrid);
+            OutputGrid(PlayerTargetTracker);
+            OutputGrid(ComputerFleetGrid);
+            OutputGrid(ComputerTargetTracker);
+
         }
 
 
@@ -299,14 +334,14 @@ namespace BattleBoats
             for (int i = 0; i < NumberOfBoats; i++)
             {
                 // FOR TESTING ONLY, don't bother with prompting for player coords
-                //OutputGrid(PlayerFleetGrid);
-                //coord = GetCheckedCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
-                //PlayerFleetGrid[coord[0], coord[1]] = 'B';
-                PlayerFleetGrid[0, 0] = 'B';
-                PlayerFleetGrid[0, 7] = 'B';
-                PlayerFleetGrid[7, 0] = 'B';
-                PlayerFleetGrid[7, 7] = 'B';
-                PlayerFleetGrid[4, 4] = 'B';
+                OutputGrid(PlayerFleetGrid);
+                coord = GetCheckedCoordinateInput(PlaceEnterPrompt, CoordinateFormatErrorPrompt, AlreadyExistsErrorPrompt, PlayerFleetGrid);
+                PlayerFleetGrid[coord[0], coord[1]] = 'B';
+                //PlayerFleetGrid[0, 0] = 'B';
+                //PlayerFleetGrid[0, 7] = 'B';
+                //PlayerFleetGrid[7, 0] = 'B';
+                //PlayerFleetGrid[7, 7] = 'B';
+                //PlayerFleetGrid[4, 4] = 'B';
             }
             OutputGrid(PlayerFleetGrid);
 
