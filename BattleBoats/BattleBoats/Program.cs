@@ -26,7 +26,7 @@ namespace BattleBoats
         static int turns = 0;
 
 
-        //// Main function ////
+        //// Main functions ////
         //  Production Main
         public static void RealMain(String[] args)
         {
@@ -87,9 +87,13 @@ namespace BattleBoats
                     PlayerTargetTracker[i, j] = ' ';
                     ComputerFleetGrid[i, j] = ' ';
                     ComputerTargetTracker[i, j] = ' ';
+                    if (i % 2 == 0)
+                    {
+                        PlayerFleetGrid[i, j] = 'B';
+                    }
                 }
             }
-            PlayerFleetGrid[2, 2] = 'X';
+            PlayerFleetGrid[2, 2] = 'B';
             PlayerTargetTracker[1, 5] = 'H';
             ComputerFleetGrid[0, 7] = 'B';
             ComputerTargetTracker[7, 7] = 'M';
@@ -98,6 +102,11 @@ namespace BattleBoats
             computerHits = 2;
             turns = 25;
 
+            while (Console.ReadLine() != "n")
+            {
+                Console.WriteLine($"P: {playerHits}, C: {computerHits}, T: {turns}");
+                ComputerTurn();
+            }
         }
 
 
@@ -341,7 +350,7 @@ namespace BattleBoats
                 ComputerFleetGrid[Ynumber, Xletter] = 'B';
             }
             // FOR TESTING ONLY, output computer fleet grid
-            OutputGrid(ComputerFleetGrid);
+            //OutputGrid(ComputerFleetGrid);
         }
 
 
