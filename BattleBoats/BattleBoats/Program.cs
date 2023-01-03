@@ -28,7 +28,7 @@ namespace BattleBoats
 
         //// Main functions ////
         //  Production Main
-        public static void RealMain(String[] args)
+        public static void Main(string[] args)
         {
             // Setting up constants
             string[] menuOptions =
@@ -77,37 +77,31 @@ namespace BattleBoats
         }
 
         //  Testing Main
-        public static void Main(string[] args)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    PlayerFleetGrid[i, j] = ' ';
-                    PlayerTargetTracker[i, j] = ' ';
-                    ComputerFleetGrid[i, j] = ' ';
-                    ComputerTargetTracker[i, j] = ' ';
-                    if (i % 2 == 0)
-                    {
-                        PlayerFleetGrid[i, j] = 'B';
-                    }
-                }
-            }
-            PlayerFleetGrid[2, 2] = 'B';
-            PlayerTargetTracker[1, 5] = 'H';
-            ComputerFleetGrid[0, 7] = 'B';
-            ComputerTargetTracker[7, 7] = 'M';
+        //public static void Main(string[] args)
+        //{
+        //    for (int i = 0; i < 8; i++)
+        //    {
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            PlayerFleetGrid[i, j] = ' ';
+        //            PlayerTargetTracker[i, j] = ' ';
+        //            ComputerFleetGrid[i, j] = ' ';
+        //            ComputerTargetTracker[i, j] = ' ';
+        //            if (i % 2 == 0)
+        //            {
+        //                PlayerFleetGrid[i, j] = 'B';
+        //            }
+        //        }
+        //    }
+        //    PlayerFleetGrid[2, 2] = 'B';
+        //    PlayerTargetTracker[1, 5] = 'H';
+        //    ComputerFleetGrid[0, 7] = 'B';
+        //    ComputerTargetTracker[7, 7] = 'M';
 
-            playerHits = 3;
-            computerHits = 2;
-            turns = 25;
-
-            while (Console.ReadLine() != "n")
-            {
-                Console.WriteLine($"P: {playerHits}, C: {computerHits}, T: {turns}");
-                ComputerTurn();
-            }
-        }
+        //    playerHits = 3;
+        //    computerHits = 2;
+        //    turns = 25;
+        //}
 
 
         //// Helper functions (used in multiple places) ////
