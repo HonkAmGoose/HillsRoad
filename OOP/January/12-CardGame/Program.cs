@@ -6,15 +6,14 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            do
+            for (int rank = 1; rank < 14; rank++)
             {
-                Random random = new();
-                Card card = new(random.Next(1, 14), random.Next(0, 4));
-
-                Console.WriteLine($"Your card is the {card.getRankString()} of {card.getSuitString()}, with score {card.getScore()}");
-
-                Console.WriteLine("Type 'q<enter>' to quit, '<enter>' to continue");
-            } while (Console.ReadLine().ToLower() != "q");
+                for (int suit = 0; suit < 4; suit++)
+                {
+                    Card card = new(rank, suit);
+                    Console.WriteLine($"Your card is the {card.getRankString()} of {card.getSuitString()}, with score {card.getScore()}");
+                }
+            }
         }
     }
 }
