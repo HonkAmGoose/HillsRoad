@@ -11,6 +11,7 @@ namespace DiceGame
         public Dice(int numSides)
         {
             sides = numSides;
+            Roll();
         }
 
         public int getValue()
