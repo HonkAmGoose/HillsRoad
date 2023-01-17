@@ -24,13 +24,13 @@ namespace CardGame
             this.suit = suit;
         }
 
-        public int getRank()
+        public int GetRank()
         {
             // Return the rank as an integer from 1(ace) to 13(king)
             return rank;
         }
 
-        public string getRankString()
+        public string GetRankString()
         {
             switch (rank)
             {
@@ -52,13 +52,13 @@ namespace CardGame
             }    
         }
 
-        public int getSuit()
+        public int GetSuit()
         {
             // Return the suit as an integer in alphabetical order 0(clubs) to 3(spades)
             return suit;
         }
 
-        public string getSuitString()
+        public string GetSuitString()
         {
             // Return the suit as a string 0-clubs, 1-diamonds, 2-hearts, 3-spades
             switch (suit)
@@ -71,10 +71,15 @@ namespace CardGame
             }
         }
 
-        public int getScore()
+        public int GetScore()
         {
             // Calculate and return the score as rank * 4 + suit - 3, to create a score from 1 to 52 inclusive
             return (rank * 4 + suit - 3);
+        }
+
+        public override string ToString()
+        {
+            return $"{GetRankString()} of {GetSuitString()}";
         }
     }
 }
