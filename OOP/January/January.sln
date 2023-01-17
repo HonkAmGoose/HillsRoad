@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "10-DiceGame", "10-DiceGame\10-DiceGame.csproj", "{F6E12C20-2979-41FF-AF41-03CF2CA8CA38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12-CardGame", "12-CardGame\12-CardGame.csproj", "{DBA88D7E-7838-4963-8D8B-A9E6FE132609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "12-CardGame", "12-CardGame\12-CardGame.csproj", "{DBA88D7E-7838-4963-8D8B-A9E6FE132609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13-BankAccount", "13-BankAccount\13-BankAccount.csproj", "{5B4A7BEB-8A0C-4FC9-9B9D-E7300586917F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DBA88D7E-7838-4963-8D8B-A9E6FE132609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBA88D7E-7838-4963-8D8B-A9E6FE132609}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBA88D7E-7838-4963-8D8B-A9E6FE132609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4A7BEB-8A0C-4FC9-9B9D-E7300586917F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4A7BEB-8A0C-4FC9-9B9D-E7300586917F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4A7BEB-8A0C-4FC9-9B9D-E7300586917F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4A7BEB-8A0C-4FC9-9B9D-E7300586917F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
