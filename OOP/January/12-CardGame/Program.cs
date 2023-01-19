@@ -10,6 +10,7 @@ namespace CardGame
             game.Shuffle();
             game.Deal();
             game.Play();
+            game.DeclareWinner();
         }
     }
 }

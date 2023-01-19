@@ -6,12 +6,17 @@ namespace CardGame
     {
         const int Length = 52;
         static Card[] pack = new Card[Length];
-        static Card[] hand1 = new Card[Length / 2];
-        static Card[] hand2 = new Card[Length / 2];
+        static Player player1;
+        static Player player2;
 
         public Game()
         {
             Create();
+
+            Console.WriteLine("Enter the name of player1:");
+            player1 = new Player(Length / 2, Console.ReadLine());
+            Console.WriteLine("Enter the name of player2:");
+            player2 = new Player(Length / 2, Console.ReadLine());
         }
         
         public void Create()
@@ -39,32 +44,30 @@ namespace CardGame
         {
             for (int i = 0; i < 26; i++)
             {
-                hand1[i] = pack[2 * i];
-                hand2[i] = pack[2 * i + 1];
+                player1.AddToHand(pack[2 * i], i);
+                player2.AddToHand(pack[2 * i + 1], i);
 
             }
         }
 
         public void Play()
         {
-            int score1 = 0;
-            int score2 = 0;
             int card1, card2;
 
             for (int i = 0; i < 26; i++)
             {
-                card1 = hand1[i].GetScore();
-                card2 = hand2[i].GetScore();
+                card1 = player1.GetScoreFromHand(i);
+                card2 = player2.GetScoreFromHand(i);
 
                 if (card1 > card2)
                 {
-                    score1++;
-                    Console.WriteLine($"Player1 won with their {hand1[i]}, to Player2's {hand2[i]}");
+                    player1.AddToRounds();
+                    Console.WriteLine($"{player1.GetName()} won with their {player1.GetCardFromHand(i)}, to {player2.GetName()}'s {player2.GetCardFromHand(i)}");
                 }
                 else if (card2 > card1)
                 {
-                    score2++;
-                    Console.WriteLine($"Player2 won with their {hand2[i]}, to Player1's {hand1[i]}");
+                    player2.AddToRounds();
+                    Console.WriteLine($"{player2.GetName()} won with their {player2.GetCardFromHand(i)}, to {player1.GetName()}'s {player1.GetCardFromHand(i)}");
                 }
                 else
                 {
@@ -74,13 +77,22 @@ namespace CardGame
                 Console.ReadLine();
             }
 
-            if (score1 > score2)
+        }
+        public void DeclareWinner()
+        { 
+            int rounds1 = player1.GetRounds();
+            int rounds2 = player2.GetRounds();
+            if (rounds1 > rounds2)
             {
-                Console.WriteLine($"Player1 won the game, winning {score1} rounds to Player2's {score2}");
+                Console.WriteLine($"{player1.GetName()} won the game, winning {rounds1} rounds to {player2.GetName()}'s {rounds2}");
             }
-            else if (score2 > score1)
+            else if (rounds2 > rounds1)
             {
-                Console.WriteLine($"Player2 won the game, winning {score2} rounds to Player1's {score1}");
+                Console.WriteLine($"{player2.GetName()} won the game, winning {rounds2} rounds to {player1.GetName()}'s {rounds1}");
+            }
+            else if (rounds1 == rounds2)
+            {
+                Console.WriteLine("Both player's drew with 13 hands");
             }
         }
     }
