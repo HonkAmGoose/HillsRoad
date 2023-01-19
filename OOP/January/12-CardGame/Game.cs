@@ -5,9 +5,9 @@ namespace CardGame
     internal class Game
     {
         const int Length = 52;
-        static Card[] pack = new Card[Length];
-        static Player player1;
-        static Player player2;
+        Card[] pack = new Card[Length];
+        Player player1;
+        Player player2;
 
         public Game()
         {
