@@ -12,7 +12,16 @@ namespace LiarsDice
 
         public static void Main(string[] args)
         {
-            Game game = new Game(playersPerGame + computersPerGame, dicePerHand, sidesPerDie);
+            try 
+            {
+                Game game = new Game(playersPerGame, computersPerGame, dicePerHand, sidesPerDie);
+            }
+            catch Exception as e
+            {
+                Console.WriteLine(e);
+            }
+            
+            game.Play();
         }
     }
 }
