@@ -83,10 +83,11 @@ namespace CardGame
 
         static void Main(string[] args)
         {
-            Create();
-            Shuffle();
-            Deal();
-            Play();
+            Game game = new Game();
+            game.Shuffle();
+            game.Deal();
+            game.Play();
+            game.DeclareWinner();
         }
     }
 }
