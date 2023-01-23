@@ -66,17 +66,19 @@ namespace CardGame
                     throw new Exception("Card 1 and 2 cannot be the same");
                 }
 
-                Console.ReadLine();
+                //Console.ReadLine();
             }
 
+            Console.WriteLine("\n***********************************************************");
             if (score1 > score2)
             {
-                Console.WriteLine($"Player1 won the game, winning {score1} rounds to Player2's {score2}");
+                Console.WriteLine($"* Player1 won the game, winning {score1} rounds to Player2's {score2} *");
             }
             else if (score2 > score1)
             {
-                Console.WriteLine($"Player2 won the game, winning {score2} rounds to Player1's {score1}");
+                Console.WriteLine($"* Player2 won the game, winning {score2} rounds to Player1's {score1} *");
             }
+            Console.WriteLine("***********************************************************\n");
         }
 
         static void Main(string[] args)
