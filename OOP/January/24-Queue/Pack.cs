@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SimpleCardGameV2._0
+namespace Queue
 {
     public class Pack
     {
@@ -11,30 +9,29 @@ namespace SimpleCardGameV2._0
 
         private int front;
         private int rear;
-
         private int size;
-        // size is number of cards currently in pack
-        public int Size //property to provide read-only access to size field
+
+        public int Size
         {
-            get { return size; }
+            get 
+            { 
+                return size; 
+            }
         }
 
-        public Pack() //constructor
+        public Pack()
         {
             for (int i = 0; i <= 51; i++)
             {
                 cardsArray[i] = new Card((i % 13) + 1, i / 13);
             }
-            //!!!!!!!
-            // initialise the three integers below
-            front = //???;
-            rear = //???;
-            size = //???;
+            front = 0;
+            rear = 51;
+            size = 52;
         }
 
         public void Shuffle()
         {
-            //Fisher-Yates shuffle
             for (int i = 0; i < size - 1; i++)
             {
                 int r = rnd.Next(i + 1, 52);
@@ -46,12 +43,12 @@ namespace SimpleCardGameV2._0
 
         public bool IsEmpty()
         {
-            return size == 0;
+            return (size == 0);
         }
 
         public bool IsFull()
         {
-            return size == 52;
+            return (size == 52);
         }
 
         public Card DealCard()
@@ -60,22 +57,37 @@ namespace SimpleCardGameV2._0
             {
                 Card ACard = cardsArray[front];
                 if (front == 51)
+                {
                     front = 0;
+                }
                 else
+                {
                     front++;
+                }
                 size--;
                 return ACard;
             }
             else
+            {
                 return null;
+            }
         }
 
         public void AddCard(Card ACard)
         {
-            // !!!!
-            // write the code for this method (see the slideshow for the algorithm)
-            // !!!!
-            
+            if (!IsFull())
+            {
+                if (rear == 51)
+                {
+                    rear = 0;
+                }
+                else
+                {
+                    rear++;
+                }
+                size++;
+                cardsArray[rear] = ACard;
+            }            
         }
     }
 }

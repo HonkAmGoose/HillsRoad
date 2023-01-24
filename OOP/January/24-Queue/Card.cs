@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SimpleCardGameV2._0
+namespace Queue
 {
     public class Card
     {
