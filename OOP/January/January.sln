@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "12-CardGame", "12-CardGame\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "13-BankAccount", "13-BankAccount\13-BankAccount.csproj", "{5B4A7BEB-8A0C-4FC9-9B9D-E7300586917F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "19-LiarsDice", "19-LiarsDice\19-LiarsDice.csproj", "{35DE5A5C-C6E7-465B-BD95-314D5AF25B96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "19-LiarsDice", "19-LiarsDice\19-LiarsDice.csproj", "{35DE5A5C-C6E7-465B-BD95-314D5AF25B96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "24-Queue", "24-Queue\24-Queue.csproj", "{748B1C9E-AB59-4882-894A-DB684313F41E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{35DE5A5C-C6E7-465B-BD95-314D5AF25B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35DE5A5C-C6E7-465B-BD95-314D5AF25B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35DE5A5C-C6E7-465B-BD95-314D5AF25B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748B1C9E-AB59-4882-894A-DB684313F41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748B1C9E-AB59-4882-894A-DB684313F41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748B1C9E-AB59-4882-894A-DB684313F41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748B1C9E-AB59-4882-894A-DB684313F41E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
