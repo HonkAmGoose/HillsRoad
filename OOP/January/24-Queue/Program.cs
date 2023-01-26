@@ -6,7 +6,8 @@ namespace Queue
     {
         static void Main(string[] args)
         {
-            HigherGame game = new HigherGame();
+            WarGame game = new WarGame();
+            game.PlayAndDisplay(100);
         }
     }
 }
