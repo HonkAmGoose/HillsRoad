@@ -81,6 +81,7 @@ namespace Queue
                 Console.WriteLine();
                 n++;
             }
+            rounds = n;
         }
 
         public void DeclareWinner()
