@@ -15,13 +15,12 @@ namespace LiarsDice
             try 
             {
                 Game game = new Game(playersPerGame, computersPerGame, dicePerHand, sidesPerDie);
+                game.Play();
             }
-            catch Exception as e
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            
-            game.Play();
         }
     }
 }
