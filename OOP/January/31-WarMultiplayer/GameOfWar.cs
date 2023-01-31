@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Transactions;
 using CardClasses;
 
 namespace War
@@ -64,14 +65,15 @@ namespace War
                 int roundWinner = 0;
                 do
                 {
-                    for(int i = 0; i < noOfPlayers; i++)
+                    Console.WriteLine("WAR!");
+                    for (int i = 0; i < noOfPlayers; i++)
                     {
                         cardsInPlayArray[i].AddCard(hands[i].RemoveFirstCard());
-                        Console.WriteLine(cardsInPlayArray[i].Last().GetName());
-                    }                   
+                        Console.WriteLine($"p{i+1}: {cardsInPlayArray[i].Last().GetName()}");
+                    }
                 } while ((roundWinner = GetRoundWinner(cardsInPlayArray)) == -1); // loop while there is a war
                 
-                Console.WriteLine($"Round Winner: {roundWinner+1}");
+                Console.WriteLine($"\nRound Winner: {roundWinner+1}\n");
 
                 // winner gets all cards in table
                 while (cardsInPlayArray[0].Size > 0)
@@ -87,8 +89,16 @@ namespace War
                 {
                     Console.WriteLine($"Player {i+1} has {hands[i].Size} cards");
                 }
+                Console.WriteLine();
             }
-            Console.WriteLine($"The winner is: {winner + 1} with {hands[winner].Size} cards");
+            if (winner != -1)
+            {
+                Console.WriteLine($"The winner is player {winner + 1} with {hands[winner].Size} cards");
+            }
+            else
+            {
+                Console.WriteLine("There was a draw");
+            }
         }
 
         /// <summary>
@@ -133,21 +143,35 @@ namespace War
         {
             // 1- check if there is a player with 0 cards
             bool finished = false;
-
-
-
-
-
-
+            for (int i = 0; i < noOfPlayers; i++)
+            {
+                if (hands[i].IsEmpty())
+                {
+                    finished = true;
+                }
+            }
 
             // 2- find the player with more cards
-            winner = -1;
-           
+            if (finished)
+            {
+                winner = -1;
+                int currentSize = hands[0].Size;
+                int newSize;
 
-
-
-
-
+                for (int i = 1; i < noOfPlayers; i++)
+                {
+                    newSize = hands[i].Size;
+                    if (newSize > currentSize)
+                    {
+                        winner = i;
+                        currentSize = newSize;
+                    }
+                    else if (newSize == currentSize)
+                    {
+                        winner = -1;
+                    }
+                }
+            }
 
             return finished;
         }
