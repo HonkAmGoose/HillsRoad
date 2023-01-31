@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "13-BankAccount", "13-BankAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "19-LiarsDice", "19-LiarsDice\19-LiarsDice.csproj", "{35DE5A5C-C6E7-465B-BD95-314D5AF25B96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "24-Queue", "24-Queue\24-Queue.csproj", "{748B1C9E-AB59-4882-894A-DB684313F41E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "24-Queue", "24-Queue\24-Queue.csproj", "{748B1C9E-AB59-4882-894A-DB684313F41E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "31-WarMultiplayer", "31-WarMultiplayer\31-WarMultiplayer.csproj", "{2459EAE4-7376-4B43-B9AD-B7B172B50601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{748B1C9E-AB59-4882-894A-DB684313F41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748B1C9E-AB59-4882-894A-DB684313F41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{748B1C9E-AB59-4882-894A-DB684313F41E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2459EAE4-7376-4B43-B9AD-B7B172B50601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2459EAE4-7376-4B43-B9AD-B7B172B50601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2459EAE4-7376-4B43-B9AD-B7B172B50601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2459EAE4-7376-4B43-B9AD-B7B172B50601}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
