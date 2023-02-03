@@ -17,7 +17,7 @@ namespace Connect4
 			board = new int[columns, rows];
 		}
 
-		public string PrettifyBoard()
+		public string PrintBoard(ConsoleColor[] playerColours)
 		{
 			string value = "";
 			// TODO: Check this works
@@ -36,27 +36,45 @@ namespace Connect4
 
 			for (int row = 0; row < rows; row++)
 			{
-				value += $" {row + 1} |";
+				Console.WriteLine($" {row + 1} |");
 				for (int column = 0; column < columns; column++)
 				{
-					value + " {board[row,col]} |";
+					if (board[row, column] == 0)
+					{
+						Console.WriteLine(" . |");
+					}
+					else
+					{
+						Console.ForegroundColor = colours[board[row,column]];
+						Console.WriteLine(" O ");
+						Console.ResetColor();
+						Console.WriteLine("|");
+					}
 				}
-				value += $"\n{separator}\n";
+				Console.WriteLine($"\n{separator}\n");
 			}
 			
-			value += ending
-			return value;
+			// TODO: Add ending
 		}
 
 		/* Code to implement this as follows:
+// prompt to enter a column
 while (!AddToken())
 {
 	// prompt to try again
 }
 		*/
+
 		public bool AddToken(int columnAttempt, Player player)
 		{
-
+			for (int row = 0; row < rows; row++)
+			{
+				if (board[columnAttempt, row] == 0)
+				{
+					board[columnAttempt, row] = player.Token;
+					break;
+				}
+			}
 		}
     }
 }
