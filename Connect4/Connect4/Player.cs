@@ -41,8 +41,8 @@ namespace Connect4
             Name = name;
             IsHuman = isHuman;
 
-            NumberOfPlayers++;
             Token = NumberOfPlayers;
+            NumberOfPlayers++;
         }
     }
 }
