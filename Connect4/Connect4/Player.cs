@@ -37,10 +37,12 @@ namespace Connect4
         /// <param name="isHuman">Whether player is human</param>
         public Player(ConsoleColor colour, string name, bool isHuman)
         {
+            // Assign values to the instance
             Colour = colour;
             Name = name;
             IsHuman = isHuman;
 
+            // Keep a rolling tally of the player number
             Token = NumberOfPlayers;
             NumberOfPlayers++;
         }

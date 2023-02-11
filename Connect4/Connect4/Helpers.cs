@@ -4,12 +4,26 @@ namespace Connect4
 {
     static class Helpers
     {
+        /// <summary>
+        /// Method to get a string input
+        /// </summary>
+        /// <param name="enterPrompt">Prompt for the user</param>
+        /// <returns>The string that was input</returns>
         public static string GetStrInput(string enterPrompt)
         {
             Console.WriteLine(enterPrompt);
             return Console.ReadLine();
         }
 
+        /// <summary>
+        /// Method to get bounded integer input
+        /// </summary>
+        /// <param name="enterPrompt">Prompt for the user</param>
+        /// <param name="formatErrorPrompt">Prompt if input not integer</param>
+        /// <param name="outOfBoundErrorPrompt">Prompt if input not in bounds</param>
+        /// <param name="lowerBound">Inclusive lower bound for acceptable input</param>
+        /// <param name="upperBound">Inclusive upper bound for acceptable input</param>
+        /// <returns>The integer that was input within the specified bounds</returns>
         public static int GetIntInput(string enterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, int lowerBound, int upperBound)
         {
             // Variables
@@ -48,6 +62,15 @@ namespace Connect4
             return response;
         }
 
+        /// <summary>
+        /// Method to display menu and get an integer response corresponding to the menu index; implements GetIntInput
+        /// </summary>
+        /// <param name="beforePrompt">User prompt before the menu</param>
+        /// <param name="afterPrompt">User prompt after the menu</param>
+        /// <param name="formatErrorPrompt">Prompt if input not integer</param>
+        /// <param name="outOfBoundErrorPrompt">Prompt if input not in bounds</param>
+        /// <param name="options">string[] with options for the menu</param>
+        /// <returns>Integer corresponding to the menu index</returns>
         public static int DisplayMenu(string beforePrompt, string afterPrompt, string formatErrorPrompt, string outOfBoundErrorPrompt, string[] options)
         {
             // Variables
