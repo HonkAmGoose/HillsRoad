@@ -127,7 +127,7 @@ namespace Connect4
 		/// <param name="playerToken">Player of last token</param>
 		/// <returns>Whether the game has been won</returns>
 		/// <exception cref="Exception">Raised if sanity check of last token placement fails</exception>
-		public bool CheckForWin(int column, int row, int playerToken) // TODO: currently broken
+		public bool CheckForWin(int column, int row, int playerToken)
 		{
 			// Sanity check the coordinate belongs to the player
 			if (board[column,row] != playerToken)
@@ -145,7 +145,7 @@ namespace Connect4
 			int[] rowMod = { 0, 1, 1, 1 };
 			for (int direction = 0; direction < 4; direction++) 
 			{
-				int numInLine = 0;
+				int numInLine = 1;
 
 				// Check in positive direction for an unbroken line, breaking when end of line
 				for (int multiplier = 1; multiplier < 4; multiplier++)

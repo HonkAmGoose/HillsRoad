@@ -89,5 +89,19 @@ namespace Connect4
             // Get integer input corresponding to a menu item and return it
             return GetIntInput(afterPrompt, formatErrorPrompt, outOfBoundErrorPrompt, 0, length - 1);
         }
+
+        /// <summary>
+        /// Method to display a prompt in the current colour, reset the colour and ask the user to press enter to do something
+        /// </summary>
+        /// <param name="prompt">Prompt in the certain colour</param>
+        /// <param name="to___">What to press enter to do in default colour</param>
+        public static void PressEnterTo(string prompt, string to___)
+        {
+            Console.Write(prompt);
+            Console.ResetColor();
+            Console.Write($"Press enter to {to___}");
+            Console.ReadLine();
+            Console.Clear();
+        }
     }
 }

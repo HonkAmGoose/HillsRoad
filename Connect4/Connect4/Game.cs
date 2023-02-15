@@ -39,6 +39,9 @@ namespace Connect4
         /// <param name="columns">Number of board columns</param>
         public Game(int humans, int computers, int rows, int columns)
         {
+            // Reset console colour
+            Console.ResetColor();
+
             // Assign values
             this.humans = humans;
             this.computers = computers;
@@ -84,10 +87,7 @@ namespace Connect4
                 ColourNames.RemoveAt(colourInt);
 
                 // Confirm player creation
-                Console.WriteLine($"\n---- Created ----\nColour: {colourStr}\nName: {name}\n\nPress enter to continue\n");
-                Console.ReadLine();
-                Console.ResetColor();
-                Console.Clear();
+                Helpers.PressEnterTo($"\n---- Created ----\nColour: {colourStr}\nName: {name}\n\n", "continue");
             }
 
             colourInt = 0;
@@ -108,11 +108,8 @@ namespace Connect4
                 Colours.RemoveAt(colourInt);
                 ColourNames.RemoveAt(colourInt);
 
-                // Confirm coomputer player creation
-                Console.WriteLine($"---- Created ----\nColour: {ColourNames[colourInt]}\nName: {name}\n\nPress enter to continue");
-                Console.ReadLine();
-                Console.ResetColor();
-                Console.Clear();
+                // Confirm computer player creation
+                Helpers.PressEnterTo($"---- Created ----\nColour: {ColourNames[colourInt]}\nName: {name}\n\n", "continue");
             }
 
             // Initialise ColourArr to contain the correct colours
@@ -129,8 +126,10 @@ namespace Connect4
         public void Play()
         {
             int won = -1;
+            int turns = 0;
             while (won == -1)
             {
+                turns++;
                 for (int i = 0; i < players.Length; i++)
                 {
                     if (PlayTurn(players[i]))
@@ -141,7 +140,7 @@ namespace Connect4
                 }
             }
 
-            // TODO: add end game screen
+            DisplayWinner(players[won], turns);
         }
 
         /// <summary>
@@ -166,10 +165,8 @@ namespace Connect4
                 Console.WriteLine($"---- Computer {player.Token}: {player.Name} to play ----");
                 coordinate = ComputerCoordinate(player.Token);
             }
-            Console.WriteLine($"Token played in column {coordinate[0]}\n\nPress enter to continue");
-            Console.ReadLine();
-            Console.ResetColor();
-            Console.Clear();
+
+            Helpers.PressEnterTo($"Token played in column {coordinate[0]}\n\n", "continue");
 
             return board.CheckForWin(coordinate[0], coordinate[1], player.Token);
         }
@@ -195,14 +192,28 @@ namespace Connect4
         }
 
         /// <summary>
-        /// Private method to generate random coordinate for computer and place on board
+        /// Private method to generate random coordinate for computer and place on board - currently unimplemented
         /// </summary>
         /// <param name="playerToken">Token of player to do this for</param>
         /// <returns>The coordinate the token was placed at</returns>
-        private int[] ComputerCoordinate(int playerToken)
+        private int[] ComputerCoordinate(int playerToken)// Currently unimplemented
         {
             // TODO: If I can be bothered later; currently returns invalid coordinates that would cause an error
             return new int[] { -1, -1 };
+        }
+
+        /// <summary>
+        /// Private method to display the win screen
+        /// </summary>
+        /// <param name="player">Instance of player that won</param>
+        /// <param name="turns">How many turns have elapsed</param>
+        private void DisplayWinner(Player player, int turns)
+        {
+            board.PrintBoard(ColourArr);
+            Console.ForegroundColor = player.Colour;
+            string sep = new string('#', Console.WindowWidth);
+
+            Helpers.PressEnterTo($"\n{sep}\nPlayer {player.Token}: {player.Name} won the game in {turns} turns!\n{sep}\n\n", "exit");
         }
     }
 }
