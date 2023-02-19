@@ -90,6 +90,7 @@ namespace Connect4
                 Helpers.PressEnterTo($"\n---- Created ----\nColour: {colourStr}\nName: {name}\n\n", "continue");
             }
 
+            /*
             colourInt = 0;
             for (int i = 0; i < computers; i++)
             {
@@ -111,6 +112,7 @@ namespace Connect4
                 // Confirm computer player creation
                 Helpers.PressEnterTo($"---- Created ----\nColour: {ColourNames[colourInt]}\nName: {name}\n\n", "continue");
             }
+            */
 
             // Initialise ColourArr to contain the correct colours
             ColourArr = new ConsoleColor[players.Length];
