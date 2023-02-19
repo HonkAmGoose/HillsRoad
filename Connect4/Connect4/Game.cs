@@ -154,7 +154,7 @@ namespace Connect4
 
             Console.ForegroundColor = player.Colour;
 
-            int[] coordinate;
+            int[] coordinate = { -1, -1 }; // Defaults to invalid coordinate as ComputerCoordinate is currently unimplemented
             if (player.IsHuman)
             {
                 Console.WriteLine($"---- Player {player.Token}: {player.Name} to play ----");
@@ -163,13 +163,14 @@ namespace Connect4
             else
             {
                 Console.WriteLine($"---- Computer {player.Token}: {player.Name} to play ----");
-                coordinate = ComputerCoordinate(player.Token);
+                //coordinate = ComputerCoordinate(player.Token);
             }
 
             Helpers.PressEnterTo($"Token played in column {coordinate[0]}\n\n", "continue");
 
             return board.CheckForWin(coordinate[0], coordinate[1], player.Token);
         }
+
 
         /// <summary>
         /// Private method to get coordinate input from human and place on the board
@@ -191,6 +192,7 @@ namespace Connect4
             return coordinate;
         }
 
+        /*
         /// <summary>
         /// Private method to generate random coordinate for computer and place on board - currently unimplemented
         /// </summary>
@@ -201,6 +203,7 @@ namespace Connect4
             // TODO: If I can be bothered later; currently returns invalid coordinates that would cause an error
             return new int[] { -1, -1 };
         }
+        */
 
         /// <summary>
         /// Private method to display the win screen
