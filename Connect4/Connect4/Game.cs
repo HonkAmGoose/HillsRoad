@@ -47,7 +47,6 @@ namespace Connect4
             this.computers = computers;
 
             // Initialise players
-            players = new Player[humans + computers];
             InitPlayers();
 
             // Initialise board
@@ -64,7 +63,10 @@ namespace Connect4
             List<string> ColourNames = new List<string>(new string[] { "Red", "Green", "Blue", "Cyan", "Yellow", "Magenta" });
             string[] Names = new string[] { "Sam", "Alex", "Jo", "Dan", "Charlie", "Rowan"};
             int colourInt;
-            
+
+            // Create player array
+            players = new Player[humans + computers];
+
             // Iterate through human creation
             for (int i = 0; i < humans; i++)
             {
