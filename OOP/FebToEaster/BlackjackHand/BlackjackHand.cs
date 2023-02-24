@@ -22,8 +22,8 @@ namespace BlackjackHand
                 int rank1 = cards[1].GetRank();
                 if (
                     (rank0 >= 11 && rank0 <= 13 && rank1 == 1) 
-                    ||
-                    (rank0 == 0 && rank1 >= 11 && rank1 <= 13)
+                    |
+                    (rank0 == 1 && rank1 >= 11 && rank1 <= 13)
                     )
                 {
                     _return.number = 21;
@@ -78,6 +78,12 @@ namespace BlackjackHand
             {
                 _return.type = "5 Card Trick";
                 return _return;
+            }
+
+            // Case for gone bust
+            if (_return.number > 21)
+            {
+                _return.type = "Bust";
             }
 
             return _return;
