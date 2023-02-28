@@ -6,10 +6,11 @@ namespace Shapes
     {
         static void Main(string[] args)
         {
-            Shape[] myShapes = new Shape[3];
+            Shape[] myShapes = new Shape[4];
             myShapes[0] = new Circle(2);
             myShapes[1] = new Square(2);
             myShapes[2] = new Rectangle(3, 2);
+            myShapes[3] = new RATriangle(3, 4);
 
             foreach (var shape in myShapes)
             {
