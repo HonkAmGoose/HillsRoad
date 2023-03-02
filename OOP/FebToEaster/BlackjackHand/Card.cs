@@ -8,7 +8,7 @@ namespace CardClasses
         private int rank;
         // 0 Hearts, 1 Clubs, 2 Diamonds, 3 Spades
         private int suit;
-        // 1 Ace, (2 Two - 10 Ten), 11 Jack, 12 Queen, 13 King
+        // 1 Ace (low), (2 Two - 10 Ten), 11 Jack, 12 Queen, 13 King, 14 Ace (high)
         
         // constructor
         public Card(int rank, int suit)
@@ -37,7 +37,7 @@ namespace CardClasses
         {
             string[] ranks = { "Ace", "Two", "Three", "Four", "Five",
               "Six","Seven", "Eight", "Nine", "Ten",
-              "Jack","Queen", "King" };
+              "Jack","Queen", "King", "Ace" };
             return ranks[rank - 1];
         }
 

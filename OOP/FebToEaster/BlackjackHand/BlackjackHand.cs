@@ -3,8 +3,9 @@ using CardClasses;
 
 namespace HandClasses
 {
-    internal class BlackjackHand : Hand
+    class BlackjackHand : Hand
     {
+        // Uses ace low - rank 1 (rank 14 unused)
         public Score GetScore()
         {
             Score _return = new Score();
