@@ -4,7 +4,7 @@ namespace Shapes
 {
     internal class Square : Rectangle
     {
-        public Square(int sideLength) : base(sideLength, sideLength)
+        public Square(double sideLength) : base(sideLength, sideLength)
         {
 
         }

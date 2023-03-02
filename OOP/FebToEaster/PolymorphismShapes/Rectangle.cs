@@ -7,7 +7,7 @@ namespace Shapes
         public double Width { get; protected set; }
         public double Height { get; protected set; }
 
-        public Rectangle(int width, int height) : base(4)
+        public Rectangle(double width, double height) : base(4)
         {
             Width = width;
             Height = height;
@@ -20,9 +20,9 @@ namespace Shapes
 
         public override void Draw()
         {
-            for (int line = 0; line < Height; line++)
+            for (int line = 0; line < Math.Ceiling(Height); line++)
             {
-                for (int column = 0; column < Width; column++)
+                for (int column = 0; column < Math.Ceiling(Width); column++)
                 {
                     Console.Write("#");
                 }

@@ -4,9 +4,9 @@ namespace Shapes
 {
     internal class Circle : Shape
     {
-        public int Radius { get; protected set; }
+        public double Radius { get; protected set; }
 
-        public Circle(int radius) : base(1)
+        public Circle(double radius) : base(1)
         {
             Radius = radius;
         }

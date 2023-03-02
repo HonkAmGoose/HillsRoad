@@ -10,7 +10,7 @@ namespace Shapes
             myShapes[0] = new Circle(2);
             myShapes[1] = new Square(2);
             myShapes[2] = new Rectangle(3, 2);
-            myShapes[3] = new RATriangle(3, 4);
+            myShapes[3] = new RATriangle(8, 5);
 
             foreach (var shape in myShapes)
             {

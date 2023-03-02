@@ -4,7 +4,7 @@ namespace Shapes
 {
     internal class RATriangle : Rectangle
     {
-        public RATriangle(int width, int height) : base(width, height)
+        public RATriangle(double width, double height) : base(width, height)
         {
 
         }
@@ -16,7 +16,7 @@ namespace Shapes
 
         public override void Draw()
         {
-            double gradient = Height / Width;
+            double gradient = Width / Height;
             double length = Width;
 
             for (int line = 0; line < Height; line++)
