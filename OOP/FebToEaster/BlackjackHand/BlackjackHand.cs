@@ -1,16 +1,10 @@
 ﻿using System;
 using CardClasses;
 
-namespace BlackjackHand
+namespace HandClasses
 {
     internal class BlackjackHand : Hand
     {
-        public struct Score
-        {
-            public int number;
-            public string type;
-        }
-
         public Score GetScore()
         {
             Score _return = new Score();
@@ -26,15 +20,15 @@ namespace BlackjackHand
                     (rank0 == 1 && rank1 >= 11 && rank1 <= 13)
                     )
                 {
-                    _return.number = 21;
-                    _return.type = "Blackjack";
+                    _return.Number = 21;
+                    _return.Type = "Blackjack";
                     return _return;
                 }
             }
 
             // Initialise variables
-            _return.number = 0;
-            _return.type = "Hand";
+            _return.Number = 0;
+            _return.Type = "Hand";
             int aces = 0;
 
             // Add up card scores
@@ -46,17 +40,17 @@ namespace BlackjackHand
                 if (rank >= 2 && rank <= 10)
                 {
                     // Number cards have equal value to rank
-                    _return.number += rank;
+                    _return.Number += rank;
                 }
                 else if (rank >= 11 && rank <= 13)
                 {
                     // Picture cards score 10
-                    _return.number += 10;
+                    _return.Number += 10;
                 }
                 else if (rank == 1)
                 {
                     // Assume aces score 11, will adjust later
-                    _return.number += 11;
+                    _return.Number += 11;
                     aces++;
                 }
                 else
@@ -67,23 +61,23 @@ namespace BlackjackHand
             }
 
             // Adjust for aces if required
-            while (_return.number > 21 && aces > 0)
+            while (_return.Number > 21 && aces > 0)
             {
-                _return.number -= 10;
+                _return.Number -= 10;
                 aces--;
             }
 
             // Special case for five card trick
-            if (cards.Count >= 5 && _return.number <= 21)
+            if (cards.Count >= 5 && _return.Number <= 21)
             {
-                _return.type = "5 Card Trick";
+                _return.Type = "5 Card Trick";
                 return _return;
             }
 
             // Case for gone bust
-            if (_return.number > 21)
+            if (_return.Number > 21)
             {
-                _return.type = "Bust";
+                _return.Type = "Bust";
             }
 
             return _return;

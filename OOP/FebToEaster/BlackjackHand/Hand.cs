@@ -1,6 +1,7 @@
 ﻿using System;
+using CardClasses;
 
-namespace CardClasses
+namespace HandClasses
 {
     public class Hand
     {
@@ -90,7 +91,5 @@ namespace CardClasses
         {
             cards.Clear(); 
         }
-
     }
-
 }
