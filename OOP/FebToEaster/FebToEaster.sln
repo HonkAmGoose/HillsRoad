@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankInheritance", "BankInheritance\BankInheritance.csproj", "{57F35495-2ECA-42A5-A025-86F4FF77CFF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackjackHand", "BlackjackHand\BlackjackHand.csproj", "{8E7C9A65-6438-4CE8-8B30-55EFACB7BE35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardGames", "BlackjackHand\CardGames.csproj", "{8E7C9A65-6438-4CE8-8B30-55EFACB7BE35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolymorphismShapes", "PolymorphismShapes\PolymorphismShapes.csproj", "{7E372FAA-70EF-4EF2-8D16-0ED5F490066F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphismShapes", "PolymorphismShapes\PolymorphismShapes.csproj", "{7E372FAA-70EF-4EF2-8D16-0ED5F490066F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

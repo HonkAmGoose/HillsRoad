@@ -4,7 +4,7 @@ using CardClasses;
 
 namespace HandClasses
 {
-    class TexasHoldemHand : ScoringHand
+    class PokerHand : ScoringHand
     {
         // Uses ace high - rank 14 (rank 1 unused)
         public override Score GetScore()
