@@ -6,9 +6,9 @@ namespace HandClasses
     class BlackjackHand : Hand
     {
         // Uses ace low - rank 1 (rank 14 unused)
-        public Score GetScore()
+        public BlackjackScore GetScore()
         {
-            Score _return = new Score();
+            BlackjackScore _return = new BlackjackScore();
 
             // Special case for blackjack
             if (cards.Count == 2)

@@ -7,10 +7,10 @@ namespace HandClasses
     class PokerHand : ScoringHand
     {
         // Uses ace high - rank 14 (rank 1 unused)
-        public override Score GetScore()
+        public override PokerScore GetScore()
         {
             int cardNo = cards.Count;
-            
+
             int[] ranks = new int[cardNo];
             int[] suits = new int[cardNo];
 
@@ -29,6 +29,11 @@ namespace HandClasses
                 {
                     flushSuit = i;
                 }
+            }
+
+            for (int i = 0; i < 13; i++)
+            {
+
             }
         }
     }

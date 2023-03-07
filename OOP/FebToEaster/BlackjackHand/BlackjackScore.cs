@@ -2,18 +2,18 @@
 
 namespace HandClasses
 {
-    internal class Score
+    internal class BlackjackScore
     {
         public int Number;
         public string Type;
 
-        public Score(int number, string type)
+        public BlackjackScore(int number, string type)
         {
             Number = number;
             Type = type;
         }
 
-        public Score()
+        public BlackjackScore()
         {
             Number = 0;
             Type = "";

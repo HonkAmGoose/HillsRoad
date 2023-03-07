@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardGames", "BlackjackHand\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphismShapes", "PolymorphismShapes\PolymorphismShapes.csproj", "{7E372FAA-70EF-4EF2-8D16-0ED5F490066F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno", "Uno\Uno.csproj", "{FEDA70CC-B0B1-4E08-BA2C-ADDDAF041C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7E372FAA-70EF-4EF2-8D16-0ED5F490066F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E372FAA-70EF-4EF2-8D16-0ED5F490066F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E372FAA-70EF-4EF2-8D16-0ED5F490066F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDA70CC-B0B1-4E08-BA2C-ADDDAF041C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDA70CC-B0B1-4E08-BA2C-ADDDAF041C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDA70CC-B0B1-4E08-BA2C-ADDDAF041C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDA70CC-B0B1-4E08-BA2C-ADDDAF041C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

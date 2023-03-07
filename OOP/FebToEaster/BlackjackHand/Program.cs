@@ -60,7 +60,7 @@ class Program
 
     static bool EvalResults(BlackjackHand hand, int expectedNumber, string expectedType)
     {
-        Score score = new Score();
+        BlackjackScore score = new BlackjackScore();
         score = hand.GetScore();
         hand.Clear();
         Console.Write($"Score {score.Number} (expected {expectedNumber}),\tType {score.Type} (expected {expectedType})\t");
