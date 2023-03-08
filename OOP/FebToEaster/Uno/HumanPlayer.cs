@@ -1,15 +1,15 @@
-﻿using System;
-
-namespace Uno
+﻿namespace PlayerClasses
 {
     internal class HumanPlayer : Player
     {
-        public override int ChooseCard()
+        protected override int ChooseCard(int[] ints, string[] options)
         {
-            return 0;
+            int response = Uno.Helpers.DisplayMenu("Select a card to play:", "Type in the corresponding number:", "Type in an integer", "Type in a number in range", options);
+            
+            return ints[response];
         }
 
-        public override ConsoleColor ChooseColour()
+        protected override ConsoleColor ChooseColour()
         {
             string[] options = new string[colours.Count];
             for (int i = 0; i < colours.Count; i++)
@@ -17,14 +17,14 @@ namespace Uno
                 options[i] = colours[i].ToString();
             }
 
-            int response = Helpers.DisplayMenu("Select a colour:", "Type in the corresponding number:", "Type in an integer", "Type in a number in range", options);
+            int response = Uno.Helpers.DisplayMenu("Select a colour:", "Type in the corresponding number:", "Type in an integer", "Type in a number in range", options);
 
             return colours[response];
         }
 
-        public override string ChooseName()
+        protected override string ChooseName()
         {
-            return Helpers.GetStrInput($"Enter the name for human player {ID}");
+            return Uno.Helpers.GetStrInput($"Enter the name for human player {ID}");
         }
     }
 }

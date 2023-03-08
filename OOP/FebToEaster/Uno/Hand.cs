@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CardClasses
+﻿namespace CardClasses
 {
     class Hand
     {

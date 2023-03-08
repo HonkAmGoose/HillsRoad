@@ -1,20 +1,21 @@
-﻿using System;
-
-namespace Uno
+﻿namespace PlayerClasses
 {
     internal class ComputerPlayer : Player
     {
-        public override int ChooseCard()
+        protected override int ChooseCard(int[] ints, string[] options)
         {
-            return 0;
+            Random rnd = new();
+            int num = rnd.Next(ints.Length);
+
+            return ints[num];
         }
 
-        public override ConsoleColor ChooseColour()
+        protected override ConsoleColor ChooseColour()
         {
             return colours[0];
         }
 
-        public override string ChooseName()
+        protected override string ChooseName()
         {
             string name = names[0];
             Console.WriteLine($"Computer player {ID} is called {name}");

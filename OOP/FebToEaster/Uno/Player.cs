@@ -1,7 +1,6 @@
-﻿using System;
-using CardClasses;
+﻿using CardClasses;
 
-namespace Uno
+namespace PlayerClasses
 {
     abstract class Player
     {
@@ -34,15 +33,42 @@ namespace Uno
             colours.Remove(Colour);
         }
 
-        public abstract int ChooseCard();
-
-        public abstract ConsoleColor ChooseColour();
-
-        public abstract string ChooseName();
-
-        public Card TakeTurn()
+        public int TakeTurn(Card top)
         {
-            return new Card(1, 1);
+            Console.Write($"\nThe current top card is {top.GetNameAs2Char()}\n\nYour hand consists of: ");
+
+            List<int> ints = new List<int>();
+            List<string> options = new List<string>();
+            for (int i = 0; i < Cards.Size; i++)
+            {
+                Console.Write(" " + Cards[i].GetNameAs2Char());
+                if (
+                    top.GetSuit() == Cards[i].GetSuit()
+                    ||
+                    top.GetRank() == Cards[i].GetRank()
+                    )
+                {
+                    ints.Add(i);
+                    options.Add(Cards[i].GetNameAs2Char());
+                }
+            }
+
+            Console.WriteLine("\n");
+
+            if (options.Count > 0)
+            {
+                return ChooseCard(ints.ToArray(), options.ToArray());
+            }
+            else
+            {
+                return -1;
+            }
         }
+
+        protected abstract int ChooseCard(int[] ints, string[] options);
+
+        protected abstract ConsoleColor ChooseColour();
+
+        protected abstract string ChooseName();
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CardClasses
+﻿namespace CardClasses
 {
     class Pack
     {
@@ -55,15 +53,26 @@ namespace CardClasses
             if (!IsEmpty())
             {
                 Card ACard = cardsArray[front];
+
+                // Difference to normal is that when we get to the end of the pack, we shuffle it --------------------------------------------------
                 if (front == 51)
+                {
                     front = 0;
+                    Shuffle();
+                    Console.WriteLine("Shuffling...");
+                }
                 else
+                {
                     front++;
+                }
+
                 size--;
                 return ACard;
             }
             else
+            {
                 return null;
+            }
         }
 
         public void AddCard(Card ACard)
@@ -83,5 +92,16 @@ namespace CardClasses
             }
         }
 
+        //New functions to return the top card on the draw pile and the discard pile ---------------------------------------------------------------
+
+        public Card GetTopDraw()
+        {
+            return cardsArray[front];
+        }
+
+        public Card GetTopDiscard()
+        {
+            return cardsArray[rear];
+        }
     }
 }

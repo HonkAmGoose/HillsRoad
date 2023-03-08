@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace CardClasses
+﻿namespace CardClasses
 {
     class Card
     {
-
         private int rank;
         // 0 Hearts, 1 Clubs, 2 Diamonds, 3 Spades
         private int suit;
@@ -47,10 +44,27 @@ namespace CardClasses
             return suits[suit];
         }
 
-        public string GetName()
+        // New functions to get things in different formats
+        public string GetRankAsChar()
+        {
+            string[] ranks = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K" };
+            return ranks[rank - 1];
+        }
+
+        public string GetSuitAsChar()
+        {
+            string[] suits = { "♥", "♣", "♦", "♠" };
+            return suits[suit];
+        }
+
+        public string GetNameAs2Char()
+        {
+            return GetRankAsChar() + GetSuitAsChar();
+        }
+
+        public string GetNameAsVerboseString()
         {
             return GetRankAsString() + " of " + GetSuitAsString();
         }
-
     }
 }

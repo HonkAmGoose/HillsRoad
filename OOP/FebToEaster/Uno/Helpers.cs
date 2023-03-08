@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace Uno
+﻿namespace Uno
 {
+    /// <summary>
+    /// A static class containing useful helper functions
+    /// </summary>
     static class Helpers
     {
         /// <summary>
@@ -91,17 +92,13 @@ namespace Uno
         }
 
         /// <summary>
-        /// Method to display a prompt in the current colour, reset the colour and ask the user to press enter to do something
+        /// Method to ask the user to press enter to do something
         /// </summary>
-        /// <param name="prompt">Prompt in the certain colour</param>
         /// <param name="to___">What to press enter to do in default colour</param>
-        public static void PressEnterTo(string prompt, string to___)
+        public static void PressEnterTo(string to___)
         {
-            Console.Write(prompt);
-            Console.ResetColor();
             Console.Write($"Press enter to {to___}");
             Console.ReadLine();
-            Console.Clear();
         }
     }
 }
