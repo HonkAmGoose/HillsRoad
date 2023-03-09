@@ -61,8 +61,21 @@ namespace PlayerClasses
             }
             else
             {
+                Console.WriteLine("Your hand doesn't have any valid cards so you have to draw one...\n");
                 return -1;
             }
+        }
+
+        public int CalculateScore()
+        {
+            int score = 0;
+
+            for (int i = 0; i < Cards.Size; i++)
+            {
+                score += Cards[i].GetRank();
+            }
+
+            return score;
         }
 
         protected abstract int ChooseCard(int[] ints, string[] options);

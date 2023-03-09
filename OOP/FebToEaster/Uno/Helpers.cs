@@ -100,5 +100,30 @@
             Console.Write($"Press enter to {to___}");
             Console.ReadLine();
         }
+
+        public static void WriteBox(string message)
+        {
+            int width = Console.WindowWidth;
+            string line = "";
+            for (int i = 0; i < width; i++)
+            {
+                line += "#";
+            }
+
+            double paddingWidth = (width - 2 - message.Length)/2d;
+            string paddingLeft = "";
+            string paddingRight = "";
+            for (int i = 0; i < paddingWidth; i++)
+            {
+                paddingLeft += " ";
+            }
+            paddingRight = paddingLeft;
+            if (paddingWidth % 1 == 0.5)
+            {
+                paddingRight += " ";
+            }
+
+            Console.Write($"{line}\n{paddingLeft}{message}{paddingRight}\n{line}\n");
+        }
     }
 }

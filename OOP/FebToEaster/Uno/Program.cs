@@ -11,8 +11,10 @@
         /// <param name="args">Arguments from cmd (currently unused)</param>
         static void Main(string[] args)
         {
-            Game game = new Game(1, 0);
+            Game game = new Game(0, 2);
             game.Play();
+            Console.ResetColor();
+            while (Console.ReadLine() != "q");
         }
     }
 }

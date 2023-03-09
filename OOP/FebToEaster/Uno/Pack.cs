@@ -59,7 +59,6 @@
                 {
                     front = 0;
                     Shuffle();
-                    Console.WriteLine("Shuffling...");
                 }
                 else
                 {

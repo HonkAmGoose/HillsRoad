@@ -37,8 +37,15 @@ namespace Uno
         {
             this.humans = humans;
             this.computers = computers;
-            CreatePlayers();
 
+            Helpers.WriteBox("Welcome to this Uno game!");
+
+            Helpers.DisplayMenu("Would you like to read the rules?", "Enter the corresponding number", "Enter an integer", "Enter a number in the bounds", new string[] { "Yes", "No" });
+        }
+
+        public void Setup()
+        {
+            CreatePlayers();
             ShuffleAndDeal();
         }
 
@@ -51,35 +58,85 @@ namespace Uno
             Console.Clear();
 
             Player player;
-            int selected;
-            Card played;
-            string message;
+            List<string> messages = new();
+            messages.Add("The game has started");
+            int won = -1;
+
+            while (won == -1)
+            {
+                for (int i = 0; i < players.Length; i++)
+                {
+                    player = players[i];
+
+                    PlayTurn(player, ref messages);
+
+                    if (player.Cards.IsEmpty())
+                    {
+                        won = i;
+                        break;
+                    }
+                }
+            }
+
+            DisplayWinner(won);
+        }
+
+        private void DisplayWinner(int winner)
+        {
+            Console.ForegroundColor = players[winner].Colour;
+            Helpers.WriteBox($"Well done player {players[winner].ID}: {players[winner].Name}. You won!");
+            Console.ResetColor();
+            Console.WriteLine();
 
             for (int i = 0; i < players.Length; i++)
             {
-                player = players[i];
-
-                Console.ForegroundColor = player.Colour;
-                Helpers.PressEnterTo($"take the turn for player {player.ID}: {player.Name}");
-
-                selected = player.TakeTurn(pack.GetTopDiscard());
-                if (selected == -1)
+                if (i != winner)
                 {
-                    player.Cards.AddCard(pack.DealCard());
-                    message = "had to draw a card";
+                    Console.ForegroundColor = players[i].Colour;
+                    Console.WriteLine($"Player {players[i].ID}: {players[i].Name} finished with score {players[i].CalculateScore()}");
+                    Console.ResetColor();
                 }
-                else
-                {
-                    played = player.Cards.RemoveCard(selected);
-                    pack.AddCard(played);
-                    message = $"played {played.GetNameAs2Char()}";
-                }
-
-                Console.ResetColor();
-                Console.Clear();
-
-                Console.WriteLine($"Player {player.ID}: {player.Name} {message}");
             }
+        }
+
+        /// <summary>
+        /// Method to play the turn of a player
+        /// </summary>
+        /// <param name="player">Player to have their turn played</param>
+        /// <param name="messages">Messages of the game so far</param>
+        private void PlayTurn(Player player, ref List<string> messages)
+        {
+            for (int j = 0; j < messages.Count; j++)
+            {
+                Console.WriteLine(messages[j]);
+            }
+            Console.WriteLine();
+
+            Console.ForegroundColor = player.Colour;
+            Helpers.PressEnterTo($"take the turn for player {player.ID}: {player.Name}");
+
+            int selected = player.TakeTurn(pack.GetTopDiscard());
+
+            if (messages.Count >= players.Length)
+            {
+                messages.RemoveAt(0);
+            }
+            if (selected == -1)
+            {
+                player.Cards.AddCard(pack.DealCard());
+                messages.Add($"Player {player.ID}: {player.Name} had to draw a card");
+            }
+            else
+            {
+                Card played = player.Cards.RemoveCard(selected);
+                pack.AddCard(played);
+                messages.Add($"Player {player.ID}: {player.Name} played {played.GetNameAs2Char()}");
+            }
+
+            Helpers.PressEnterTo("finish your turn");
+
+            Console.ResetColor();
+            Console.Clear();
         }
 
         /// <summary>
@@ -92,10 +149,12 @@ namespace Uno
             for (int i = 0; i < humans; i++)
             {
                 players[i] = new HumanPlayer();
+                Console.Clear();
             }
             for (int i = humans; i < computers; i++)
             {
                 players[i] = new ComputerPlayer();
+                Console.Clear();
             }
         }
 
