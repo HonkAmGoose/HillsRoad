@@ -12,6 +12,7 @@
         static void Main(string[] args)
         {
             Game game = new Game(0, 2);
+            game.Setup();
             game.Play();
             Console.ResetColor();
             while (Console.ReadLine() != "q");
