@@ -56,6 +56,8 @@ namespace Uno
             {
                 DisplayRules();
             }
+
+            Console.Clear();
         }
 
         /// <summary>
@@ -126,12 +128,6 @@ namespace Uno
                 }
             }
 
-            // FOR TESTING ONLY, display log of game
-            foreach (string message in allMessages)
-            {
-                Console.WriteLine(message);
-            }
-
             // Display nice winning message
             DisplayWinner(won);
         }
@@ -146,10 +142,12 @@ namespace Uno
                     (
                     "Each turn, play a card that matches the rank or suit of the top card on the discard pile.\n" +
                     "If you have no valid cards, you must draw a new card to add to your hand.\n" +
+                    "\n" +
                     "If you have one card left, the game will tell other players by adding \"***** UNO *****\" to the end of your turn message.\n" +
                     "The game ends when one player has no cards left.\n" +
-                    "Every other player gets a score based on the cards left in their hands.\n" +
-                    "Some cards have special abilities:\n" +
+                    "Every other player gets a score based on the ranks of the cards left in their hands.\n" +
+                    "\n" +
+                    "Some cards have special abilities (which score 25 instead of the rank at the end of the game):\n" +
                     "\tKings make the next player pick up two cards\n" +
                     "\tQueens can have their rank changed when they are played\n" +
                     "\tJacks make the next player skip their turn\n" +
@@ -255,25 +253,29 @@ namespace Uno
         /// <param name="player">Current player taking the turn</param>
         private void DealWithSpecials(ref Card played, ref string message, Player player, ref bool skip)
         {
+            // Jack skips next turn
             if (played.GetRank() == 11)
             {
                 skip = true;
                 message += "The next player's turn was skipped. ";
             }
+            // Queen changes suit
             else if (played.GetRank() == 12)
             {
                 int suit;
+                // Human gets to choose
                 if (player.IsHuman)
                 {
                     suit = Helpers.DisplayMenu
                         (
-                        "You have played a queen, choose a rank to play it as:",
+                        "You have played a queen, choose a suit to play it as:",
                         "Type in the corresponding number:",
                         "Type in an integer",
                         "Type in a number in range",
                         new string[] { "Hearts", "Clubs", "Diamonds", "Spades" }
                         );
                 }
+                // Computer is randomly selected
                 else
                 {
                     Random rnd = new();
@@ -286,6 +288,7 @@ namespace Uno
 
                 message += $"The suit was changed to {played.GetSuitAsString().ToLower()} so the top card is {played.GetNameAs2Char()}. ";
             }
+            // King makes the next player draw two extra cards
             else if (played.GetRank() == 13)
             {
                 for (int i = 0; i < 2; i++)
@@ -301,13 +304,16 @@ namespace Uno
         /// </summary>
         private void CreatePlayers()
         {
+            // Create array of correct length
             players = new Player[humans + computers];
 
+            // Create human players
             for (int i = 0; i < humans; i++)
             {
                 players[i] = new HumanPlayer();
                 Console.Clear();
             }
+            // Create computer players
             for (int i = humans; i < humans + computers; i++)
             {
                 players[i] = new ComputerPlayer();
@@ -320,9 +326,11 @@ namespace Uno
         /// </summary>
         private void ShuffleAndDeal()
         {
+            // Create pack and shuffle
             pack = new Pack();
             pack.Shuffle();
 
+            // Deal 7 cards to each player
             for (int i = 0; i < players.Length; i++)
             {
                 for (int j = 0; j < 7; j++)

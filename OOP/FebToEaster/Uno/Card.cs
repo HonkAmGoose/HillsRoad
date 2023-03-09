@@ -44,7 +44,7 @@
             return suits[suit];
         }
 
-        // New functions to get things in different formats
+        // New functions to get things in different formats ----------------------------------------------------------------------------------------
         public string GetRankAsChar()
         {
             string[] ranks = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K" };
