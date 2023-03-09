@@ -2,6 +2,11 @@
 {
     internal class ComputerPlayer : Player
     {
+        public ComputerPlayer() : base() 
+        {
+            IsHuman = false;
+        }
+
         protected override int ChooseCard(int[] ints, string[] options)
         {
             Random rnd = new();

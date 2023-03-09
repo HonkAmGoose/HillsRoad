@@ -7,6 +7,8 @@ namespace PlayerClasses
         private static int nextID = 0;
         public int ID { get; protected set; }
 
+        public bool IsHuman;
+
         public Hand Cards { get; protected set; }
 
         public ConsoleColor Colour { get; protected set; }
@@ -35,17 +37,21 @@ namespace PlayerClasses
 
         public int TakeTurn(Card top)
         {
-            Console.Write($"\nThe current top card is {top.GetNameAs2Char()}\n\nYour hand consists of: ");
+            // Display information for human players
+            if (IsHuman) Console.Write($"\nThe current top card is {top.GetNameAs2Char()}\n\nYour hand consists of: ");
 
             List<int> ints = new List<int>();
             List<string> options = new List<string>();
             for (int i = 0; i < Cards.Size; i++)
             {
-                Console.Write(" " + Cards[i].GetNameAs2Char());
+                if (IsHuman) Console.Write(" " + Cards[i].GetNameAs2Char());
+
                 if (
                     top.GetSuit() == Cards[i].GetSuit()
                     ||
                     top.GetRank() == Cards[i].GetRank()
+                    ||
+                    Cards[i].GetRank() == 12
                     )
                 {
                     ints.Add(i);
@@ -64,6 +70,7 @@ namespace PlayerClasses
                 Console.WriteLine("Your hand doesn't have any valid cards so you have to draw one...\n");
                 return -1;
             }
+            
         }
 
         public int CalculateScore()

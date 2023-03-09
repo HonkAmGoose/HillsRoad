@@ -50,6 +50,11 @@
             return Size == 0; 
         }
 
+        public bool IsUno()
+        {
+            return Size == 1;
+        }
+
         public Card Last() 
         { 
             return cards[Size - 1]; 
