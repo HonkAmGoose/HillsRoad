@@ -11,8 +11,17 @@ namespace Baccarat
     {
         public override int getScore()
         {
-           
-            return 0;
+            int score = 0;
+
+            foreach(Card card in cards)
+            {
+                int rank = card.GetRank();
+                if (rank <= 9)
+                {
+                    score += rank;
+                }
+            }
+            return score % 10;
         }
     }
 }

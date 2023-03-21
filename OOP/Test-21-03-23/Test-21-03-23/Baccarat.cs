@@ -67,6 +67,51 @@ namespace Baccarat
         }
 
         
-        
+        public bool Natural()
+        {
+            if (getPScore() == 8 | getPScore() == 9 | getBScore() == 8 | getBScore() == 9)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void Draw()
+        {
+            if (getPScore() >= 0 && getPScore() <= 5)
+            {
+                PHand.AddCard(pack.DealCard());
+
+                int drawn = PHand.Last().GetRank();
+                int value = 0;
+
+                if (drawn >= 0 && drawn <= 7)
+                {
+                    value = Convert.ToInt32(Math.Floor(drawn / 2d));
+                }
+                else if (drawn >= 8 && drawn <= 9)
+                {
+                    value = Convert.ToInt32(Math.Ceiling((drawn - 10) / 2d));
+                }
+                else if (drawn >= 10)
+                {
+                    value = 0;
+                }
+
+                value += 3;
+
+                if (BScore <= value)
+                {
+                    BHand.AddCard(pack.DealCard());
+                }
+            }
+            else if (getBScore() >= 0 && getBScore() <= 5)
+            {
+                BHand.AddCard(pack.DealCard());
+            }
+        }
     }
 }
