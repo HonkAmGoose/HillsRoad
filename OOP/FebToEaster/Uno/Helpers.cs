@@ -101,8 +101,13 @@
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Method to display a box with a message
+        /// </summary>
+        /// <param name="message">Message to display</param>
         public static void WriteBox(string message)
         {
+            // Variables and maths calculations
             int width = Console.WindowWidth;
             string line = "";
             for (int i = 0; i < width; i++)
@@ -123,6 +128,7 @@
                 paddingRight += " ";
             }
 
+            // Write the box
             Console.Write($"{line}\n{paddingLeft}{message}{paddingRight}\n{line}\n");
         }
     }

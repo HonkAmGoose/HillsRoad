@@ -50,6 +50,13 @@
             return Size == 0; 
         }
 
+        // New function to check if the player has an uno ------------------------------------------------------------------------------------------
+
+        public bool IsUno()
+        {
+            return Size == 1;
+        }
+
         public Card Last() 
         { 
             return cards[Size - 1]; 
