@@ -17,6 +17,13 @@ namespace Calculator
             InitializeComponent();
         }
 
+        private void CalculatorForm_Load(object sender, EventArgs e)
+        {
+            Button SquareRootButton = new Button();
+            SquareRootButton.Location = new Point(50, 50);
+            SquareRootButton.Show();
+        }
+
         // Helper Functions //
 
         private double fullAnswer = 0;
@@ -82,11 +89,6 @@ namespace Calculator
         private void RoundCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             OutputOldResult();
-        }
-
-        private void CalculatorForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
