@@ -39,6 +39,8 @@
             this.SubtractButton = new System.Windows.Forms.Button();
             this.DivideButton = new System.Windows.Forms.Button();
             this.RoundCheckBox = new System.Windows.Forms.CheckBox();
+            this.DecimalPlaces = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.DecimalPlaces)).BeginInit();
             this.SuspendLayout();
             // 
             // AddButton
@@ -135,17 +137,31 @@
             this.RoundCheckBox.AutoSize = true;
             this.RoundCheckBox.Location = new System.Drawing.Point(274, 170);
             this.RoundCheckBox.Name = "RoundCheckBox";
-            this.RoundCheckBox.Size = new System.Drawing.Size(64, 17);
+            this.RoundCheckBox.Size = new System.Drawing.Size(91, 17);
             this.RoundCheckBox.TabIndex = 10;
-            this.RoundCheckBox.Text = "Round?";
+            this.RoundCheckBox.Text = "Round to DP:";
             this.RoundCheckBox.UseVisualStyleBackColor = true;
             this.RoundCheckBox.CheckedChanged += new System.EventHandler(this.RoundCheckBox_CheckedChanged);
+            // 
+            // DecimalPlaces
+            // 
+            this.DecimalPlaces.Location = new System.Drawing.Point(367, 170);
+            this.DecimalPlaces.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.DecimalPlaces.Name = "DecimalPlaces";
+            this.DecimalPlaces.Size = new System.Drawing.Size(32, 20);
+            this.DecimalPlaces.TabIndex = 11;
+            this.DecimalPlaces.ValueChanged += new System.EventHandler(this.DecimalPlaces_ValueChanged);
             // 
             // CalculatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 263);
+            this.Controls.Add(this.DecimalPlaces);
             this.Controls.Add(this.RoundCheckBox);
             this.Controls.Add(this.DivideButton);
             this.Controls.Add(this.SubtractButton);
@@ -160,6 +176,7 @@
             this.Name = "CalculatorForm";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.CalculatorForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DecimalPlaces)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,6 +195,7 @@
         private System.Windows.Forms.Button SubtractButton;
         private System.Windows.Forms.Button DivideButton;
         private System.Windows.Forms.CheckBox RoundCheckBox;
+        private System.Windows.Forms.NumericUpDown DecimalPlaces;
     }
 }
 

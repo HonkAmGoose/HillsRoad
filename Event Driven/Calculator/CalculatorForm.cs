@@ -19,9 +19,7 @@ namespace Calculator
 
         private void CalculatorForm_Load(object sender, EventArgs e)
         {
-            Button SquareRootButton = new Button();
-            SquareRootButton.Location = new Point(50, 50);
-            SquareRootButton.Show();
+
         }
 
         // Helper Functions //
@@ -55,7 +53,7 @@ namespace Calculator
             double answer = fullAnswer;
             if (RoundCheckBox.Checked == true)
             {
-                answer = Math.Round(answer);
+                answer = Math.Round(answer, int.Parse(DecimalPlaces.Value.ToString()));
             }
             ResultTextBox.Text = answer.ToString();
         }
@@ -87,6 +85,11 @@ namespace Calculator
         }
 
         private void RoundCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            OutputOldResult();
+        }
+
+        private void DecimalPlaces_ValueChanged(object sender, EventArgs e)
         {
             OutputOldResult();
         }
