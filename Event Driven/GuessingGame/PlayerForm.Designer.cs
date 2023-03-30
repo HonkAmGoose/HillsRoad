@@ -119,7 +119,7 @@
             this.NewButton.Location = new System.Drawing.Point(161, 31);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(75, 23);
-            this.NewButton.TabIndex = 3;
+            this.NewButton.TabIndex = 5;
             this.NewButton.Text = "New";
             this.NewButton.UseVisualStyleBackColor = true;
             this.NewButton.Click += new System.EventHandler(this.NewButton_Click);
@@ -129,7 +129,7 @@
             this.GuessTextBox.Location = new System.Drawing.Point(125, 72);
             this.GuessTextBox.Name = "GuessTextBox";
             this.GuessTextBox.Size = new System.Drawing.Size(30, 20);
-            this.GuessTextBox.TabIndex = 4;
+            this.GuessTextBox.TabIndex = 3;
             this.GuessTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GuessTextBox_KeyPress);
             // 
             // label2
@@ -146,7 +146,7 @@
             this.GuessButton.Location = new System.Drawing.Point(161, 71);
             this.GuessButton.Name = "GuessButton";
             this.GuessButton.Size = new System.Drawing.Size(75, 23);
-            this.GuessButton.TabIndex = 6;
+            this.GuessButton.TabIndex = 4;
             this.GuessButton.Text = "Guess";
             this.GuessButton.UseVisualStyleBackColor = true;
             this.GuessButton.Click += new System.EventHandler(this.GuessButton_Click);

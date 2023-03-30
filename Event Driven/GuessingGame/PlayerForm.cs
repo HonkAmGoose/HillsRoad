@@ -13,6 +13,7 @@ namespace GuessingGame
     public partial class PlayerForm : Form
     {
         private int GuessesLeft, Number;
+        private bool HasWon;
         private List<int> Guesses;
         private Random rnd;
         private ComputerForm computerForm;
@@ -46,8 +47,9 @@ namespace GuessingGame
 
         private void GuessTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar.ToString().Equals(Keys.Enter.ToString()))
+            if (e.KeyChar == (char)Keys.Return) // TODO: Broken
             {
+                e.Handled = true;
                 MakeGuess();
             }
         }
@@ -56,12 +58,17 @@ namespace GuessingGame
         {
             int guess = 0;
             string message = "";
-            bool checkGuess = true;
+            bool doCheckGuess = true;
 
             if (GuessesLeft < 1)
             {
                 // Not enough guesses left
                 message = "No guesses left!";
+            }
+            else if (HasWon == true)
+            {
+                // Already won
+                message = "Already won!";
             }
             else
             {
@@ -73,58 +80,69 @@ namespace GuessingGame
                 catch (FormatException)
                 {
                     // Not integer guess
-                    message = "Guess integer!";
-                    checkGuess = false;
+                    message = "Guess an integer!";
+                    doCheckGuess = false;
                 }
 
-                if (checkGuess)
+                if (doCheckGuess)
                 {
-                    if (guess < 1 | guess > 100)
-                    {
-                        // Out of bounds
-                        message = "Guess 1-100!";
-                    }
-                    else if (Guesses.Contains(guess))
-                    {
-                        // Already guessed
-                        message = "Guess something new!";
-                    }
-                    else if (guess == Number)
-                    {
-                        // Win
-                        message = "You win!";
-                    }
-                    else
-                    {
-                        // Valid guess to be added
-
-                        if (guess < Number)
-                        {
-                            message = "Too low!";
-                        }
-                        else if (guess > Number)
-                        {
-                            message = "Too high!";
-                        }
-                        else
-                        {
-                            throw new Exception("Should be unreachable");
-                        }
-
-                        // Decrease GuessesLeft and display
-                        GuessesLeft -= 1;
-                        GuessesLeftLabel.Text = GuessesLeft.ToString();
-
-                        // Add guess to list
-                        Guesses.Add(guess);
-                        GuessesListBox.Items.Add(guess.ToString() + " - " + message);
-                    }
+                    CheckGuess(guess);
                 }
             }
 
             // Display message
             ResponseLabel.Text = message;
             ResponseLabel.Visible = true;
+        }
+
+        private string CheckGuess(int guess)
+        {
+            string message;
+
+            if (guess < 1 | guess > 100)
+            {
+                // Out of bounds
+                message = "Guess between 1-100!";
+            }
+            else if (Guesses.Contains(guess))
+            {
+                // Already guessed
+                message = "Guess something new!";
+            }
+            else
+            {
+                // Valid guess to be added
+                if (guess < Number)
+                {
+                    message = "Too low!";
+                }
+                else if (guess > Number)
+                {
+                    message = "Too high!";
+                }
+                else if (guess == Number)
+                {
+                    message = "You win!";
+                    HasWon = true;
+                }
+                else
+                {
+                    throw new Exception("Should be unreachable");
+                }
+
+                // Decrease GuessesLeft and display
+                GuessesLeft -= 1;
+                GuessesLeftLabel.Text = GuessesLeft.ToString();
+
+                // Add guess to list
+                Guesses.Add(guess);
+                GuessesListBox.Items.Add(guess.ToString() + " - " + message);
+
+                // Clear guess box
+                GuessTextBox.Clear();
+            }
+
+            return message;
         }
 
         private void NewGame()
