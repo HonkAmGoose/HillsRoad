@@ -25,6 +25,7 @@ namespace GuessingGame
         private void PlayerForm_Load(object sender, EventArgs e)
         {
             rnd = new Random();
+            Guesses = new List<int>();
             NewGame();
         }
 
@@ -40,61 +41,98 @@ namespace GuessingGame
 
         private void GuessButton_Click(object sender, EventArgs e)
         {
-            int guess;
+            MakeGuess();
+        }
+
+        private void GuessTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar.ToString().Equals(Keys.Enter.ToString()))
+            {
+                MakeGuess();
+            }
+        }
+
+        private void MakeGuess()
+        {
+            int guess = 0;
             string message = "";
+            bool checkGuess = true;
 
-            try
+            if (GuessesLeft < 1)
             {
-                guess = int.Parse(GuessTextBox.Text);
-
-                if (guess < 1 | guess > 100)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-                else if (Guesses.Contains(guess))
-                {
-                    throw new InvalidOperationException();
-                }
-
-                else if (guess == Number)
-                {
-                    message = "You win!";
-                }
-                else if (guess > Number)
-                {
-                    message = "Too high!";
-                }
-                else if (guess < Number)
-                {
-                    message = "Too low!";
-                }
-
-                GuessesLeft -= 1;
-                GuessesLeftLabel.Text = GuessesLeft.ToString();
-
-                Guesses.Add(guess);
-                GuessesListBox.Items.Add(guess.ToString() + " - " + message);
+                // Not enough guesses left
+                message = "No guesses left!";
             }
-            catch (FormatException)
+            else
             {
-                message = "Guess integer";
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                message = "Guess 1-100";
-            }
-            catch (InvalidOperationException)
-            {
-                message = "Guess something new";
+                try
+                {
+                    // Get guess
+                    guess = int.Parse(GuessTextBox.Text);
+                }
+                catch (FormatException)
+                {
+                    // Not integer guess
+                    message = "Guess integer!";
+                    checkGuess = false;
+                }
+
+                if (checkGuess)
+                {
+                    if (guess < 1 | guess > 100)
+                    {
+                        // Out of bounds
+                        message = "Guess 1-100!";
+                    }
+                    else if (Guesses.Contains(guess))
+                    {
+                        // Already guessed
+                        message = "Guess something new!";
+                    }
+                    else if (guess == Number)
+                    {
+                        // Win
+                        message = "You win!";
+                    }
+                    else
+                    {
+                        // Valid guess to be added
+
+                        if (guess < Number)
+                        {
+                            message = "Too low!";
+                        }
+                        else if (guess > Number)
+                        {
+                            message = "Too high!";
+                        }
+                        else
+                        {
+                            throw new Exception("Should be unreachable");
+                        }
+
+                        // Decrease GuessesLeft and display
+                        GuessesLeft -= 1;
+                        GuessesLeftLabel.Text = GuessesLeft.ToString();
+
+                        // Add guess to list
+                        Guesses.Add(guess);
+                        GuessesListBox.Items.Add(guess.ToString() + " - " + message);
+                    }
+                }
             }
 
+            // Display message
             ResponseLabel.Text = message;
             ResponseLabel.Visible = true;
         }
 
         private void NewGame()
         {
+            // Generate number
             Number = rnd.Next(100) + 1;
+
+            // Reset vars and display
             GuessesLeft = 10;
             GuessesLeftLabel.Text = "10";
             GuessesListBox.Items.Clear();

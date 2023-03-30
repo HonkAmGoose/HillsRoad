@@ -130,6 +130,7 @@
             this.GuessTextBox.Name = "GuessTextBox";
             this.GuessTextBox.Size = new System.Drawing.Size(30, 20);
             this.GuessTextBox.TabIndex = 4;
+            this.GuessTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GuessTextBox_KeyPress);
             // 
             // label2
             // 
