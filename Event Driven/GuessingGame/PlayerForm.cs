@@ -27,6 +27,7 @@ namespace GuessingGame
         {
             rnd = new Random();
             Guesses = new List<int>();
+            MeRadioButton.Checked = true;
             NewGame();
         }
 
@@ -47,11 +48,41 @@ namespace GuessingGame
 
         private void GuessTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Return) // TODO: Broken
+            if (e.KeyChar == (char)Keys.Return)
             {
                 e.Handled = true;
                 MakeGuess();
             }
+        }
+
+        private void ComputerRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ComputerRadioButton.Checked == true)
+            {
+                if (Application.OpenForms.OfType<ComputerForm>().Count() == 0)
+                {
+                    computerForm = new ComputerForm(this);
+                    computerForm.Show();
+                    computerForm.Focus();
+                }
+                else
+                {
+                    computerForm.Focus();
+                }
+                Hide();
+            }
+            else
+            {
+                if (Application.OpenForms.OfType<ComputerForm>().Count() >= 1)
+                {
+                    computerForm.Hide();
+                }
+            }
+        }
+
+        private void ExitMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void MakeGuess()
@@ -86,7 +117,7 @@ namespace GuessingGame
 
                 if (doCheckGuess)
                 {
-                    CheckGuess(guess);
+                    message = CheckGuess(guess);
                 }
             }
 
@@ -124,6 +155,7 @@ namespace GuessingGame
                 {
                     message = "You win!";
                     HasWon = true;
+                    GuessButton.Enabled = false;
                 }
                 else
                 {
@@ -156,6 +188,10 @@ namespace GuessingGame
             GuessesListBox.Items.Clear();
             GuessTextBox.Clear();
             ResponseLabel.Visible = false;
+
+            // Focus and reenable controls
+            GuessButton.Enabled = true;
+            GuessTextBox.Focus();
         }
     }
 }
