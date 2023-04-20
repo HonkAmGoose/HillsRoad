@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunLengthEncoding", "RunLengthEncoding\RunLengthEncoding.csproj", "{C8BF3BC9-4A32-415C-ADB8-D7F0C3760E17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regex", "Regex\Regex.csproj", "{40054E01-EEDC-4164-A8CA-0A03B8DDAE64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regex", "Regex\Regex.csproj", "{40054E01-EEDC-4164-A8CA-0A03B8DDAE64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeFinder", "ModeFinder\ModeFinder.csproj", "{697799D2-2C14-428A-A497-B46AB6D075CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{40054E01-EEDC-4164-A8CA-0A03B8DDAE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40054E01-EEDC-4164-A8CA-0A03B8DDAE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40054E01-EEDC-4164-A8CA-0A03B8DDAE64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697799D2-2C14-428A-A497-B46AB6D075CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697799D2-2C14-428A-A497-B46AB6D075CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697799D2-2C14-428A-A497-B46AB6D075CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697799D2-2C14-428A-A497-B46AB6D075CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
