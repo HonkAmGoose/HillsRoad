@@ -95,6 +95,7 @@
             this.ExitMenuItem.Name = "ExitMenuItem";
             this.ExitMenuItem.Size = new System.Drawing.Size(103, 22);
             this.ExitMenuItem.Text = "Exit";
+            this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
             // label1
             // 
@@ -200,6 +201,7 @@
             this.ComputerRadioButton.TabStop = true;
             this.ComputerRadioButton.Text = "Computer";
             this.ComputerRadioButton.UseVisualStyleBackColor = true;
+            this.ComputerRadioButton.CheckedChanged += new System.EventHandler(this.ComputerRadioButton_CheckedChanged);
             // 
             // MeRadioButton
             // 
