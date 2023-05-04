@@ -15,7 +15,7 @@ namespace TicTacToe
         // Variables
 
         private string NoughtOrCross;
-        private TicTacToeButton[,] gridButtons;
+        private Button[,] gridButtons;
         private bool AllowTurn;
         private int TurnsTaken;
 
@@ -46,8 +46,13 @@ namespace TicTacToe
                 }
             }
 
-            NoughtOrCross = "X";
             AllowTurn = true;
+            TurnsTaken = 0;
+
+            XStartRadioButton.Enabled = true;
+            XStartRadioButton.Checked = false;
+            OStartRadioButton.Enabled = true;
+            OStartRadioButton.Checked = false;
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace TicTacToe
         /// <param name="gridLeft">Horizontal position</param>
         private void CreateGrid(int rows, int cols, int tileWidth, int tileHeight, int gridTop, int gridLeft)
         {
-            gridButtons = new TicTacToeButton[rows, cols];
+            gridButtons = new Button[rows, cols];
             // double for loop to handle all rows and columns
             for (int r = 0; r < rows; r++)
             {
@@ -69,7 +74,7 @@ namespace TicTacToe
                 {
                     // create newTicTacToeButton control which will be one 
                     // of the buttons of the grid
-                    gridButtons[r, c] = new TicTacToeButton(r, c)
+                    gridButtons[r, c] = new Button()
                     {
                         Size = new Size(tileWidth, tileHeight),
                         Location = new Point(tileWidth * c + gridLeft, tileHeight * r + gridTop),
@@ -92,18 +97,27 @@ namespace TicTacToe
             {
                 for (int c = 0; c < cols; c++)
                 {
-                    if (CheckForWin(r, c))
+                    if (CheckRowsAndCols(r, c))
                     {
                         return true;
                     }
                 }
             }
-            return false;
+            return CheckDiagonals();
         }
 
         private bool CheckForWin(int r, int c)
         {
-            if (!gridButtons[r, c].Equals(""))
+            if (CheckRowsAndCols(r, c))
+            {
+                return true;
+            }
+            return CheckDiagonals();
+        }
+
+        private bool CheckRowsAndCols(int r, int c)
+        {
+            if (!gridButtons[r, c].Text.Equals(""))
             {
                 if (
                     gridButtons[r, 0].Text == gridButtons[r, 1].Text && gridButtons[r, 0].Text == gridButtons[r, 2].Text // row
@@ -113,19 +127,21 @@ namespace TicTacToe
                 {
                     return true;
                 }
-                if (r + c == 2) // coordinate is on forward diagonal
+            }
+            return false;
+        }
+
+        private bool CheckDiagonals()
+        {
+            if (!gridButtons[1, 1].Text.Equals(""))
+            {
+                if (gridButtons[0, 2].Text == gridButtons[1, 1].Text && gridButtons[0, 2].Text == gridButtons[2, 0].Text)
                 {
-                    if (gridButtons[0, 2].Text == gridButtons[1, 1].Text && gridButtons[0, 2].Text == gridButtons[2, 0].Text)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-                if (r % 2 == 0 && c % 2 == 0) // coordinate is on backwards diagonal
+                if (gridButtons[0, 0].Text == gridButtons[1, 1].Text && gridButtons[0, 0].Text == gridButtons[2, 2].Text)
                 {
-                    if (gridButtons[0, 0].Text == gridButtons[1, 1].Text && gridButtons[0, 0].Text == gridButtons[2, 2].Text)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
@@ -138,7 +154,7 @@ namespace TicTacToe
         {
             InitializeComponent();
         }
-       
+
         private void TicTacToeForm_Load(object sender, EventArgs e)
         {
             CreateGrid(rows, cols, tileWidth, tileHeight, gridTop, gridLeft);
@@ -147,18 +163,36 @@ namespace TicTacToe
 
         private void gridButton_Click(object sender, EventArgs e)
         {
-            if (AllowTurn && ((TicTacToeButton)sender).Text == "")
+            if (AllowTurn && ((Button)sender).Text == "")
             {
-                ((TicTacToeButton)sender).Text = NoughtOrCross;
+                if (TurnsTaken == 0)
+                {
+                    if (XStartRadioButton.Checked)
+                    {
+                        NoughtOrCross = "X";
+                    }
+                    else if (OStartRadioButton.Checked)
+                    {
+                        NoughtOrCross = "O";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select a player to start");
+                        return;
+                    }
+                    XStartRadioButton.Enabled = false;
+                    OStartRadioButton.Enabled = false;
+                }
+                ((Button)sender).Text = NoughtOrCross;
+
+                TurnsTaken++;
 
                 if (CheckForWin())
                 {
                     AllowTurn = false;
                     MessageBox.Show($"Player {NoughtOrCross} has won");
                 }
-
-                TurnsTaken++;
-                if (TurnsTaken >= 9)
+                else if (TurnsTaken >= 9)
                 {
                     AllowTurn = false;
                     MessageBox.Show("You have drawn");
@@ -172,7 +206,7 @@ namespace TicTacToe
                 {
                     NoughtOrCross = "X";
                 }
-            } 
+            }
         }
 
         private void newGameButton_Click(object sender, EventArgs e)

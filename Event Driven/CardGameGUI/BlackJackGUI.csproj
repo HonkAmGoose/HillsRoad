@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8551FA32-DD25-4D86-BEF9-AE6FB353253C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlackJackGUI</RootNamespace>
+    <AssemblyName>BlackJackGUI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlackJackHand.cs" />
+    <Compile Include="Card.cs" />
+    <Compile Include="FormBlackJack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBlackJack.Designer.cs">
+      <DependentUpon>FormBlackJack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hand.cs" />
+    <Compile Include="Pack.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScoringHand.cs" />
+    <EmbeddedResource Include="FormBlackJack.resx">
+      <DependentUpon>FormBlackJack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\13c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\13d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\13h.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\13s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4985410560_22c77a17d9_b.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
