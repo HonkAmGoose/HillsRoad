@@ -31,8 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.newGameButton = new System.Windows.Forms.Button();
             this.StartPlayerGroupBox = new System.Windows.Forms.GroupBox();
-            this.XStartRadioButton = new System.Windows.Forms.RadioButton();
             this.OStartRadioButton = new System.Windows.Forms.RadioButton();
+            this.XStartRadioButton = new System.Windows.Forms.RadioButton();
+            this.ScoreLabel = new System.Windows.Forms.Label();
+            this.resetScoreButton = new System.Windows.Forms.Button();
             this.StartPlayerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,17 +69,6 @@
             this.StartPlayerGroupBox.TabStop = false;
             this.StartPlayerGroupBox.Text = "Start Player";
             // 
-            // XStartRadioButton
-            // 
-            this.XStartRadioButton.AutoSize = true;
-            this.XStartRadioButton.Location = new System.Drawing.Point(6, 19);
-            this.XStartRadioButton.Name = "XStartRadioButton";
-            this.XStartRadioButton.Size = new System.Drawing.Size(64, 17);
-            this.XStartRadioButton.TabIndex = 0;
-            this.XStartRadioButton.TabStop = true;
-            this.XStartRadioButton.Text = "Player X";
-            this.XStartRadioButton.UseVisualStyleBackColor = true;
-            // 
             // OStartRadioButton
             // 
             this.OStartRadioButton.AutoSize = true;
@@ -89,11 +80,43 @@
             this.OStartRadioButton.Text = "Player O";
             this.OStartRadioButton.UseVisualStyleBackColor = true;
             // 
+            // XStartRadioButton
+            // 
+            this.XStartRadioButton.AutoSize = true;
+            this.XStartRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.XStartRadioButton.Name = "XStartRadioButton";
+            this.XStartRadioButton.Size = new System.Drawing.Size(64, 17);
+            this.XStartRadioButton.TabIndex = 0;
+            this.XStartRadioButton.TabStop = true;
+            this.XStartRadioButton.Text = "Player X";
+            this.XStartRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ScoreLabel
+            // 
+            this.ScoreLabel.AutoSize = true;
+            this.ScoreLabel.Location = new System.Drawing.Point(178, 525);
+            this.ScoreLabel.Name = "ScoreLabel";
+            this.ScoreLabel.Size = new System.Drawing.Size(35, 13);
+            this.ScoreLabel.TabIndex = 3;
+            this.ScoreLabel.Text = "Score";
+            // 
+            // resetScoreButton
+            // 
+            this.resetScoreButton.Location = new System.Drawing.Point(66, 520);
+            this.resetScoreButton.Name = "resetScoreButton";
+            this.resetScoreButton.Size = new System.Drawing.Size(75, 23);
+            this.resetScoreButton.TabIndex = 4;
+            this.resetScoreButton.Text = "Reset Score";
+            this.resetScoreButton.UseVisualStyleBackColor = true;
+            this.resetScoreButton.Click += new System.EventHandler(this.resetScoreButton_Click);
+            // 
             // TicTacToeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 501);
+            this.ClientSize = new System.Drawing.Size(444, 561);
+            this.Controls.Add(this.resetScoreButton);
+            this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.StartPlayerGroupBox);
             this.Controls.Add(this.newGameButton);
             this.Controls.Add(this.label1);
@@ -114,6 +137,8 @@
         private System.Windows.Forms.GroupBox StartPlayerGroupBox;
         private System.Windows.Forms.RadioButton XStartRadioButton;
         private System.Windows.Forms.RadioButton OStartRadioButton;
+        private System.Windows.Forms.Label ScoreLabel;
+        private System.Windows.Forms.Button resetScoreButton;
     }
 }
 

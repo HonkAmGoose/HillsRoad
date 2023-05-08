@@ -18,6 +18,9 @@ namespace TicTacToe
         private Button[,] gridButtons;
         private bool AllowTurn;
         private int TurnsTaken;
+        private int XScore;
+        private int OScore;
+        private int GamesPlayed;
 
         const int SQUARE_GRID_SIZE = 3;
         const int cols = SQUARE_GRID_SIZE;
@@ -53,6 +56,48 @@ namespace TicTacToe
             XStartRadioButton.Checked = false;
             OStartRadioButton.Enabled = true;
             OStartRadioButton.Checked = false;
+        }
+
+        private void ResetScore()
+        {
+            XScore = 0;
+            OScore = 0;
+            UpdateScore();
+        }
+
+        /// <summary>
+        /// Updates score by adding 1 to the player specified and updating the label
+        /// </summary>
+        /// <param name="player">X, O or Both</param>
+        /// <exception cref="ArgumentException">Thrown when player is not valid</exception>
+        private void UpdateScore(string player)
+        {
+            if (player.Equals("X"))
+            {
+                XScore++;
+            }
+            else if (player.Equals("O"))
+            {
+                OScore++;
+            }
+            else if (player.Equals("Both"))
+            {
+                XScore++;
+                OScore++;
+            }
+            else
+            {
+                throw new ArgumentException("Player must be X, O or Both");
+            }
+            UpdateScore();
+        }
+
+        /// <summary>
+        /// Updates the score label with current score
+        /// </summary>
+        private void UpdateScore()
+        {
+            ScoreLabel.Text = $"X:{XScore} - O:{OScore} from {GamesPlayed} games";
         }
 
         /// <summary>
@@ -158,6 +203,7 @@ namespace TicTacToe
         private void TicTacToeForm_Load(object sender, EventArgs e)
         {
             CreateGrid(rows, cols, tileWidth, tileHeight, gridTop, gridLeft);
+            ResetScore();
             NewGame();
         }
 
@@ -191,11 +237,13 @@ namespace TicTacToe
                 {
                     AllowTurn = false;
                     MessageBox.Show($"Player {NoughtOrCross} has won");
+                    UpdateScore(NoughtOrCross);
                 }
                 else if (TurnsTaken >= 9)
                 {
                     AllowTurn = false;
                     MessageBox.Show("You have drawn");
+                    UpdateScore("Both");
                 }
 
                 if (NoughtOrCross == "X")
@@ -212,6 +260,11 @@ namespace TicTacToe
         private void newGameButton_Click(object sender, EventArgs e)
         {
             NewGame();
+        }
+
+        private void resetScoreButton_Click(object sender, EventArgs e)
+        {
+            ResetScore();
         }
     }
 }
