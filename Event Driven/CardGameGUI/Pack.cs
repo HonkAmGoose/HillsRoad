@@ -12,7 +12,7 @@ namespace CardClasses
     {
         Random rnd = new Random();
         private Card[] cardsArray = new Card[52];
-     
+
         private int front;
         public int Top
         {
@@ -61,7 +61,7 @@ namespace CardClasses
         {
             for (int i = 0; i <= 51; i++)
             {
-                cardsArray[i] = new Card(i % 13+1, i / 13);
+                cardsArray[i] = new Card(i % 13 + 1, i / 13);
             }
             Top = 0;
             Bottom = 51;

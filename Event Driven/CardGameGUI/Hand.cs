@@ -12,18 +12,20 @@ namespace CardClasses
         protected List<Card> cards = new List<Card>();
         protected int GetSize()
         {
-        return cards.Count();
+            return cards.Count();
         }
 
         public List<Card> Cards
         {
-            get {
-                return cards; 
+            get
+            {
+                return cards;
             }
         }
-        public int Size 
+        public int Size
         {
-            get {
+            get
+            {
                 return GetSize();
             }
         }
@@ -43,7 +45,7 @@ namespace CardClasses
         {
             return cards[0];
         }
-      
+
         public bool IsEmpty()
         {
             return Size == 0;
@@ -56,25 +58,25 @@ namespace CardClasses
         {
             if (cards.Contains(card))
             {
-               int i = cards.IndexOf(card); 
-               Card c = cards[i];
-               cards.RemoveAt(i);
-               return c;
+                int i = cards.IndexOf(card);
+                Card c = cards[i];
+                cards.RemoveAt(i);
+                return c;
             }
             else
-           {
+            {
                 return null;
-           }
+            }
         }
         public Card RemoveFirstCard()
         {
             Card c = cards[0];
             cards.RemoveAt(0);
-            return c;   
+            return c;
         }
 
 
-        
+
 
 
     }

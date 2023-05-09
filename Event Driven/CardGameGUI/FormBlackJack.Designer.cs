@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.NewGameButton = new System.Windows.Forms.Button();
             this.Player1DealButton = new System.Windows.Forms.Button();
             this.P1CurrentScoreLabel = new System.Windows.Forms.Label();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,6 +38,12 @@
             this.P2ScoreLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Player2DealButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.P2CurrentScoreLabel = new System.Windows.Forms.Label();
+            this.Player1StickButton = new System.Windows.Forms.Button();
+            this.Player2StickButton = new System.Windows.Forms.Button();
+            this.PDCurrentScoreLabel = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NewGameButton
@@ -71,12 +75,6 @@
             this.P1CurrentScoreLabel.Size = new System.Drawing.Size(19, 21);
             this.P1CurrentScoreLabel.TabIndex = 3;
             this.P1CurrentScoreLabel.Text = "0";
-            // 
-            // imageList
-            // 
-            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // label1
             // 
@@ -153,11 +151,77 @@
             this.Player2DealButton.UseVisualStyleBackColor = true;
             this.Player2DealButton.Click += new System.EventHandler(this.Player2DealButton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(10, 364);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 21);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Player 2";
+            // 
+            // P2CurrentScoreLabel
+            // 
+            this.P2CurrentScoreLabel.AutoSize = true;
+            this.P2CurrentScoreLabel.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.P2CurrentScoreLabel.Location = new System.Drawing.Point(30, 396);
+            this.P2CurrentScoreLabel.Name = "P2CurrentScoreLabel";
+            this.P2CurrentScoreLabel.Size = new System.Drawing.Size(19, 21);
+            this.P2CurrentScoreLabel.TabIndex = 12;
+            this.P2CurrentScoreLabel.Text = "0";
+            // 
+            // Player1StickButton
+            // 
+            this.Player1StickButton.Location = new System.Drawing.Point(256, 224);
+            this.Player1StickButton.Name = "Player1StickButton";
+            this.Player1StickButton.Size = new System.Drawing.Size(148, 46);
+            this.Player1StickButton.TabIndex = 13;
+            this.Player1StickButton.Text = "Player 1 Stick";
+            this.Player1StickButton.UseVisualStyleBackColor = true;
+            this.Player1StickButton.Click += new System.EventHandler(this.Player1StickButton_Click);
+            // 
+            // Player2StickButton
+            // 
+            this.Player2StickButton.Location = new System.Drawing.Point(256, 472);
+            this.Player2StickButton.Name = "Player2StickButton";
+            this.Player2StickButton.Size = new System.Drawing.Size(148, 46);
+            this.Player2StickButton.TabIndex = 14;
+            this.Player2StickButton.Text = "Player 2 Stick";
+            this.Player2StickButton.UseVisualStyleBackColor = true;
+            this.Player2StickButton.Click += new System.EventHandler(this.Player2StickButton_Click);
+            // 
+            // PDCurrentScoreLabel
+            // 
+            this.PDCurrentScoreLabel.AutoSize = true;
+            this.PDCurrentScoreLabel.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PDCurrentScoreLabel.Location = new System.Drawing.Point(30, 644);
+            this.PDCurrentScoreLabel.Name = "PDCurrentScoreLabel";
+            this.PDCurrentScoreLabel.Size = new System.Drawing.Size(19, 21);
+            this.PDCurrentScoreLabel.TabIndex = 16;
+            this.PDCurrentScoreLabel.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(10, 612);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 21);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Dealer";
+            // 
             // FormBlackJack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 561);
+            this.ClientSize = new System.Drawing.Size(784, 741);
+            this.Controls.Add(this.PDCurrentScoreLabel);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.Player2StickButton);
+            this.Controls.Add(this.Player1StickButton);
+            this.Controls.Add(this.P2CurrentScoreLabel);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.Player2DealButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.P2ScoreLabel);
@@ -182,7 +246,6 @@
         private System.Windows.Forms.Button NewGameButton;
         private System.Windows.Forms.Button Player1DealButton;
         private System.Windows.Forms.Label P1CurrentScoreLabel;
-        private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -190,6 +253,12 @@
         private System.Windows.Forms.Label P2ScoreLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button Player2DealButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label P2CurrentScoreLabel;
+        private System.Windows.Forms.Button Player1StickButton;
+        private System.Windows.Forms.Button Player2StickButton;
+        private System.Windows.Forms.Label PDCurrentScoreLabel;
+        private System.Windows.Forms.Label label7;
     }
 }
 

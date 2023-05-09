@@ -96,7 +96,7 @@ namespace CardClasses
         }
         public string GetName()
         {
-         return GetRankAsString() + " of " + GetSuitAsString();
+            return GetRankAsString() + " of " + GetSuitAsString();
         }
 
 
