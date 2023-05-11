@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe", "TicTacToe\TicT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackGUI", "CardGameGUI\BlackJackGUI.csproj", "{8551FA32-DD25-4D86-BEF9-AE6FB353253C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterMind", "MasterMind\MasterMind.csproj", "{DC1FD030-658C-4026-B05A-439111AD099F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8551FA32-DD25-4D86-BEF9-AE6FB353253C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8551FA32-DD25-4D86-BEF9-AE6FB353253C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8551FA32-DD25-4D86-BEF9-AE6FB353253C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC1FD030-658C-4026-B05A-439111AD099F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC1FD030-658C-4026-B05A-439111AD099F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC1FD030-658C-4026-B05A-439111AD099F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC1FD030-658C-4026-B05A-439111AD099F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
