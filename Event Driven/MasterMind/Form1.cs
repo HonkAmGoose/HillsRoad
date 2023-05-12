@@ -78,6 +78,7 @@ public partial class FormMM : Form
                 Data[i] = PegColour.grey;
             }
             buttonCheck.Enabled = false;
+            buttonNewGame_Click(sender, e);
         }
 
         private void pegBoard_Paint(object sender, PaintEventArgs e)
@@ -124,7 +125,8 @@ public partial class FormMM : Form
             white = 0;
 
             PegColour[] guess = new PegColour[4];
-            bool[] used = new bool[4];
+            bool[] guessUsed = new bool[4];
+            bool[] solutionUsed = new bool[4];
 
             int rowoffset = rownum * 4;
             for (int i = 0; i < 4; i++)
@@ -137,7 +139,8 @@ public partial class FormMM : Form
                 if (guess[i] == solution[i])
                 {
                     black++;
-                    used[i] = true;
+                    guessUsed[i] = true;
+                    solutionUsed[i] = true;
                 }
             }
             
@@ -145,10 +148,11 @@ public partial class FormMM : Form
             {
                 for (int j = 0; j < solution.Length; j++)
                 {
-                    if (!used[i] && !used[j] && guess[i] == solution[j])
+                    if (!guessUsed[i] && !solutionUsed[j] && guess[i] == solution[j])
                     {
                         white++;
-                        used[i] = true;
+                        guessUsed[i] = true;
+                        solutionUsed[j] = true;
                     }
                 }
             }
@@ -199,13 +203,13 @@ public partial class FormMM : Form
                 scoreboard.Invalidate();
                 if (black == 4)
                 {
-                    MessageBox.Show($"Well done. You have cracked the code{solution[0]}{solution[1]}{solution[2]}{solution[3]}");
+                    MessageBox.Show($"Well done. You have cracked the code: {solution[0]} {solution[1]} {solution[2]} {solution[3]}");
                     buttonCheck.Enabled = false;
                     scoreboard.Enabled = false;
                 }
                 else if (currentRow == 9)
                 {
-                    MessageBox.Show($"Oh dear. You have run out of guesses{solution[0]}{solution[1]}{solution[2]}{solution[3]}");
+                    MessageBox.Show($"Oh dear. You have run out of guesses. The code was: {solution[0]} {solution[1]} {solution[2]} {solution[3]}");
                     buttonCheck.Enabled = false;
                     scoreboard.Enabled = false;
                 }
@@ -254,7 +258,7 @@ public partial class FormMM : Form
             pegBoard.Invalidate();
             for (int i = 0; i < 4; i++)
             {
-                solution[i] = (PegColour)(rand.Next(5) + 1);
+                solution[i] = (PegColour)(rand.Next(6) + 1);
             }
             scoreboard.Invalidate();
             currentRow = 0;
