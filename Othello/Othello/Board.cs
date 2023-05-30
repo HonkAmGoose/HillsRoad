@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Othello
+{
+    internal abstract class Board
+    {
+        public Tile[,] Tiles { get; protected set; }
+
+        public char PlayerTurn { get; protected set; }
+        
+        private Coordinate ProposedMove;
+
+        public List<Coordinate> ValidMoves { get; protected set; }
+        public List<Coordinate> TurningTiles { get; protected set; }
+
+        public Board() 
+        {
+            Tiles = new Tile[Coordinate.maxX + 1, Coordinate.maxY + 1];
+            for (int x = 0; x <= Coordinate.maxX; x++)
+            {
+                for (int y = 0; y <= Coordinate.maxY; y++)
+                {
+                    Tiles[x, y] = new Tile(x, y);
+                }
+            }
+            ValidMoves = new List<Coordinate>();
+            TurningTiles = new List<Coordinate>();
+        }
+
+        public bool FindValidMoves()
+        {
+            ValidMoves.Clear();
+
+            Coordinate locationToCheck;
+            for (int x = 0; x < Coordinate.maxX; x++)
+            {
+                for (int y = 0; y < Coordinate.maxY; y++)
+                {
+                    if (Tiles[x, y].Status == 'C' && Tiles[x, y].CounterColour == PlayerTurn)
+                    {
+                        locationToCheck = new Coordinate(x, y);
+                        if (IsValidMove(locationToCheck))
+                        {
+                            ValidMoves.Add(locationToCheck);
+                        }
+                    }
+                }
+            }   
+
+            if (ValidMoves.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsValidMove(Coordinate proposedLocation)
+        {
+            char currentPlayer = PlayerTurn;
+            char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';
+            int incrementValue;
+            Tile checkingTile;
+
+            for (int xIncrement = -1; xIncrement <= 1; xIncrement++)
+            {
+                for (int yIncrement = -1; yIncrement <= 1; yIncrement++)
+                {
+                    if (xIncrement != 0 || yIncrement != 0)
+                    {
+                        incrementValue = 1;
+                        while (true)
+                        {
+                            checkingTile = Tiles[proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue)];
+
+                            if (checkingTile.Status == 'N') // There is a gap
+                            {
+                                break;
+                            }
+                            else if (checkingTile.CounterColour == otherPlayer) // Tile would turn if sandwiched
+                            {
+                                incrementValue++;
+                            }
+                            else if (checkingTile.CounterColour == currentPlayer) // There is a tile to sandwich
+                            {
+                                if (incrementValue > 1) // There is a sandwich filling
+                                {
+                                    return true;
+                                }
+                                else // There is no sandwich filling
+                                {
+                                    break;
+                                }
+                            }
+
+                            incrementValue++;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void AssignTurningTiles(Coordinate proposedLocation)
+        {
+            TurningTiles.Clear();
+            char currentPlayer = PlayerTurn;
+            char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';
+            int incrementValue;
+            Coordinate checkingLocation;
+            Tile checkingTile;
+            List<Coordinate> singleDirectionTurningTiles = new List<Coordinate>();
+
+            for (int xIncrement = -1; xIncrement <= 1; xIncrement++)
+            {
+                for (int yIncrement = -1; yIncrement <= 1; yIncrement++)
+                {
+                    if (xIncrement != 0 || yIncrement != 0)
+                    {
+                        incrementValue = 1;
+                        while (true)
+                        {
+                            checkingLocation = new Coordinate(proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue));
+                            checkingTile = Tiles[checkingLocation.x, checkingLocation.y];
+
+                            if (checkingTile.Status == 'N') // There is a gap
+                            {
+                                break;
+                            }
+                            else if (checkingTile.CounterColour == otherPlayer) // Tile would turn if sandwiched
+                            {
+                                singleDirectionTurningTiles.Add(checkingLocation);
+                                incrementValue++;
+                            }
+                            else if (checkingTile.CounterColour == currentPlayer) // There is a tile to sandwich - no need to check for filling because if there is none, then singleDirectionTurningTiles will be empty
+                            {
+                                TurningTiles.AddRange(singleDirectionTurningTiles);
+                                break;
+                            }
+
+                            incrementValue++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
