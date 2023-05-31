@@ -69,13 +69,19 @@ namespace Othello
             {
                 for (int yIncrement = -1; yIncrement <= 1; yIncrement++)
                 {
-                    if (xIncrement != 0 || yIncrement != 0)
+                    if (!(xIncrement == 0 && yIncrement == 0))
                     {
                         incrementValue = 1;
                         while (true)
                         {
-                            checkingTile = Tiles[proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue)];
-
+                            try
+                            {
+                                checkingTile = Tiles[proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue)];
+                            }
+                            catch (IndexOutOfRangeException)
+                            {
+                                break;
+                            }
                             if (checkingTile.Status == 'N') // There is a gap
                             {
                                 break;
