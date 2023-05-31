@@ -37,13 +37,10 @@ namespace Othello
             {
                 for (int y = 0; y < Coordinate.maxY; y++)
                 {
-                    if (Tiles[x, y].Status == 'C' && Tiles[x, y].CounterColour == PlayerTurn)
+                    locationToCheck = new Coordinate(x, y);
+                    if (IsValidMove(locationToCheck))
                     {
-                        locationToCheck = new Coordinate(x, y);
-                        if (IsValidMove(locationToCheck))
-                        {
-                            ValidMoves.Add(locationToCheck);
-                        }
+                        ValidMoves.Add(locationToCheck);
                     }
                 }
             }   
@@ -95,8 +92,10 @@ namespace Othello
                                     break;
                                 }
                             }
-
-                            incrementValue++;
+                            else
+                            {
+                                throw new Exception("Invalid tile status");
+                            }
                         }
                     }
                 }
@@ -140,8 +139,6 @@ namespace Othello
                                 TurningTiles.AddRange(singleDirectionTurningTiles);
                                 break;
                             }
-
-                            incrementValue++;
                         }
                     }
                 }
