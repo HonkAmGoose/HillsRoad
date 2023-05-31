@@ -42,6 +42,22 @@ namespace Othello
 
         }
 
+        private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            int x, y;
+            Coordinate location;
+            if (e.Location.X % 50 > 5 && e.Location.Y % 50 > 5)
+            {
+                x = e.Location.X / 50;
+                y = e.Location.Y / 50;
+                location = new Coordinate(x, y);
+                if (gameBoard.ValidMoves.Contains(location))
+                {
+                    gameBoard.ProposeMove(location);
+                }
+            }
+        }
+
         private void DisplayPanel_Paint(object sender, PaintEventArgs e)
         {
             using(SolidBrush lineBrush = new SolidBrush(Color.Black))

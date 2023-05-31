@@ -52,6 +52,7 @@
             this.DisplayPanel.Size = new System.Drawing.Size(405, 405);
             this.DisplayPanel.TabIndex = 1;
             this.DisplayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DisplayPanel_Paint);
+            this.DisplayPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DisplayPanel_MouseUp);
             // 
             // HintButton
             // 
