@@ -42,17 +42,56 @@ namespace Othello
             }
         }
 
-        public bool StartTurn()
-        {
-            return FindValidMoves();
-        }
-
         public void HintMoves()
         {
             foreach (Coordinate location in ValidMoves)
             {
                 Tiles[location.x, location.y].Status = 'H';
                 Tiles[location.x, location.y].CounterColour = PlayerTurn;
+            }
+        }
+
+        public void UnhintMoves()
+        {
+            foreach (Coordinate location in ValidMoves)
+            {
+                Tiles[location.x, location.y].Status = 'N';
+                Tiles[location.x, location.y].CounterColour = 'N';
+            }
+        }
+
+        public void HintTurns()
+        {
+            foreach (Coordinate location in TurningTiles)
+            {
+                Tiles[location.x, location.y].Status = 'T';
+                Tiles[location.x, location.y].CounterColour = PlayerTurn;
+            }
+        }
+
+        public void UnhintTurns()
+        {
+            foreach (Coordinate location in TurningTiles)
+            {
+                Tiles[location.x, location.y].Status = 'N';
+                Tiles[location.x, location.y].CounterColour = 'N';
+            }
+        }
+
+        public void ProposeMove(Coordinate location)
+        {
+            if (ValidMoves.Contains(location))
+            {
+                Tiles[location.x, location.y].Status = 'P';
+                Tiles[location.x, location.y].CounterColour = PlayerTurn;
+                MoveProposed = true;
+                UnhintMoves();
+                AssignTurningTiles(location);
+                HintTurns();
+            }
+            else
+            {
+                throw new ArgumentException("Location must be a valid move");
             }
         }
     }
