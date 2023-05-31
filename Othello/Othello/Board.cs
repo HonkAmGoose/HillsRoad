@@ -11,8 +11,6 @@ namespace Othello
         public Tile[,] Tiles { get; protected set; }
 
         public char PlayerTurn { get; protected set; }
-        
-        private Coordinate ProposedMove;
 
         public List<Coordinate> ValidMoves { get; protected set; }
         public List<Coordinate> TurningTiles { get; protected set; }
@@ -35,15 +33,15 @@ namespace Othello
         {
             ValidMoves.Clear();
 
-            Coordinate locationToCheck;
-            for (int x = 0; x < Coordinate.maxX; x++)
+            Coordinate location;
+            for (int x = 0; x <= Coordinate.maxX; x++)
             {
-                for (int y = 0; y < Coordinate.maxY; y++)
+                for (int y = 0; y <= Coordinate.maxY; y++)
                 {
-                    locationToCheck = new Coordinate(x, y);
-                    if (IsValidMove(locationToCheck))
+                    location = new Coordinate(x, y);
+                    if (IsValidMove(location))
                     {
-                        ValidMoves.Add(locationToCheck);
+                        ValidMoves.Add(location);
                     }
                 }
             }   
@@ -58,7 +56,19 @@ namespace Othello
             }
         }
 
-        public bool IsValidMove(Coordinate proposedLocation)
+        public bool SearchValidMoves(Coordinate Location)
+        {
+            foreach(Coordinate c in ValidMoves)
+            {
+                if (c.x == Location.x && c.y == Location.y)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected bool IsValidMove(Coordinate proposedLocation)
         {
             char currentPlayer = PlayerTurn;
             char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';

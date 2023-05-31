@@ -29,6 +29,7 @@ namespace Othello
         private void NewGameButton_Click(object sender, EventArgs e)
         {
             NewGame();
+            Refresh();
         }
 
         private void HintButton_Click(object sender, EventArgs e)
@@ -44,6 +45,11 @@ namespace Othello
 
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
         {
+            if (gameBoard.IsMoveProposed)
+            {
+                gameBoard.CancelMove();
+            }
+
             int x, y;
             Coordinate location;
             if (e.Location.X % 50 > 5 && e.Location.Y % 50 > 5)
@@ -51,9 +57,10 @@ namespace Othello
                 x = e.Location.X / 50;
                 y = e.Location.Y / 50;
                 location = new Coordinate(x, y);
-                if (gameBoard.ValidMoves.Contains(location))
+                if (gameBoard.SearchValidMoves(location))
                 {
                     gameBoard.ProposeMove(location);
+                    Refresh();
                 }
             }
         }
@@ -75,7 +82,14 @@ namespace Othello
 
         private void NewGame()
         {
-            gameBoard = new GameBoard();
+            if (gameBoard == null)
+            {
+                gameBoard = new GameBoard();
+            }
+            else
+            {
+                gameBoard.Reset();
+            }
             noValidMovesCounter = 0;
             StartTurn();
             DisplayPanel.Enabled = true;
