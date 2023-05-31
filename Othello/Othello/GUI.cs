@@ -81,11 +81,12 @@ namespace Othello
             DisplayPanel.Enabled = true;
             HintButton.Enabled = true;
             EndTurnButton.Enabled = true;
+            Refresh();
         }
 
         private void StartTurn()
         {
-            if (!gameBoard.StartTurn())
+            if (!gameBoard.FindValidMoves())
             {
                 noValidMovesCounter++;
             }
