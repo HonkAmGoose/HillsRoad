@@ -12,9 +12,16 @@ namespace Othello
 {
     public partial class GUI : Form
     {
-        Graphics displayGraphics;
-        GameBoard gameBoard;
-        int noValidMovesCounter;
+        Graphics DisplayGraphics;
+        GameBoard GameBoard;
+        int NoValidMovesCounter;
+
+        SolidBrush[,] TileBrushes = new SolidBrush[,] { 
+            { new SolidBrush(Color.Black), new SolidBrush(Color.White) },
+            { new SolidBrush(Color.DarkRed), new SolidBrush(Color.Pink) },
+            { new SolidBrush(Color.Navy), new SolidBrush(Color.Aqua) },
+            { new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow) }
+        };
 
         public GUI()
         {
@@ -22,7 +29,7 @@ namespace Othello
         }
         private void GUI_Load(object sender, EventArgs e)
         {
-            displayGraphics = DisplayPanel.CreateGraphics();
+            DisplayGraphics = DisplayPanel.CreateGraphics();
             NewGame();
         }
 
@@ -34,13 +41,13 @@ namespace Othello
 
         private void HintButton_Click(object sender, EventArgs e)
         {
-            gameBoard.HintMoves();
+            GameBoard.HintMoves();
             Refresh();
         }
 
         private void EndTurnButton_Click(object sender, EventArgs e)
         {
-            gameBoard.ConfirmMove();
+            GameBoard.ConfirmMove();
             StartTurn();
             Refresh();
         }
@@ -48,10 +55,10 @@ namespace Othello
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
         {
             Coordinate previous = null;
-            if (gameBoard.IsMoveProposed)
+            if (GameBoard.IsMoveProposed)
             {
-                previous = gameBoard.ProposedMove;
-                gameBoard.CancelMove();
+                previous = GameBoard.ProposedMove;
+                GameBoard.CancelMove();
             }
 
             int x, y;
@@ -61,9 +68,9 @@ namespace Othello
                 x = e.Location.X / 50;
                 y = e.Location.Y / 50;
                 location = new Coordinate(x, y);
-                if (location != previous && gameBoard.SearchValidMoves(location))
+                if (location != previous && GameBoard.SearchValidMoves(location))
                 {
-                    gameBoard.ProposeMove(location);
+                    GameBoard.ProposeMove(location);
                 }
                 Refresh();
             }
@@ -73,12 +80,12 @@ namespace Othello
         {
             using(SolidBrush lineBrush = new SolidBrush(Color.Black))
             {
-                displayGraphics.Clear(Color.Green);
+                DisplayGraphics.Clear(Color.Green);
 
                 for (int i = 0; i <= 405; i += 50)
                 {
-                    displayGraphics.FillRectangle(lineBrush, i, 0, 5, 405);
-                    displayGraphics.FillRectangle(lineBrush, 0, i, 405, 5);
+                    DisplayGraphics.FillRectangle(lineBrush, i, 0, 5, 405);
+                    DisplayGraphics.FillRectangle(lineBrush, 0, i, 405, 5);
                 }
             }
             DrawPieces();
@@ -86,37 +93,30 @@ namespace Othello
 
         private void NewGame()
         {
-            if (gameBoard == null)
-            {
-                gameBoard = new GameBoard();
-            }
-            else
-            {
-                gameBoard.Reset();
-            }
-            noValidMovesCounter = 0;
+            GameBoard = new GameBoard();
+            NoValidMovesCounter = 0;
             StartTurn();
             DisplayPanel.Enabled = true;
             HintButton.Enabled = true;
             EndTurnButton.Enabled = true;
-            Refresh();
         }
 
         private void StartTurn()
         {
-            if (!gameBoard.FindValidMoves())
+            if (!GameBoard.StartTurn())
             {
-                noValidMovesCounter++;
+                NoValidMovesCounter++;
+                if (NoValidMovesCounter >= 2)
+                {
+                    EndGame();
+                    return;
+                }
+                StartTurn();
             }
             else
             {
-                noValidMovesCounter = 0;
+                NoValidMovesCounter = 0;
             }
-            if (noValidMovesCounter >= 2)
-            {
-                EndGame();
-            }
-            Refresh();
         }
 
         private void EndGame()
@@ -129,84 +129,44 @@ namespace Othello
 
         private void DrawPieces()
         {
-            SolidBrush blackC = new SolidBrush(Color.Black);
-            SolidBrush whiteC = new SolidBrush(Color.White);
-            SolidBrush blackP = new SolidBrush(Color.DarkRed);
-            SolidBrush whiteP = new SolidBrush(Color.LightPink);
-            SolidBrush blackT = new SolidBrush(Color.Navy);
-            SolidBrush whiteT = new SolidBrush(Color.LightBlue);
-            SolidBrush blackH = new SolidBrush(Color.Orange);
-            SolidBrush whiteH = new SolidBrush(Color.Yellow);
-
             Tile toPaint;
             for (int x = 0; x <= Coordinate.maxX; x++)
             {
                 for (int y = 0; y <= Coordinate.maxY; y++)
                 {
-                    toPaint = gameBoard.Tiles[x, y];
+                    toPaint = GameBoard.Tiles[x, y];
                     if (toPaint.Status != 'N')
                     {
-                        if (toPaint.Status == 'C')
+                        int status = 100;
+                        switch (toPaint.Status)
                         {
-                            if (toPaint.CounterColour == 'B')
-                            {
-                                DrawCounter(blackC, x, y);
-                            }
-                            else
-                            {
-                                DrawCounter(whiteC, x, y);
-                            }
+                            case 'C':
+                                status = 0;
+                                break;
+
+                            case 'P':
+                                status = 1;
+                                break;
+
+                            case 'T':
+                                status = 2;
+                                break;
+
+                            case 'H':
+                                status = 3;
+                                break;
                         }
-                        else if (toPaint.Status == 'P')
-                        {
-                            if (toPaint.CounterColour == 'B')
-                            {
-                                DrawCounter(blackP, x, y);
-                            }
-                            else
-                            {
-                                DrawCounter(whiteP, x, y);
-                            }
-                        }
-                        else if (toPaint.Status == 'T')
-                        {
-                            if (toPaint.CounterColour == 'B')
-                            {
-                                DrawCounter(blackT, x, y);
-                            }
-                            else
-                            {
-                                DrawCounter(whiteT, x, y);
-                            }
-                        }
-                        else if (toPaint.Status == 'H')
-                        {
-                            if (toPaint.CounterColour == 'B')
-                            {
-                                DrawCounter(blackH, x, y);
-                            }
-                            else
-                            {
-                                DrawCounter(whiteH, x, y);
-                            }
-                        }
+                        int counterColour = (toPaint.CounterColour == 'B') ? 0 : 1;
+
+                        DrawCounter(TileBrushes[status, counterColour], x, y);
                     }
                 }
             }
-
-            blackC.Dispose();
-            whiteC.Dispose();
-            blackP.Dispose();
-            whiteP.Dispose();
-            blackT.Dispose();
-            whiteT.Dispose();
-            blackH.Dispose();
-            whiteH.Dispose();
         }
 
         private void DrawCounter(SolidBrush brush, int x, int y)
         {
-            displayGraphics.FillEllipse(brush, x * 50 + 7, y * 50 + 7, 40, 40);
+            DisplayGraphics.FillEllipse(brush, x * 50 + 7, y * 50 + 7, 40, 40);
         }
     }
 }

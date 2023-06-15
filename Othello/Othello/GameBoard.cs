@@ -38,7 +38,7 @@ namespace Othello
 
         protected void Setup()
         {
-            PlayerTurn = 'B';
+            PlayerTurn = 'W'; // Will be changed by StartTurn() to black
             Tiles[3, 3] = new Tile(3, 3, 'B');
             Tiles[4, 4] = new Tile(4, 4, 'B');
             Tiles[3, 4] = new Tile(3, 4, 'W');
@@ -159,16 +159,17 @@ namespace Othello
 
         public void ConfirmMove()
         {
-            Coordinate location = ProposedMove;
+            if (IsMoveProposed)
+            {
+                Coordinate location = ProposedMove;
 
-            Tiles[location.x, location.y].Status = 'C';
-            Tiles[location.x, location.y].CounterColour = PlayerTurn;
-            IsMoveProposed = false;
-            TurnTurners();
+                Tiles[location.x, location.y].Status = 'C';
+                Tiles[location.x, location.y].CounterColour = PlayerTurn;
+                IsMoveProposed = false;
+                TurnTurners();
 
-            ProposedMove = null;
-
-            PlayerTurn = PlayerTurn == 'W' ? 'B' : 'W';
+                ProposedMove = null;
+            }
         }
     }
 }

@@ -29,6 +29,12 @@ namespace Othello
             TurningTiles = new List<Coordinate>();
         }
 
+        public bool StartTurn()
+        {
+            PlayerTurn = PlayerTurn == 'W' ? 'B' : 'W';
+            return FindValidMoves();
+        }
+
         public bool FindValidMoves()
         {
             ValidMoves.Clear();
@@ -70,51 +76,55 @@ namespace Othello
 
         protected bool IsValidMove(Coordinate proposedLocation)
         {
-            char currentPlayer = PlayerTurn;
-            char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';
-            int incrementValue;
-            Tile checkingTile;
-
-            for (int xIncrement = -1; xIncrement <= 1; xIncrement++)
+            if (Tiles[proposedLocation.x, proposedLocation.y].Status != 'C')
             {
-                for (int yIncrement = -1; yIncrement <= 1; yIncrement++)
-                {
-                    if (!(xIncrement == 0 && yIncrement == 0))
-                    {
-                        incrementValue = 1;
-                        while (true)
-                        {
-                            try
-                            {
-                                checkingTile = Tiles[proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue)];
-                            }
-                            catch (IndexOutOfRangeException)
-                            {
-                                break;
-                            }
 
-                            if (checkingTile.Status != 'C') // There is a gap
+                char currentPlayer = PlayerTurn;
+                char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';
+                int incrementValue;
+                Tile checkingTile;
+
+                for (int xIncrement = -1; xIncrement <= 1; xIncrement++)
+                {
+                    for (int yIncrement = -1; yIncrement <= 1; yIncrement++)
+                    {
+                        if (!(xIncrement == 0 && yIncrement == 0))
+                        {
+                            incrementValue = 1;
+                            while (true)
                             {
-                                break;
-                            }
-                            else if (checkingTile.CounterColour == otherPlayer) // Tile would turn if sandwiched
-                            {
-                                incrementValue++;
-                            }
-                            else if (checkingTile.CounterColour == currentPlayer) // There is a tile to sandwich
-                            {
-                                if (incrementValue > 1) // There is a sandwich filling
+                                try
                                 {
-                                    return true;
+                                    checkingTile = Tiles[proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue)];
                                 }
-                                else // There is no sandwich filling
+                                catch (IndexOutOfRangeException)
                                 {
                                     break;
                                 }
-                            }
-                            else
-                            {
-                                throw new Exception("Invalid tile status");
+
+                                if (checkingTile.Status != 'C') // There is a gap
+                                {
+                                    break;
+                                }
+                                else if (checkingTile.CounterColour == otherPlayer) // Tile would turn if sandwiched
+                                {
+                                    incrementValue++;
+                                }
+                                else if (checkingTile.CounterColour == currentPlayer) // There is a tile to sandwich
+                                {
+                                    if (incrementValue > 1) // There is a sandwich filling
+                                    {
+                                        return true;
+                                    }
+                                    else // There is no sandwich filling
+                                    {
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    throw new Exception("Invalid tile status");
+                                }
                             }
                         }
                     }
@@ -129,7 +139,7 @@ namespace Othello
             char currentPlayer = PlayerTurn;
             char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';
             int incrementValue;
-            Coordinate checkingLocation;
+            Coordinate checkingLocation = new Coordinate(0, 0);
             Tile checkingTile;
             List<Coordinate> singleDirectionTurningTiles = new List<Coordinate>();
 
@@ -137,12 +147,21 @@ namespace Othello
             {
                 for (int yIncrement = -1; yIncrement <= 1; yIncrement++)
                 {
-                    if (xIncrement != 0 || yIncrement != 0)
+                    if (!(xIncrement == 0 && yIncrement == 0))
                     {
                         incrementValue = 1;
+                        singleDirectionTurningTiles.Clear();
+
                         while (true)
                         {
-                            checkingLocation = new Coordinate(proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue));
+                            try
+                            {
+                                checkingLocation = new Coordinate(proposedLocation.x + (xIncrement * incrementValue), proposedLocation.y + (yIncrement * incrementValue));
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                break;
+                            }
                             checkingTile = Tiles[checkingLocation.x, checkingLocation.y];
 
                             if (checkingTile.Status == 'N') // There is a gap
