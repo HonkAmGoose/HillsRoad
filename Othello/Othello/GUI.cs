@@ -16,12 +16,8 @@ namespace Othello
         GameBoard GameBoard;
         int NoValidMovesCounter;
 
-        SolidBrush[,] TileBrushes = new SolidBrush[,] { 
-            { new SolidBrush(Color.Black), new SolidBrush(Color.White) },
-            { new SolidBrush(Color.DarkRed), new SolidBrush(Color.Pink) },
-            { new SolidBrush(Color.Navy), new SolidBrush(Color.Aqua) },
-            { new SolidBrush(Color.Orange), new SolidBrush(Color.Yellow) }
-        };
+        SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Green) };
+        Pen[] TilePens = new Pen[] { new Pen(Color.Black, 1), new Pen(Color.White, 5), new Pen(Color.Green, 5) };
 
         public GUI()
         {
@@ -137,28 +133,30 @@ namespace Othello
                     toPaint = GameBoard.Tiles[x, y];
                     if (toPaint.Status != 'N')
                     {
-                        int status = 100;
+                        int playerColour = (toPaint.CounterColour == 'B') ? 0 : 1;
+                        int opponentColour = (toPaint.CounterColour == 'B') ? 1 : 0;
                         switch (toPaint.Status)
                         {
                             case 'C':
-                                status = 0;
+                                DrawCounter(TileBrushes[playerColour], x, y);
                                 break;
 
                             case 'P':
-                                status = 1;
+                                DrawOutlineCounter(TilePens[playerColour], x, y);
+                                DrawSmallCounter(TileBrushes[2], x, y);
                                 break;
 
                             case 'T':
-                                status = 2;
+                                DrawCounter(TileBrushes[playerColour], x, y);
+                                DrawSmallCounter(TileBrushes[opponentColour], x, y);
                                 break;
 
                             case 'H':
-                                status = 3;
+                                DrawSmallCounter(TileBrushes[playerColour], x, y);
                                 break;
                         }
-                        int counterColour = (toPaint.CounterColour == 'B') ? 0 : 1;
 
-                        DrawCounter(TileBrushes[status, counterColour], x, y);
+                        DrawCounter(TileBrushes[playerColour], x, y);
                     }
                 }
             }
@@ -167,6 +165,16 @@ namespace Othello
         private void DrawCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 7, y * 50 + 7, 40, 40);
+        }
+
+        private void DrawOutlineCounter(Pen pen, int x, int y)
+        {
+            DisplayGraphics.DrawEllipse(pen, x * 50 + 12, y * 50 + 12, 30, 30);
+        }
+
+        private void DrawSmallCounter(SolidBrush brush, int x, int y)
+        {
+            DisplayGraphics.FillEllipse(brush, x * 50 + 17, y * 50 + 17, 20, 20);
         }
     }
 }
