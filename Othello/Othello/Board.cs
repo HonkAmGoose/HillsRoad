@@ -92,7 +92,8 @@ namespace Othello
                             {
                                 break;
                             }
-                            if (checkingTile.Status == 'N') // There is a gap
+
+                            if (checkingTile.Status != 'C') // There is a gap
                             {
                                 break;
                             }

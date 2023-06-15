@@ -40,13 +40,17 @@ namespace Othello
 
         private void EndTurnButton_Click(object sender, EventArgs e)
         {
-
+            gameBoard.ConfirmMove();
+            StartTurn();
+            Refresh();
         }
 
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
         {
+            Coordinate previous = null;
             if (gameBoard.IsMoveProposed)
             {
+                previous = gameBoard.ProposedMove;
                 gameBoard.CancelMove();
             }
 
@@ -57,11 +61,11 @@ namespace Othello
                 x = e.Location.X / 50;
                 y = e.Location.Y / 50;
                 location = new Coordinate(x, y);
-                if (gameBoard.SearchValidMoves(location))
+                if (location != previous && gameBoard.SearchValidMoves(location))
                 {
                     gameBoard.ProposeMove(location);
-                    Refresh();
                 }
+                Refresh();
             }
         }
 

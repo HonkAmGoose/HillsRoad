@@ -10,7 +10,7 @@ namespace Othello
     {
         public bool IsMoveProposed { get; protected set; }
 
-        protected Coordinate ProposedMove;
+        public Coordinate ProposedMove { get; protected set; }
 
         public GameBoard() : base()
         {
@@ -36,7 +36,7 @@ namespace Othello
             }
         }
 
-        private void Setup()
+        protected void Setup()
         {
             PlayerTurn = 'B';
             Tiles[3, 3] = new Tile(3, 3, 'B');
@@ -89,7 +89,7 @@ namespace Othello
             }
         }
 
-        public void UnhintMoves()
+        protected void UnhintMoves()
         {
             foreach (Coordinate location in ValidMoves)
             {
@@ -98,7 +98,7 @@ namespace Othello
             }
         }
 
-        public void DisplayTurners()
+        protected void DisplayTurners()
         {
             foreach (Coordinate location in TurningTiles)
             {
@@ -107,13 +107,22 @@ namespace Othello
             }
         }
 
-        public void UndisplayTurners()
+        protected void UndisplayTurners()
         {
-            char otherPlayer = PlayerTurn == 'W' ? 'B' : 'W';
+            ChangeTurners(PlayerTurn == 'W' ? 'B' : 'W');
+        }
+
+        protected void TurnTurners()
+        {
+            ChangeTurners(PlayerTurn);
+        }
+
+        public void ChangeTurners(char player)
+        {
             foreach (Coordinate location in TurningTiles)
             {
                 Tiles[location.x, location.y].Status = 'C';
-                Tiles[location.x, location.y].CounterColour = otherPlayer;
+                Tiles[location.x, location.y].CounterColour = player;
             }
             TurningTiles.Clear();
         }
@@ -123,12 +132,12 @@ namespace Othello
             if (SearchValidMoves(location))
             {
                 ProposedMove = location;
-                Tiles[location.x, location.y].Status = 'P';
-                Tiles[location.x, location.y].CounterColour = PlayerTurn;
                 IsMoveProposed = true;
                 UnhintMoves();
                 AssignTurningTiles(location);
                 DisplayTurners();
+                Tiles[location.x, location.y].Status = 'P';
+                Tiles[location.x, location.y].CounterColour = PlayerTurn;
             }
             else
             {
@@ -144,9 +153,22 @@ namespace Othello
             Tiles[location.x, location.y].CounterColour = 'N';
             IsMoveProposed = false;
             UndisplayTurners();
-            TurningTiles.Clear();
 
             ProposedMove = null;
+        }
+
+        public void ConfirmMove()
+        {
+            Coordinate location = ProposedMove;
+
+            Tiles[location.x, location.y].Status = 'C';
+            Tiles[location.x, location.y].CounterColour = PlayerTurn;
+            IsMoveProposed = false;
+            TurnTurners();
+
+            ProposedMove = null;
+
+            PlayerTurn = PlayerTurn == 'W' ? 'B' : 'W';
         }
     }
 }
