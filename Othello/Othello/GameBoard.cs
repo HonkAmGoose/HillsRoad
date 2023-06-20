@@ -12,9 +12,12 @@ namespace Othello
 
         public Coordinate ProposedMove { get; protected set; }
 
+        public int[] CounterNumbers;
+
         public GameBoard() : base()
         {
             Setup();
+            CounterNumbers = new int[] { 2, 2 };
         }
 
         public GameBoard(char bonusPlayer, int bonusNumber) : base()
@@ -34,6 +37,8 @@ namespace Othello
             {
                 throw new ArgumentException("bonusPlayer must be 'W' or 'B' and bonusNumber >= 1 and <= 4");
             }
+
+            CounterNumbers = new int[] { 2 + bonusNumber * (bonusPlayer == 'B' ? 1 : 0) , 2 + bonusNumber * (bonusPlayer == 'W' ? 1 : 0) };
         }
 
         protected void Setup()

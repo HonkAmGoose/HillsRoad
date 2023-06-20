@@ -110,16 +110,20 @@ namespace Othello
             }
             else
             {
+                MessageBox.Show("No valid moves for " + ((GameBoard.PlayerTurn == 'B') ? "white" : "black"));
                 NoValidMovesCounter = 0;
             }
         }
 
         private void EndGame()
         {
+            Refresh();
             MessageBox.Show("Game Over");
             DisplayPanel.Enabled = false;
             HintButton.Enabled = false;
             EndTurnButton.Enabled = false;
+
+            
         }
 
         private void DrawPieces()
@@ -158,12 +162,12 @@ namespace Othello
             }
         }
 
-        public void DrawCounter(SolidBrush brush, int x, int y)
+        private void DrawCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 7, y * 50 + 7, 40, 40);
         }
 
-        public void DrawSmallCounter(SolidBrush brush, int x, int y)
+        private void DrawSmallCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 12, y * 50 + 12, 30, 30);
         }
