@@ -16,8 +16,7 @@ namespace Othello
         GameBoard GameBoard;
         int NoValidMovesCounter;
 
-        SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Green) };
-        Pen[] TilePens = new Pen[] { new Pen(Color.Black, 1), new Pen(Color.White, 5), new Pen(Color.Green, 5) };
+        SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Gold) };
 
         public GUI()
         {
@@ -142,39 +141,31 @@ namespace Othello
                                 break;
 
                             case 'P':
-                                DrawOutlineCounter(TilePens[playerColour], x, y);
-                                DrawSmallCounter(TileBrushes[2], x, y);
+                                DrawSmallCounter(TileBrushes[playerColour], x, y);
                                 break;
 
                             case 'T':
-                                DrawCounter(TileBrushes[playerColour], x, y);
-                                DrawSmallCounter(TileBrushes[opponentColour], x, y);
+                                DrawCounter(TileBrushes[opponentColour], x, y);
+                                DrawSmallCounter(TileBrushes[playerColour], x, y);
                                 break;
 
                             case 'H':
-                                DrawSmallCounter(TileBrushes[playerColour], x, y);
+                                DrawSmallCounter(TileBrushes[2], x, y);
                                 break;
                         }
-
-                        DrawCounter(TileBrushes[playerColour], x, y);
                     }
                 }
             }
         }
 
-        private void DrawCounter(SolidBrush brush, int x, int y)
+        public void DrawCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 7, y * 50 + 7, 40, 40);
         }
 
-        private void DrawOutlineCounter(Pen pen, int x, int y)
+        public void DrawSmallCounter(SolidBrush brush, int x, int y)
         {
-            DisplayGraphics.DrawEllipse(pen, x * 50 + 12, y * 50 + 12, 30, 30);
-        }
-
-        private void DrawSmallCounter(SolidBrush brush, int x, int y)
-        {
-            DisplayGraphics.FillEllipse(brush, x * 50 + 17, y * 50 + 17, 20, 20);
+            DisplayGraphics.FillEllipse(brush, x * 50 + 12, y * 50 + 12, 30, 30);
         }
     }
 }
