@@ -160,17 +160,14 @@ namespace Othello
 
         public void ConfirmMove()
         {
-            if (IsMoveProposed)
-            {
-                Coordinate location = ProposedMove;
+            Coordinate location = ProposedMove;
 
-                Tiles[location.x, location.y].Status = 'C';
-                Tiles[location.x, location.y].CounterColour = PlayerTurn;
-                IsMoveProposed = false;
-                TurnTurners();
+            Tiles[location.x, location.y].Status = 'C';
+            Tiles[location.x, location.y].CounterColour = PlayerTurn;
+            IsMoveProposed = false;
+            TurnTurners();
 
-                ProposedMove = null;
-            }
+            ProposedMove = null;
         }
     }
 }

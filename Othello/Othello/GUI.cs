@@ -36,9 +36,12 @@ namespace Othello
 
         private void EndTurnButton_Click(object sender, EventArgs e)
         {
-            GameBoard.ConfirmMove();
-            StartTurn();
-            Refresh();
+            if (GameBoard.IsMoveProposed)
+            {
+                GameBoard.ConfirmMove();
+                StartTurn();
+                Refresh();
+            }
         }
 
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
