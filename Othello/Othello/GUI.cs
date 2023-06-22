@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Othello
@@ -73,7 +67,7 @@ namespace Othello
 
         private void DisplayPanel_Paint(object sender, PaintEventArgs e)
         {
-            using(SolidBrush lineBrush = new SolidBrush(Color.Black))
+            using (SolidBrush lineBrush = new SolidBrush(Color.Black))
             {
                 DisplayGraphics.Clear(Color.Green);
 
@@ -110,8 +104,11 @@ namespace Othello
             }
             else
             {
-                MessageBox.Show("No valid moves for " + ((GameBoard.PlayerTurn == 'B') ? "white" : "black"));
-                NoValidMovesCounter = 0;
+                if (NoValidMovesCounter != 0)
+                {
+                    MessageBox.Show("No valid moves for " + ((GameBoard.PlayerTurn == 'B') ? "white" : "black"));
+                    NoValidMovesCounter = 0;
+                }
             }
         }
 
@@ -123,7 +120,7 @@ namespace Othello
             HintButton.Enabled = false;
             EndTurnButton.Enabled = false;
 
-            
+
         }
 
         private void DrawPieces()

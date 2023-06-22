@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Othello
 {
@@ -15,7 +12,7 @@ namespace Othello
         public List<Coordinate> ValidMoves { get; protected set; }
         public List<Coordinate> TurningTiles { get; protected set; }
 
-        public Board() 
+        public Board()
         {
             Tiles = new Tile[Coordinate.maxX + 1, Coordinate.maxY + 1];
             for (int x = 0; x <= Coordinate.maxX; x++)
@@ -50,7 +47,7 @@ namespace Othello
                         ValidMoves.Add(location);
                     }
                 }
-            }   
+            }
 
             if (ValidMoves.Count > 0)
             {
@@ -64,7 +61,7 @@ namespace Othello
 
         public bool SearchValidMoves(Coordinate Location)
         {
-            foreach(Coordinate c in ValidMoves)
+            foreach (Coordinate c in ValidMoves)
             {
                 if (c.x == Location.x && c.y == Location.y)
                 {

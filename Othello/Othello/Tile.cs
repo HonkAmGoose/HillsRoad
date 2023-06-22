@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Othello
 {
@@ -12,7 +8,7 @@ namespace Othello
         public char Status = 'N';
         public Coordinate Location { get; private set; }
 
-        public Tile(Coordinate location) 
+        public Tile(Coordinate location)
         {
             Location = location;
         }
@@ -24,12 +20,12 @@ namespace Othello
             Status = 'C';
         }
 
-        public Tile (int x, int y)
+        public Tile(int x, int y)
         {
             Location = new Coordinate(x, y);
         }
 
-        public Tile (int x, int y, char player)
+        public Tile(int x, int y, char player)
         {
             Location = new Coordinate(x, y);
             CounterColour = player;

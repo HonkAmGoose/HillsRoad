@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Othello
 {
@@ -38,7 +34,7 @@ namespace Othello
                 throw new ArgumentException("bonusPlayer must be 'W' or 'B' and bonusNumber >= 1 and <= 4");
             }
 
-            CounterNumbers = new int[] { 2 + bonusNumber * (bonusPlayer == 'B' ? 1 : 0) , 2 + bonusNumber * (bonusPlayer == 'W' ? 1 : 0) };
+            CounterNumbers = new int[] { 2 + bonusNumber * (bonusPlayer == 'B' ? 1 : 0), 2 + bonusNumber * (bonusPlayer == 'W' ? 1 : 0) };
         }
 
         protected void Setup()

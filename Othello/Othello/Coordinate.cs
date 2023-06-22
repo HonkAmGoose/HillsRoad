@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Othello
 {
@@ -13,7 +9,7 @@ namespace Othello
         public const int maxX = 7;
         public const int maxY = 7;
 
-        public Coordinate (int x, int y)
+        public Coordinate(int x, int y)
         {
             if (x >= 0 && x <= maxX && y >= 0 && y <= maxY)
             {

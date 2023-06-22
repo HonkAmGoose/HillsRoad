@@ -31,13 +31,12 @@
             this.NewGameButton = new System.Windows.Forms.Button();
             this.DisplayPanel = new System.Windows.Forms.Panel();
             this.HintButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.EndTurnButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameButton
             // 
-            this.NewGameButton.Location = new System.Drawing.Point(10, 420);
+            this.NewGameButton.Location = new System.Drawing.Point(332, 425);
             this.NewGameButton.Name = "NewGameButton";
             this.NewGameButton.Size = new System.Drawing.Size(80, 30);
             this.NewGameButton.TabIndex = 0;
@@ -56,7 +55,7 @@
             // 
             // HintButton
             // 
-            this.HintButton.Location = new System.Drawing.Point(110, 420);
+            this.HintButton.Location = new System.Drawing.Point(10, 475);
             this.HintButton.Name = "HintButton";
             this.HintButton.Size = new System.Drawing.Size(80, 30);
             this.HintButton.TabIndex = 2;
@@ -64,19 +63,9 @@
             this.HintButton.UseVisualStyleBackColor = true;
             this.HintButton.Click += new System.EventHandler(this.HintButton_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 420);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "New Game";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.NewGameButton_Click);
-            // 
             // EndTurnButton
             // 
-            this.EndTurnButton.Location = new System.Drawing.Point(210, 420);
+            this.EndTurnButton.Location = new System.Drawing.Point(10, 425);
             this.EndTurnButton.Name = "EndTurnButton";
             this.EndTurnButton.Size = new System.Drawing.Size(80, 30);
             this.EndTurnButton.TabIndex = 4;
@@ -88,9 +77,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 461);
+            this.ClientSize = new System.Drawing.Size(424, 561);
             this.Controls.Add(this.EndTurnButton);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.HintButton);
             this.Controls.Add(this.DisplayPanel);
             this.Controls.Add(this.NewGameButton);
@@ -106,7 +94,6 @@
         private System.Windows.Forms.Button NewGameButton;
         private System.Windows.Forms.Panel DisplayPanel;
         private System.Windows.Forms.Button HintButton;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button EndTurnButton;
     }
 }
