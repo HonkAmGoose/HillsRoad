@@ -8,7 +8,7 @@ namespace Othello
 
         public Coordinate ProposedMove { get; protected set; }
 
-        public int[] CounterNumbers;
+        public int[] CounterNumbers { get; protected set; }
 
         public GameBoard() : base()
         {
@@ -165,6 +165,8 @@ namespace Othello
             Tiles[location.x, location.y].Status = 'C';
             Tiles[location.x, location.y].CounterColour = PlayerTurn;
             IsMoveProposed = false;
+            CounterNumbers[(PlayerTurn == 'B') ? 0 : 1] += TurningTiles.Count + 1;
+            CounterNumbers[(PlayerTurn == 'B') ? 1 : 0] -= TurningTiles.Count;
             TurnTurners();
 
             ProposedMove = null;

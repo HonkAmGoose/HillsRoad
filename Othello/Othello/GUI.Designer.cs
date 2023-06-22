@@ -35,9 +35,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BonusComboBox = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.BlackCounterLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.WhiteCounterLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -118,15 +118,15 @@
             this.BonusComboBox.Size = new System.Drawing.Size(80, 21);
             this.BonusComboBox.TabIndex = 7;
             // 
-            // label3
+            // BlackCounterLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(175, 450);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 25);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "0";
+            this.BlackCounterLabel.AutoSize = true;
+            this.BlackCounterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlackCounterLabel.Location = new System.Drawing.Point(175, 450);
+            this.BlackCounterLabel.Name = "BlackCounterLabel";
+            this.BlackCounterLabel.Size = new System.Drawing.Size(24, 25);
+            this.BlackCounterLabel.TabIndex = 8;
+            this.BlackCounterLabel.Text = "0";
             // 
             // label4
             // 
@@ -138,15 +138,15 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "0";
             // 
-            // label5
+            // WhiteCounterLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(175, 480);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(24, 25);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "0";
+            this.WhiteCounterLabel.AutoSize = true;
+            this.WhiteCounterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WhiteCounterLabel.Location = new System.Drawing.Point(175, 480);
+            this.WhiteCounterLabel.Name = "WhiteCounterLabel";
+            this.WhiteCounterLabel.Size = new System.Drawing.Size(24, 25);
+            this.WhiteCounterLabel.TabIndex = 10;
+            this.WhiteCounterLabel.Text = "0";
             // 
             // label6
             // 
@@ -175,9 +175,9 @@
             this.ClientSize = new System.Drawing.Size(424, 511);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.WhiteCounterLabel);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.BlackCounterLabel);
             this.Controls.Add(this.BonusComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -202,9 +202,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox BonusComboBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label BlackCounterLabel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label WhiteCounterLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
     }

@@ -70,17 +70,9 @@ namespace Othello
 
         private void DisplayPanel_Paint(object sender, PaintEventArgs e)
         {
-            using (SolidBrush lineBrush = new SolidBrush(Color.Black))
-            {
-                DisplayGraphics.Clear(Color.Green);
-
-                for (int i = 0; i <= 405; i += 50)
-                {
-                    DisplayGraphics.FillRectangle(lineBrush, i, 0, 5, 405);
-                    DisplayGraphics.FillRectangle(lineBrush, 0, i, 405, 5);
-                }
-            }
+            DrawBackground();
             DrawPieces();
+            UpdateCounterNumbers();
         }
 
         private void NewGame()
@@ -122,8 +114,34 @@ namespace Othello
             DisplayPanel.Enabled = false;
             HintButton.Enabled = false;
             EndTurnButton.Enabled = false;
+        }
 
+        private void UpdateCounterNumbers()
+        {
+            BlackCounterLabel.Text = GameBoard.CounterNumbers[0].ToString();
+            WhiteCounterLabel.Text = GameBoard.CounterNumbers[1].ToString();
+        }
 
+        private void UpdateWinNumbers()
+        {
+            if (GameBoard.CounterNumbers[0] > GameBoard.CounterNumbers[1])
+            {
+                BlackWin
+            }
+        }
+
+        private void DrawBackground()
+        {
+            using (SolidBrush lineBrush = new SolidBrush(Color.Black))
+            {
+                DisplayGraphics.Clear(Color.Green);
+
+                for (int i = 0; i <= 405; i += 50)
+                {
+                    DisplayGraphics.FillRectangle(lineBrush, i, 0, 5, 405);
+                    DisplayGraphics.FillRectangle(lineBrush, 0, i, 405, 5);
+                }
+            }
         }
 
         private void DrawPieces()
