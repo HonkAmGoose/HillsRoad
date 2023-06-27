@@ -9,6 +9,7 @@ namespace Othello
         Graphics DisplayGraphics;
         GameBoard GameBoard;
         int NoValidMovesCounter;
+        int BlackWins = 0, WhiteWins = 0;
 
         SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Gold) };
 
@@ -110,7 +111,22 @@ namespace Othello
         private void EndGame()
         {
             Refresh();
-            MessageBox.Show("Game Over");
+            if (GameBoard.CounterNumbers[0] > GameBoard.CounterNumbers[1])
+            {
+                BlackWinLabel.Text = (++BlackWins).ToString();
+                MessageBox.Show("Game Over - Black wins!");
+            }
+            else if (GameBoard.CounterNumbers[0] < GameBoard.CounterNumbers[1])
+            {
+                WhiteWinLabel.Text = (++WhiteWins).ToString();
+                MessageBox.Show("Game Over - White wins!");
+            }
+            else
+            {
+                BlackWinLabel.Text = (++BlackWins).ToString();
+                WhiteWinLabel.Text = (++WhiteWins).ToString();
+                MessageBox.Show("Game Over - Draw!");
+            }
             DisplayPanel.Enabled = false;
             HintButton.Enabled = false;
             EndTurnButton.Enabled = false;
@@ -120,14 +136,6 @@ namespace Othello
         {
             BlackCounterLabel.Text = GameBoard.CounterNumbers[0].ToString();
             WhiteCounterLabel.Text = GameBoard.CounterNumbers[1].ToString();
-        }
-
-        private void UpdateWinNumbers()
-        {
-            if (GameBoard.CounterNumbers[0] > GameBoard.CounterNumbers[1])
-            {
-                BlackWin
-            }
         }
 
         private void DrawBackground()
