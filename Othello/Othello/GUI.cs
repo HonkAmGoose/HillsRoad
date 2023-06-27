@@ -17,6 +17,7 @@ namespace Othello
         {
             InitializeComponent();
         }
+
         private void GUI_Load(object sender, EventArgs e)
         {
             DisplayGraphics = DisplayPanel.CreateGraphics();
@@ -39,6 +40,7 @@ namespace Othello
 
         private void EndTurnButton_Click(object sender, EventArgs e)
         {
+            // Prevent spam of EndTurnButton by disabling and reenabling
             EndTurnButton.Enabled = false;
             if (GameBoard.IsMoveProposed)
             {
@@ -51,21 +53,20 @@ namespace Othello
 
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            Coordinate previous = null;
+            // Cancel current move
             if (GameBoard.IsMoveProposed)
             {
-                previous = GameBoard.ProposedMove;
                 GameBoard.CancelMove();
             }
 
             int x, y;
             Coordinate location;
-            if (e.Location.X % 50 > 5 && e.Location.Y % 50 > 5)
+            if (e.Location.X % 50 > 5 && e.Location.Y % 50 > 5) // Location is a green square and not a black line
             {
                 x = e.Location.X / 50;
                 y = e.Location.Y / 50;
                 location = new Coordinate(x, y);
-                if (location != previous && GameBoard.SearchValidMoves(location))
+                if (GameBoard.SearchValidMoves(location))
                 {
                     GameBoard.ProposeMove(location);
                 }
@@ -82,7 +83,7 @@ namespace Othello
 
         private void NewGame()
         {
-            if (BonusComboBox.SelectedIndex == 0)
+            if (BonusComboBox.SelectedIndex == 0) // No bonus
             {
                 GameBoard = new GameBoard();
             }

@@ -4,6 +4,10 @@ namespace Othello
 {
     internal class Test
     {
+        /// <summary>
+        /// Testing Main method
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             GameBoard gb = new GameBoard();
