@@ -24,8 +24,8 @@ namespace Othello
             {
                 for (int i = 0; i < bonusNumber; i++)
                 {
-                    int x = i % 2 * (Coordinate.maxX - 1);
-                    int y = i / 2 * (Coordinate.maxY - 1);
+                    int x = i % 2 * (Coordinate.maxX - 2) + 1;
+                    int y = i / 2 * (Coordinate.maxY - 2) + 1;
                     Tiles[x, y] = new Tile(x, y, bonusPlayer);
                 }
             }

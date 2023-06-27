@@ -44,7 +44,7 @@
             // 
             // NewGameButton
             // 
-            this.NewGameButton.Location = new System.Drawing.Point(332, 425);
+            this.NewGameButton.Location = new System.Drawing.Point(332, 475);
             this.NewGameButton.Name = "NewGameButton";
             this.NewGameButton.Size = new System.Drawing.Size(80, 30);
             this.NewGameButton.TabIndex = 0;
@@ -113,7 +113,7 @@
             "White 2",
             "White 3",
             "White 4"});
-            this.BonusComboBox.Location = new System.Drawing.Point(332, 475);
+            this.BonusComboBox.Location = new System.Drawing.Point(332, 425);
             this.BonusComboBox.Name = "BonusComboBox";
             this.BonusComboBox.Size = new System.Drawing.Size(80, 21);
             this.BonusComboBox.TabIndex = 7;

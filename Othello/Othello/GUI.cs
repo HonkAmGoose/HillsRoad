@@ -20,7 +20,9 @@ namespace Othello
         private void GUI_Load(object sender, EventArgs e)
         {
             DisplayGraphics = DisplayPanel.CreateGraphics();
+            BonusComboBox.SelectedIndex = 0;
             NewGame();
+            Refresh();
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)
@@ -37,12 +39,14 @@ namespace Othello
 
         private void EndTurnButton_Click(object sender, EventArgs e)
         {
+            EndTurnButton.Enabled = false;
             if (GameBoard.IsMoveProposed)
             {
                 GameBoard.ConfirmMove();
                 StartTurn();
                 Refresh();
             }
+            EndTurnButton.Enabled = true;
         }
 
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
@@ -78,7 +82,15 @@ namespace Othello
 
         private void NewGame()
         {
-            GameBoard = new GameBoard();
+            if (BonusComboBox.SelectedIndex == 0)
+            {
+                GameBoard = new GameBoard();
+            }
+            else
+            {
+                int bonus = BonusComboBox.SelectedIndex - 1;
+                GameBoard = new GameBoard(bonus / 4 == 0 ? 'B' : 'W', bonus % 4 + 1);
+            }
             NoValidMovesCounter = 0;
             StartTurn();
             DisplayPanel.Enabled = true;
