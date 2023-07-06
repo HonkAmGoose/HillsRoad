@@ -121,7 +121,7 @@ namespace Othello
                     EndGame();
                     return;
                 }
-                StartTurn();
+                StartTurn(); // Recursion
             }
             else
             {
