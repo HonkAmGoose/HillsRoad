@@ -28,7 +28,19 @@ namespace Othello
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
+            NewGameButton.Enabled = false;
+            int index;
+            if ((index = BonusComboBox.FindString(BonusComboBox.Text)) != -1)
+            {
+                BonusComboBox.SelectedIndex = index;
+            }
+            else
+            {
+                BonusComboBox.SelectedIndex = 0;
+            }
+            Refresh();
             NewGame();
+            NewGameButton.Enabled = true;
             Refresh();
         }
 
