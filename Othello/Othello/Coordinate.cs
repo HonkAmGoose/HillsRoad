@@ -2,6 +2,9 @@
 
 namespace Othello
 {
+    /// <summary>
+    /// Coordinate class to store locations on the board - enforces maximum values for the size of the board
+    /// </summary>
     internal class Coordinate
     {
         public int x;
@@ -11,7 +14,7 @@ namespace Othello
 
         public Coordinate(int x, int y)
         {
-            if (x >= 0 && x <= maxX && y >= 0 && y <= maxY)
+            if (x >= 0 && x <= maxX && y >= 0 && y <= maxY) // Enforce max size of board
             {
                 this.x = x;
                 this.y = y;

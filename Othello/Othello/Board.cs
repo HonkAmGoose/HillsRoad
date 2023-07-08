@@ -3,8 +3,14 @@ using System.Collections.Generic;
 
 namespace Othello
 {
+    /// <summary>
+    /// Class to store the board currently in play
+    /// </summary>
     internal abstract class Board
     {
+        /// <summary>
+        /// Array of tiles representing the board
+        /// </summary>
         public Tile[,] Tiles { get; protected set; }
 
         public char PlayerTurn { get; protected set; }
@@ -12,6 +18,9 @@ namespace Othello
         public List<Coordinate> ValidMoves { get; protected set; }
         public List<Coordinate> TurningTiles { get; protected set; }
 
+        /// <summary>
+        /// Creates board with empty tiles
+        /// </summary>
         public Board()
         {
             Tiles = new Tile[Coordinate.maxX + 1, Coordinate.maxY + 1];
@@ -26,12 +35,20 @@ namespace Othello
             TurningTiles = new List<Coordinate>();
         }
 
+        /// <summary>
+        /// Changes player and finds valid moves
+        /// </summary>
+        /// <returns>Whether there are valid moves</returns>
         public bool StartTurn()
         {
             PlayerTurn = PlayerTurn == 'W' ? 'B' : 'W';
             return FindValidMoves();
         }
 
+        /// <summary>
+        /// Looks for valid moves on the board for the current player
+        /// </summary>
+        /// <returns>Whether there are any</returns>
         public bool FindValidMoves()
         {
             ValidMoves.Clear();
@@ -58,7 +75,12 @@ namespace Othello
                 return false;
             }
         }
-
+        
+        /// <summary>
+        /// Searches for a location in the list of valid moves - must have run FindValidMoves beforehand
+        /// </summary>
+        /// <param name="Location">Location to check</param>
+        /// <returns>Whether it is a valid move</returns>
         public bool SearchValidMoves(Coordinate Location)
         {
             foreach (Coordinate c in ValidMoves)
@@ -71,6 +93,11 @@ namespace Othello
             return false;
         }
 
+        /// <summary>
+        /// Used by FindValidMoves to check a single location to see if it is a valid move
+        /// </summary>
+        /// <param name="proposedLocation">Location to check</param>
+        /// <returns>Whether it is a valid move</returns>
         protected bool IsValidMove(Coordinate proposedLocation)
         {
             if (Tiles[proposedLocation.x, proposedLocation.y].Status != 'C')
@@ -118,10 +145,6 @@ namespace Othello
                                         break;
                                     }
                                 }
-                                else
-                                {
-                                    throw new Exception("Invalid tile status");
-                                }
                             }
                         }
                     }
@@ -130,13 +153,17 @@ namespace Othello
             return false;
         }
 
+        /// <summary>
+        /// Checks for tiles that turn in a single location and assignes them to TurningTiles
+        /// </summary>
+        /// <param name="proposedLocation">Location to check</param>
         public void AssignTurningTiles(Coordinate proposedLocation)
         {
             TurningTiles.Clear();
             char currentPlayer = PlayerTurn;
             char otherPlayer = (PlayerTurn == 'B') ? 'W' : 'B';
             int incrementValue;
-            Coordinate checkingLocation = new Coordinate(0, 0);
+            Coordinate checkingLocation;
             Tile checkingTile;
             List<Coordinate> singleDirectionTurningTiles = new List<Coordinate>();
 

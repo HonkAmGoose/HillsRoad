@@ -4,93 +4,31 @@ namespace Othello
 {
     internal class Tile
     {
-        public char CounterColour = 'N';
-        public char Status = 'N';
+        public char CounterColour = 'N'; // 'N'one, 'W'hite or 'B'lack
+        public char Status = 'N'; // 'N'one, 'C'onfirmed, 'P'roposed, 'T'urning or 'H'inted
         public Coordinate Location { get; private set; }
 
-        public Tile(Coordinate location)
-        {
-            Location = location;
-        }
-
-        public Tile(Coordinate location, char player)
-        {
-            Location = location;
-            CounterColour = player;
-            Status = 'C';
-        }
-
+        /// <summary>
+        /// Used to create blank/empty tiles
+        /// </summary>
+        /// <param name="x">x coordinate</param>
+        /// <param name="y">y coordinate</param>
         public Tile(int x, int y)
         {
             Location = new Coordinate(x, y);
         }
 
+        /// <summary>
+        /// Used for tiles that start with a certain colour
+        /// </summary>
+        /// <param name="x">x coordinate</param>
+        /// <param name="y">y coordinate</param>
+        /// <param name="player">player colour</param>
         public Tile(int x, int y, char player)
         {
             Location = new Coordinate(x, y);
             CounterColour = player;
             Status = 'C';
-        }
-
-        public void Place(char player)
-        {
-            if (player == 'W' || player == 'B')
-            {
-                CounterColour = player;
-                Status = 'P';
-            }
-            else
-            {
-                throw new ArgumentException("Player must be 'W' or 'B'");
-            }
-        }
-
-        public void Turn()
-        {
-            if (CounterColour == 'N')
-            {
-                throw new Exception("Counter not placed");
-            }
-            else
-            {
-                if (CounterColour == 'W')
-                {
-                    CounterColour = 'B';
-                }
-                else if (CounterColour == 'B')
-                {
-                    CounterColour = 'W';
-                }
-                else
-                {
-                    throw new Exception("Invalid counter colour");
-                }
-            }
-        }
-
-        public void Confirm()
-        {
-            if (Status == 'T' || Status == 'P')
-            {
-                Status = 'C';
-            }
-            else
-            {
-                throw new Exception("Invalid status for confirmation");
-            }
-        }
-
-        public void Cancel()
-        {
-            if (Status == 'T' || Status == 'P')
-            {
-                CounterColour = 'N';
-                Status = 'N';
-            }
-            else
-            {
-                throw new Exception("Invalid status for cancellation");
-            }
         }
 
         public override string ToString()
