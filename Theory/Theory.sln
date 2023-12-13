@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2019_AS_QP1_Q3", "2019_AS_Q
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2019_AS_QP1_SP", "2019_AS_QP1_SP\2019_AS_QP1_SP.csproj", "{755E9500-4397-4D32-9557-E9EA073F4D7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveKDigitsFromNDigitNumber", "OxInterview\RemoveKDigitsFromNDigitNumber\RemoveKDigitsFromNDigitNumber.csproj", "{BAE39DC3-6B47-429F-BC7F-19DE53D09928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveKDigitsFromNDigitNumber", "OxInterview\RemoveKDigitsFromNDigitNumber\RemoveKDigitsFromNDigitNumber.csproj", "{BAE39DC3-6B47-429F-BC7F-19DE53D09928}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hershad numbers", "Hershad numbers\Hershad numbers.csproj", "{B98D3416-B4BE-4EE4-B3D2-C86854EA0422}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{BAE39DC3-6B47-429F-BC7F-19DE53D09928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE39DC3-6B47-429F-BC7F-19DE53D09928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE39DC3-6B47-429F-BC7F-19DE53D09928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98D3416-B4BE-4EE4-B3D2-C86854EA0422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98D3416-B4BE-4EE4-B3D2-C86854EA0422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98D3416-B4BE-4EE4-B3D2-C86854EA0422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98D3416-B4BE-4EE4-B3D2-C86854EA0422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
