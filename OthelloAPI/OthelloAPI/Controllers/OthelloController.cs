@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace OthelloAPI.Controllers
 {
@@ -10,7 +11,6 @@ namespace OthelloAPI.Controllers
     public class OthelloController : ControllerBase
     {
         public readonly IConfiguration config;
-        public static int testing = 0;
 
         public OthelloController(IConfiguration config)
         {
@@ -19,13 +19,10 @@ namespace OthelloAPI.Controllers
 
         [HttpGet]
         [Route("GetAllUsers")]
-        public string GetUsers()
+        public string GetAllUsers()
         {
-            SqlConnection con = new SqlConnection(config.GetConnectionString("OthelloConnection").ToString());
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Users", con);
+            return "hi";
 
-            testing++;
-            return $"test {testing}";
         }
     }
 }
