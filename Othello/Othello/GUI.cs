@@ -24,6 +24,8 @@ namespace Othello
         private void GUI_Load(object sender, EventArgs e)
         {
             DisplayGraphics = DisplayPanel.CreateGraphics(); // Get the graphics object to be referenced
+            DisplayGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
             BonusComboBox.SelectedIndex = 0; // Set combo box to default
             NewGame();
             Refresh();
