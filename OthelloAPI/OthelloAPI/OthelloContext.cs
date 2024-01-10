@@ -7,8 +7,11 @@ namespace OthelloAPI
     {
         public DbSet<User> Users { get; set; }
 
-        public OthelloContext()
+        private readonly IConfiguration Configuration;
+
+        public OthelloContext(IConfiguration configuration)
         {
+            Configuration = configuration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
