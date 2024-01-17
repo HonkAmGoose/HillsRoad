@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OthelloAPI", "OthelloAPI\OthelloAPI.csproj", "{D54D947D-AB6E-4426-AF9F-FDC1E1662C98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Othello", "OthelloClient\Othello.csproj", "{9E25EA61-8787-416D-8907-B270032F8341}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OthelloClient", "OthelloClient\OthelloClient.csproj", "{9E25EA61-8787-416D-8907-B270032F8341}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
