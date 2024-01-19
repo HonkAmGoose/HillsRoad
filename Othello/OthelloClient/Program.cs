@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Othello
@@ -13,6 +14,14 @@ namespace Othello
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var thread = new Thread(ThreadStart);
+            thread.TrySetApartmentState(ApartmentState.STA);
+            thread.Start();
+            Application.Run(new GUI());
+
+        }
+        private static void ThreadStart()
+        {
             Application.Run(new GUI());
         }
     }
