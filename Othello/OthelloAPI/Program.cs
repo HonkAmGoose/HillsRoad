@@ -4,7 +4,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Hosting;
 using Owin;
 
-namespace SignalR.Server //THIS IS ACTUALLY THE SERVER
+namespace Othello //THIS IS ACTUALLY THE SERVER
 {
     public class Program
     {
