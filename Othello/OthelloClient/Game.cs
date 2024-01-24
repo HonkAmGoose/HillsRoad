@@ -7,7 +7,7 @@ namespace Othello
     /// <summary>
     /// The GUI form
     /// </summary>
-    public partial class GUI : Form
+    public partial class Game : Form
     {
         Graphics DisplayGraphics;
         GameBoard GameBoard;
@@ -16,7 +16,7 @@ namespace Othello
 
         SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Gold) };
 
-        public GUI()
+        public Game()
         {
             InitializeComponent();
         }

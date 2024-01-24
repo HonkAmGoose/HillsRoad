@@ -1,6 +1,6 @@
 ﻿namespace Othello
 {
-    partial class GUI
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.

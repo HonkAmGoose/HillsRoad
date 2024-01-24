@@ -14,15 +14,18 @@ namespace Othello
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var thread = new Thread(ThreadStart);
-            thread.TrySetApartmentState(ApartmentState.STA);
-            thread.Start();
-            Application.Run(new GUI());
+
+            // Uncomment to start an extra version
+            //var thread = new Thread(ThreadStart);
+            //thread.TrySetApartmentState(ApartmentState.STA);
+            //thread.Start();
+
+            Application.Run(new Menu());
 
         }
         private static void ThreadStart()
         {
-            Application.Run(new GUI());
+            Application.Run(new Menu());
         }
     }
 }
