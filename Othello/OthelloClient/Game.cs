@@ -9,8 +9,9 @@ namespace Othello
     /// </summary>
     public partial class Game : Form
     {
+        Menu parent;
         Graphics DisplayGraphics;
-        GameBoard GameBoard;
+        OfflineBoard GameBoard;
         int NoValidMovesCounter; // Used to end the game when both players have no valid moves
         int BlackWins = 0, WhiteWins = 0;
 
@@ -19,6 +20,12 @@ namespace Othello
         public Game()
         {
             InitializeComponent();
+        }
+
+        public Game(Menu parent)
+        {
+            InitializeComponent();
+            this.parent = parent;
         }
 
         private void GUI_Load(object sender, EventArgs e)
@@ -104,12 +111,12 @@ namespace Othello
         {
             if (BonusComboBox.SelectedIndex == 0) // No bonus
             {
-                GameBoard = new GameBoard();
+                GameBoard = new OfflineBoard();
             }
             else
             {
                 int bonus = BonusComboBox.SelectedIndex - 1;
-                GameBoard = new GameBoard(bonus / 4 == 0 ? 'B' : 'W', bonus % 4 + 1); // Black bonuses are first 4 and white the second 4
+                GameBoard = new OfflineBoard(bonus / 4 == 0 ? 'B' : 'W', bonus % 4 + 1); // Black bonuses are first 4 and white the second 4
             }
             NoValidMovesCounter = 0;
             StartTurn();
@@ -240,6 +247,11 @@ namespace Othello
         private void DrawSmallCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 12, y * 50 + 12, 30, 30);
+        }
+
+        private void Game_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parent.Show();
         }
     }
 }

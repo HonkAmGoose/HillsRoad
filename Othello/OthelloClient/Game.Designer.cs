@@ -168,7 +168,7 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "W:";
             // 
-            // GUI
+            // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,8 +185,9 @@
             this.Controls.Add(this.HintButton);
             this.Controls.Add(this.DisplayPanel);
             this.Controls.Add(this.NewGameButton);
-            this.Name = "GUI";
+            this.Name = "Game";
             this.Text = "Othello Game";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Game_FormClosed);
             this.Load += new System.EventHandler(this.GUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

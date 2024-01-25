@@ -2,7 +2,7 @@
 
 namespace Othello
 {
-    internal class GameBoard : Board
+    internal class OfflineBoard : Board
     {
         public bool IsMoveProposed { get; protected set; }
 
@@ -13,7 +13,7 @@ namespace Othello
         /// <summary>
         /// Creates a board and calls setup
         /// </summary>
-        public GameBoard() : base()
+        public OfflineBoard() : base()
         {
             Setup();
             CounterNumbers = new int[] { 2, 2 };
@@ -25,7 +25,7 @@ namespace Othello
         /// <param name="bonusPlayer">Player to give the bonus</param>
         /// <param name="bonusNumber">Number of bonus tiles</param>
         /// <exception cref="ArgumentException">Thrown when arguments are invalid</exception>
-        public GameBoard(char bonusPlayer, int bonusNumber) : base()
+        public OfflineBoard(char bonusPlayer, int bonusNumber) : base()
         {
             Setup();
 
