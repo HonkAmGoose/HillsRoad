@@ -32,6 +32,10 @@
             this.LoginButton = new System.Windows.Forms.Button();
             this.LoggedInCheckBox = new System.Windows.Forms.CheckBox();
             this.RegisterButton = new System.Windows.Forms.Button();
+            this.OfflineVsHumanButton = new System.Windows.Forms.Button();
+            this.OnlineChallengeButton = new System.Windows.Forms.Button();
+            this.OfflineVsAIButton = new System.Windows.Forms.Button();
+            this.ComingSoonLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,11 +76,59 @@
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
             // 
+            // OfflineVsHumanButton
+            // 
+            this.OfflineVsHumanButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OfflineVsHumanButton.Location = new System.Drawing.Point(100, 200);
+            this.OfflineVsHumanButton.Name = "OfflineVsHumanButton";
+            this.OfflineVsHumanButton.Size = new System.Drawing.Size(240, 80);
+            this.OfflineVsHumanButton.TabIndex = 4;
+            this.OfflineVsHumanButton.Text = "Offline vs Human";
+            this.OfflineVsHumanButton.UseVisualStyleBackColor = true;
+            this.OfflineVsHumanButton.Click += new System.EventHandler(this.OfflineVsHumanButton_Click);
+            // 
+            // OnlineChallengeButton
+            // 
+            this.OnlineChallengeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OnlineChallengeButton.Location = new System.Drawing.Point(100, 300);
+            this.OnlineChallengeButton.Name = "OnlineChallengeButton";
+            this.OnlineChallengeButton.Size = new System.Drawing.Size(240, 80);
+            this.OnlineChallengeButton.TabIndex = 5;
+            this.OnlineChallengeButton.Text = "Online Challenge";
+            this.OnlineChallengeButton.UseVisualStyleBackColor = true;
+            // 
+            // OfflineVsAIButton
+            // 
+            this.OfflineVsAIButton.Enabled = false;
+            this.OfflineVsAIButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OfflineVsAIButton.Location = new System.Drawing.Point(100, 400);
+            this.OfflineVsAIButton.Name = "OfflineVsAIButton";
+            this.OfflineVsAIButton.Size = new System.Drawing.Size(240, 80);
+            this.OfflineVsAIButton.TabIndex = 6;
+            this.OfflineVsAIButton.Text = "Offline vs AI";
+            this.OfflineVsAIButton.UseVisualStyleBackColor = true;
+            // 
+            // ComingSoonLabel
+            // 
+            this.ComingSoonLabel.AutoSize = true;
+            this.ComingSoonLabel.BackColor = System.Drawing.Color.MistyRose;
+            this.ComingSoonLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComingSoonLabel.ForeColor = System.Drawing.Color.Red;
+            this.ComingSoonLabel.Location = new System.Drawing.Point(160, 405);
+            this.ComingSoonLabel.Name = "ComingSoonLabel";
+            this.ComingSoonLabel.Size = new System.Drawing.Size(114, 20);
+            this.ComingSoonLabel.TabIndex = 7;
+            this.ComingSoonLabel.Text = "Coming soon...";
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(424, 521);
+            this.Controls.Add(this.ComingSoonLabel);
+            this.Controls.Add(this.OfflineVsAIButton);
+            this.Controls.Add(this.OnlineChallengeButton);
+            this.Controls.Add(this.OfflineVsHumanButton);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.LoggedInCheckBox);
             this.Controls.Add(this.LoginButton);
@@ -94,5 +146,9 @@
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.CheckBox LoggedInCheckBox;
         private System.Windows.Forms.Button RegisterButton;
+        private System.Windows.Forms.Button OfflineVsHumanButton;
+        private System.Windows.Forms.Button OnlineChallengeButton;
+        private System.Windows.Forms.Button OfflineVsAIButton;
+        private System.Windows.Forms.Label ComingSoonLabel;
     }
 }

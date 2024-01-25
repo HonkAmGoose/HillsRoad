@@ -16,5 +16,12 @@ namespace Othello
         {
             InitializeComponent();
         }
+
+        private void OfflineVsHumanButton_Click(object sender, EventArgs e)
+        {
+            Game game = new Game(this);
+            game.Show();
+            Hide();
+        }
     }
 }
