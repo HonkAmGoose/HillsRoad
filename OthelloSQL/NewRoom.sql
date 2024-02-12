@@ -1,0 +1,2 @@
+INSERT INTO Room(Password) VALUES ('about');
+SELECT TOP 1 * FROM Room ORDER BY RoomID DESC;

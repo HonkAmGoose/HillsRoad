@@ -111,6 +111,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomSelect.Designer.cs">
+      <DependentUpon>RoomSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Test.cs" />
     <Compile Include="Tile.cs" />
     <EmbeddedResource Include="Game.resx">
@@ -129,6 +135,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RoomSelect.resx">
+      <DependentUpon>RoomSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -149,6 +158,8 @@
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
+    <Content Include="Sowpods.txt" />
+    <Content Include="Words.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

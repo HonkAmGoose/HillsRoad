@@ -96,6 +96,7 @@
             this.OnlineChallengeButton.TabIndex = 5;
             this.OnlineChallengeButton.Text = "Online Challenge";
             this.OnlineChallengeButton.UseVisualStyleBackColor = true;
+            this.OnlineChallengeButton.Click += new System.EventHandler(this.OnlineChallengeButton_Click);
             // 
             // OfflineVsAIButton
             // 

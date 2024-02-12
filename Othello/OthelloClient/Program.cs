@@ -6,6 +6,8 @@ namespace Othello
 {
     internal static class Program
     {
+        public const string connectionString = "Server=localhost; Database=OTHELLO_DB; Trusted_Connection=True;";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

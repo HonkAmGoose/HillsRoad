@@ -23,5 +23,12 @@ namespace Othello
             game.Show();
             Hide();
         }
+
+        private void OnlineChallengeButton_Click(object sender, EventArgs e)
+        {
+            RoomSelect roomSelect = RoomSelect.Instance;
+            if (roomSelect == null ) (roomSelect = new RoomSelect()).Show();
+            roomSelect.BringToFront();
+        }
     }
 }
