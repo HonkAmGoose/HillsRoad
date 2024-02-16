@@ -7,6 +7,7 @@ namespace Othello
     internal static class Program
     {
         public const string connectionString = "Server=localhost; Database=OTHELLO_DB; Trusted_Connection=True;";
+        public const string hubConnection = "http://localhost:9082";
 
         /// <summary>
         /// The main entry point for the application.

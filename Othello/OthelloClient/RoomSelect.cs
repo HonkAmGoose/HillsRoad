@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
@@ -10,12 +11,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Transports;
+using Microsoft.AspNet.SignalR.Client.Hubs;
 
 namespace Othello
 {
     public partial class RoomSelect : Form
     {
         public static RoomSelect Instance;
+
+        int roomID = 0;
+        string password = "";
+        HubConnection connection = new HubConnection("http://localhost:9082");
+        IHubProxy hubProxy;
+
 
         public RoomSelect()
         {
@@ -25,6 +35,10 @@ namespace Othello
         private void RoomSelect_Load(object sender, EventArgs e)
         {
             Instance = this;
+
+            hubProxy = connection.CreateHubProxy("MyHub");
+
+            hubProxy.On<int, string>("returnRoom", (_roomID, _password) => getReturnedRoom(_roomID, _password));
         }
 
         private void RoomSelect_FormClosed(object sender, FormClosedEventArgs e)
@@ -32,26 +46,18 @@ namespace Othello
             Instance = null;
         }
 
-        private void CreateButton_Click(object sender, EventArgs e)
+        private async void CreateButton_Click(object sender, EventArgs e)
         {
-            string[] words = File.ReadAllLines("C:\\Users\\Dom\\My stuff\\SixthForm\\Computer Science\\Code\\Othello\\OthelloClient\\Words.txt");
-            Random random = new Random();
-            string password = words[random.Next(words.Length)];
-            using (var database = new SqlConnection(Program.connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(
-                    $"INSERT INTO Room(Password) VALUES ('{password}'); " + // I know this could be insecure - fix
-                    "SELECT TOP 1 RoomID FROM Room ORDER BY RoomID DESC;", 
-                    database);
-                database.Open();
+                await connection.Start(new LongPollingTransport());
+                _ = hubProxy.Invoke("createRoom");
+        }
 
-                string result = cmd.ExecuteScalar().ToString();
-                Console.WriteLine(result);
-
-                cmd = new SqlCommand(
-                    $"DELETE FROM Room WHERE RoomID={result};", // I know this could be insecure - fix
-                    database);
-            }
+        private void getReturnedRoom(int _roomID, string _password)
+        {
+            roomID = _roomID;
+            password = _password;
+            Console.WriteLine(roomID + password);
+            Close();
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Othello //THIS IS ACTUALLY THE SERVER
 {
     public class Program
     {
-        private const string Url = "http://localhost:9080";
+        private const string Url = "http://localhost:9082";
+        public const string connectionString = "Server=localhost; Database=OTHELLO_DB; Trusted_Connection=True;";
 
         public List<string> messages = new List<string>();
 

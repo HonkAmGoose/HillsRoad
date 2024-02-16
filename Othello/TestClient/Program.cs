@@ -11,7 +11,7 @@ namespace Othello
 
             Console.WriteLine("Client started");
 
-            using (var connection = new HubConnection("http://localhost:9080"))
+            using (var connection = new HubConnection("http://localhost:9082"))
             {
                 var hubProxy = connection.CreateHubProxy("MyHub");
 
