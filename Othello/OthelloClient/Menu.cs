@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Transports;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,16 +12,23 @@ using System.Windows.Forms;
 
 namespace Othello
 {
-    public partial class Menu : Form
+    public partial class OthelloMenu : Form
     {
-        public Menu()
+        public int roomID = -1;
+        public string password = "";
+        public readonly string ID;
+
+        public OthelloMenu()
         {
             InitializeComponent();
+
+            Random rand = new Random();
+            ID = Guid.NewGuid().ToString();
         }
 
         private void OfflineVsHumanButton_Click(object sender, EventArgs e)
         {
-            Game game = new Game(this);
+            Game game = new Game(this, false);
             game.Show();
             Hide();
         }
@@ -27,8 +36,21 @@ namespace Othello
         private void OnlineChallengeButton_Click(object sender, EventArgs e)
         {
             RoomSelect roomSelect = RoomSelect.Instance;
-            if (roomSelect == null ) (roomSelect = new RoomSelect()).Show();
+            if (roomSelect == null) (roomSelect = new RoomSelect(this)).Show();
             roomSelect.BringToFront();
         }
+
+        private void OthelloMenu_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        public void NewOnlineGame(int roomID, string password)
+        {
+            Game game = new Game(this, true);
+            game.Show();
+            //if (InvokeRequired) Invoke(new Action(() => Hide()));
+            Hide();
+        } 
     }
 }

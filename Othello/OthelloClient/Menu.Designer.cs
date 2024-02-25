@@ -1,6 +1,6 @@
 ﻿namespace Othello
 {
-    partial class Menu
+    partial class OthelloMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -121,7 +121,7 @@
             this.ComingSoonLabel.TabIndex = 7;
             this.ComingSoonLabel.Text = "Coming soon...";
             // 
-            // Menu
+            // OthelloMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,8 +134,9 @@
             this.Controls.Add(this.LoggedInCheckBox);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.label1);
-            this.Name = "Menu";
+            this.Name = "OthelloMenu";
             this.Text = "Menu";
+            this.Enter += new System.EventHandler(this.OthelloMenu_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();
 

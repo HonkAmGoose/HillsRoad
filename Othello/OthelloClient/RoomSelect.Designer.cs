@@ -59,6 +59,7 @@
             this.JoinButton.TabIndex = 2;
             this.JoinButton.Text = "Join";
             this.JoinButton.UseVisualStyleBackColor = true;
+            this.JoinButton.Click += new System.EventHandler(this.JoinButton_Click);
             // 
             // label2
             // 

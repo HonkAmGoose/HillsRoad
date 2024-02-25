@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Transports;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,31 +11,65 @@ namespace Othello
     /// </summary>
     public partial class Game : Form
     {
-        Menu parent;
+        OthelloMenu parentMenu;
         Graphics DisplayGraphics;
-        OfflineBoard GameBoard;
+        Board GameBoard;
+
+        bool online = false;
         int NoValidMovesCounter; // Used to end the game when both players have no valid moves
         int BlackWins = 0, WhiteWins = 0;
 
+        bool opponentConnected;
+        char player;
+
+        HubConnection connection;
+        IHubProxy hubProxy;
+
         SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Gold) };
 
-        public Game()
+        public Game(OthelloMenu parentMenu, bool online)
         {
             InitializeComponent();
+            this.parentMenu = parentMenu;
+            this.online = online;
+
+            if (online)
+            {
+                BonusComboBox.Visible = false;
+                StatusLabel.Visible = true;
+                Text += " - " + (_ = parentMenu.roomID).ToString() + parentMenu.password;
+
+                connection = new HubConnection("http://localhost:9082");
+                hubProxy = connection.CreateHubProxy("MyHub");
+                hubProxy.On<bool, char>("ReturnGameInfo", (opponentConnected, player) => GetReturnedGameInfo(opponentConnected, player));
+                //hubProxy.On("ReturnJoined", () => );
+                //hubProxy.On("ReturnDenied", () => );
+            }
         }
 
-        public Game(Menu parent)
+        private void GetReturnedGameInfo(bool opponentConnected, char player)
         {
-            InitializeComponent();
-            this.parent = parent;
+            this.opponentConnected = opponentConnected;
+            this.player = player;
+
+            string oc = opponentConnected ? "" : "not ";
+
+            MessageBox.Show($"Opponent is {oc}connected, you are player {player}");
         }
 
-        private void GUI_Load(object sender, EventArgs e)
+        private async void GUI_Load(object sender, EventArgs e)
         {
             DisplayGraphics = DisplayPanel.CreateGraphics(); // Get the graphics object to be referenced
             DisplayGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             BonusComboBox.SelectedIndex = 0; // Set combo box to default
+
+            if (online)
+            {
+                await connection.Start(new LongPollingTransport());
+                _ = hubProxy.Invoke("Hello", parentMenu.ID);
+                _ = hubProxy.Invoke("GetGameInfo", parentMenu.ID);
+            }
             NewGame();
             Refresh();
         }
@@ -111,13 +147,19 @@ namespace Othello
         {
             if (BonusComboBox.SelectedIndex == 0) // No bonus
             {
-                GameBoard = new OfflineBoard();
+                if (online) GameBoard = new OnlineBoard();
+                else GameBoard = new OfflineBoard();
             }
             else
             {
                 int bonus = BonusComboBox.SelectedIndex - 1;
-                GameBoard = new OfflineBoard(bonus / 4 == 0 ? 'B' : 'W', bonus % 4 + 1); // Black bonuses are first 4 and white the second 4
+                char player = bonus / 4 == 0 ? 'B' : 'W';
+                bonus = bonus % 4 + 1;
+
+                if (online) GameBoard = new OnlineBoard(player, bonus);
+                else GameBoard = new OfflineBoard(player, bonus); // Black bonuses are first 4 and white the second 4
             }
+
             NoValidMovesCounter = 0;
             StartTurn();
             DisplayPanel.Enabled = true;
@@ -249,9 +291,20 @@ namespace Othello
             DisplayGraphics.FillEllipse(brush, x * 50 + 12, y * 50 + 12, 30, 30);
         }
 
-        private void Game_FormClosed(object sender, FormClosedEventArgs e)
+        private async void Game_FormClosed(object sender, FormClosedEventArgs e)
         {
-            parent.Show();
+            using (var connection = new HubConnection(Program.hubConnection))
+            {
+                var hubProxy = connection.CreateHubProxy("MyHub");
+
+                // Start listening
+                await connection.Start(new LongPollingTransport());
+
+                // Send a message to server / other clients
+                _ = hubProxy.Invoke("Leaving", parentMenu.ID);
+            }
+
+            parentMenu.Show();
         }
     }
 }

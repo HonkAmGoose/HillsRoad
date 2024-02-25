@@ -1,1 +1,1 @@
-DELETE FROM Room WHERE RoomID=13; 
+DELETE FROM Room; 

@@ -5,7 +5,7 @@ namespace Othello
 {
     class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             const string connectionString = "Server=localhost; Database=OTHELLO_DB; Trusted_Connection=True;";
 
@@ -15,10 +15,7 @@ namespace Othello
             {
                 var hubProxy = connection.CreateHubProxy("MyHub");
 
-                hubProxy.On<string>("selectAll", (test) =>
-                {
-                    Console.WriteLine(GetUserNames(connectionString));
-                });
+                hubProxy.On<string>("selectAll", (test) => Console.WriteLine(GetUserNames(connectionString)));
             }
         }
 

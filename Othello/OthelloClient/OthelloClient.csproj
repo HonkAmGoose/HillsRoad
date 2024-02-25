@@ -100,18 +100,13 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
+    <Compile Include="OnlineBoard.cs" />
     <Compile Include="OfflineBoard.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OfflineGame.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OfflineGame.Designer.cs">
-      <DependentUpon>OfflineGame.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

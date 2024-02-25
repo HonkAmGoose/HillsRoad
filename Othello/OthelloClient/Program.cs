@@ -23,12 +23,12 @@ namespace Othello
             //thread.TrySetApartmentState(ApartmentState.STA);
             //thread.Start();
 
-            Application.Run(new Menu());
+            Application.Run(new OthelloMenu());
 
         }
         private static void ThreadStart()
         {
-            Application.Run(new Menu());
+            Application.Run(new OthelloMenu());
         }
     }
 }

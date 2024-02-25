@@ -1,0 +1,6 @@
+CREATE TABLE dbo.Connection
+(
+	RoomID INT NOT NULL,
+	UserID INT NOT NULL,
+	PRIMARY KEY (RoomID, UserID),
+)

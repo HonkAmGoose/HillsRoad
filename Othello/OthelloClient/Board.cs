@@ -12,11 +12,16 @@ namespace Othello
         /// Array of tiles representing the board
         /// </summary>
         public Tile[,] Tiles { get; protected set; }
-
+        
         public char PlayerTurn { get; protected set; }
+        public int[] CounterNumbers { get; protected set; }
 
         public List<Coordinate> ValidMoves { get; protected set; }
         public List<Coordinate> TurningTiles { get; protected set; }
+
+        public bool IsMoveProposed { get; protected set; }
+        public Coordinate ProposedMove { get; protected set; }
+
 
         /// <summary>
         /// Creates board with empty tiles
@@ -207,5 +212,22 @@ namespace Othello
                 }
             }
         }
+
+        protected abstract void Setup();
+        public abstract void Reset();
+        public abstract void Reset(char bonusPlayer, int bonusNumber);
+
+        public abstract void HintMoves();
+        public abstract void UnhintMoves();
+
+        protected abstract void DisplayTurners();
+        protected abstract void UndisplayTurners();
+        protected abstract void TurnTurners();
+        public abstract void ChangeTurners(char player);
+
+        public abstract void ProposeMove(Coordinate location);
+        public abstract void CancelMove();
+        public abstract void ConfirmMove();
+
     }
 }

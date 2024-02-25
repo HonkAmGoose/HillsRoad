@@ -40,6 +40,7 @@
             this.WhiteCounterLabel = new System.Windows.Forms.Label();
             this.WhiteWinLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.StatusLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NewGameButton
@@ -168,11 +169,22 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "W:";
             // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Location = new System.Drawing.Point(332, 425);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(73, 26);
+            this.StatusLabel.TabIndex = 12;
+            this.StatusLabel.Text = "You are black\r\nNo opponent";
+            this.StatusLabel.Visible = false;
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(424, 521);
+            this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.WhiteWinLabel);
             this.Controls.Add(this.WhiteCounterLabel);
@@ -208,6 +220,7 @@
         private System.Windows.Forms.Label WhiteCounterLabel;
         private System.Windows.Forms.Label WhiteWinLabel;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label StatusLabel;
     }
 }
 
