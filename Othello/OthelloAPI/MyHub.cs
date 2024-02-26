@@ -59,13 +59,14 @@ namespace Othello
                 bool opponentConnected;
                 char player;
 
-                if (gameID == -1)
+                if (gameID == -1) // Create new game
                 {
                     gameID = OthelloDB.QueryIntScalar
                         (
                             $"INSERT INTO Game_Basic(NumberOfTurns, BlackConnection) VALUES (0, '{ID}'); " +
                             $"SELECT TOP 1 GameID FROM Game_Basic ORDER BY GameID DESC;"
                         );
+                    OthelloDB.QueryNoResult($"UPDATE Room SET CurrentGame = {gameID} WHERE RoomID = {roomID}");
                     player = 'B';
                     opponentConnected = false;
                 }
@@ -109,6 +110,11 @@ namespace Othello
 
                 Clients.Caller.ReturnGameInfo(opponentConnected, player);
             }
+        }
+
+        public void MakeMove(string move)
+        {
+            // ------------------------------------------------------------------------------------------------------------------------------------------------------ TODO
         }
 
         public void Hello(string ID)

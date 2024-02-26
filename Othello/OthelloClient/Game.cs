@@ -42,6 +42,9 @@ namespace Othello
                 connection = new HubConnection("http://localhost:9082");
                 hubProxy = connection.CreateHubProxy("MyHub");
                 hubProxy.On<bool, char>("ReturnGameInfo", (opponentConnected, player) => GetReturnedGameInfo(opponentConnected, player));
+                // Opponent connects
+                // Opponent makes a move
+                // -------------------------------------------------------------------------------------------------------------------------------------------- TODO
                 //hubProxy.On("ReturnJoined", () => );
                 //hubProxy.On("ReturnDenied", () => );
             }
@@ -100,36 +103,53 @@ namespace Othello
 
         private void EndTurnButton_Click(object sender, EventArgs e)
         {
-            EndTurnButton.Enabled = false; // Prevent spam of the button
-            if (GameBoard.IsMoveProposed) // Only confirm move if one has been proposed
+            if (online && GameBoard.PlayerTurn != player)
             {
-                GameBoard.ConfirmMove();
-                StartTurn();
-                Refresh();
+                string addition = (opponentConnected) ? "are" : "aren't";
+                MessageBox.Show($"Opponent's turn - they {addition} connected");
             }
-            EndTurnButton.Enabled = true;
+            else
+            {
+                EndTurnButton.Enabled = false; // Prevent spam of the button
+                if (GameBoard.IsMoveProposed) // Only confirm move if one has been proposed
+                {
+                    GameBoard.ConfirmMove();
+                    // Send move to opponent ----------------------------------------------------------------------------------------------------------------------- TODO
+                    StartTurn();
+                    Refresh();
+                }
+                EndTurnButton.Enabled = true;
+            }
         }
 
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            if (GameBoard.IsMoveProposed)
+            if (online && GameBoard.PlayerTurn != player)
             {
-                GameBoard.CancelMove();
+                string addition = (opponentConnected) ? "are" : "aren't";
+                MessageBox.Show($"Opponent's turn - they {addition} connected");
             }
-
-            int x, y;
-            Coordinate location;
-            if (e.Location.X % 50 > 5 && e.Location.Y % 50 > 5) // Location is a green square and not a black line
+            else
             {
-                // Convert coordinate to 2d index
-                x = e.Location.X / 50; 
-                y = e.Location.Y / 50;
-                location = new Coordinate(x, y);
-                if (GameBoard.SearchValidMoves(location))
+                if (GameBoard.IsMoveProposed)
                 {
-                    GameBoard.ProposeMove(location);
+                    GameBoard.CancelMove();
                 }
-                Refresh();
+
+                int x, y;
+                Coordinate location;
+                if (e.Location.X % 50 > 5 && e.Location.Y % 50 > 5) // Location is a green square and not a black line
+                {
+                    // Convert coordinate to 2d index
+                    x = e.Location.X / 50;
+                    y = e.Location.Y / 50;
+                    location = new Coordinate(x, y);
+                    if (GameBoard.SearchValidMoves(location))
+                    {
+                        GameBoard.ProposeMove(location);
+                    }
+                    Refresh();
+                }
             }
         }
 
@@ -161,7 +181,6 @@ namespace Othello
             }
 
             NoValidMovesCounter = 0;
-            StartTurn();
             DisplayPanel.Enabled = true;
             HintButton.Enabled = true;
             EndTurnButton.Enabled = true;

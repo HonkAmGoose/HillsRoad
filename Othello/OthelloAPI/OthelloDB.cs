@@ -44,7 +44,7 @@ namespace Othello
 
                 var result = cmd.ExecuteScalar();
 
-                if (result == null | result.ToString() == "") return null;
+                if (result == null || result.ToString() == "") return null;
                 else return result.ToString();
             }
         }

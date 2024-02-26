@@ -8,4 +8,7 @@ SELECT * FROM Game_Basic;
 --SELECT COUNT(*) FROM Connection_Basic WHERE RoomID = 28;
 --SELECT CurrentGame FROM Room WHERE RoomID = 28;
 --SELECT COUNT(BlackConnection) FROM Game_Basic WHERE GameID = ;
-INSERT INTO Game_Basic(NumberOfTurns, BlackConnection) VALUES (0, '');
+--INSERT INTO Game_Basic(NumberOfTurns, BlackConnection) VALUES (0, '');
+--SELECT TOP 1 GameID FROM Game_Basic ORDER BY GameID DESC;
+--UPDATE Game_Basic SET WhiteConnection = 'hi' WHERE GameID = 1;
+--UPDATE Room SET CurrentGame = 2;
