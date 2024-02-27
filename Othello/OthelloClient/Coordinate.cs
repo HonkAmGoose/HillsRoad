@@ -25,6 +25,18 @@ namespace Othello
             }
         }
 
+        public Coordinate(string coord)
+        {
+            // Format is AD or ADD where A is an alpha and D is a digit
+            if ((coord.Length == 2) || (coord.Length == 3  && char.IsNumber(coord[2]))
+                && char.IsLetter(coord[0]) 
+                && char.IsNumber(coord[1])
+                )
+            {
+
+            }
+        }
+
         public override string ToString()
         {
             return $"({x},{y})";

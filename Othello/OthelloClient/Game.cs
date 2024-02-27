@@ -43,7 +43,10 @@ namespace Othello
                 hubProxy = connection.CreateHubProxy("MyHub");
                 hubProxy.On<bool, char>("ReturnGameInfo", (opponentConnected, player) => GetReturnedGameInfo(opponentConnected, player));
                 // Opponent connects
+                hubProxy.On("OpponentJoin", () => opponentConnected = true);
+                hubProxy.On("OpponentLeave", () => opponentConnected = false);
                 // Opponent makes a move
+                hubProxy.On<string>("OpponentMove", (move) => )
                 // -------------------------------------------------------------------------------------------------------------------------------------------- TODO
                 //hubProxy.On("ReturnJoined", () => );
                 //hubProxy.On("ReturnDenied", () => );
