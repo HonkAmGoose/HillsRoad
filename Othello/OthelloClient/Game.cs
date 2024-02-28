@@ -42,14 +42,33 @@ namespace Othello
                 connection = new HubConnection("http://localhost:9082");
                 hubProxy = connection.CreateHubProxy("MyHub");
                 hubProxy.On<bool, char>("ReturnGameInfo", (opponentConnected, player) => GetReturnedGameInfo(opponentConnected, player));
-                // Opponent connects
-                hubProxy.On("OpponentJoin", () => opponentConnected = true);
-                hubProxy.On("OpponentLeave", () => opponentConnected = false);
-                // Opponent makes a move
-                hubProxy.On<string>("OpponentMove", (move) => )
+                hubProxy.On("OpponentJoin", () => UpdateOpponentStatus(true));
+                hubProxy.On("OpponentLeave", () => UpdateOpponentStatus(false));
+                hubProxy.On<string>("OpponentMove", (move) => MakeOpponentMove(move));
                 // -------------------------------------------------------------------------------------------------------------------------------------------- TODO
                 //hubProxy.On("ReturnJoined", () => );
                 //hubProxy.On("ReturnDenied", () => );
+            }
+        }
+
+        private void UpdateOpponentStatus(bool joinedOrNot)
+        {
+            opponentConnected = joinedOrNot;
+            string prefix = joinedOrNot ? "" : "dis";
+            MessageBox.Show($"Opponent {prefix}connected");
+        }
+
+        private void MakeOpponentMove(string move)
+        {
+            Coordinate coord = new Coordinate(move);
+            if (GameBoard.ProposeMove(coord))
+            {
+                GameBoard.ConfirmMove();
+            }
+            else
+            {
+                MessageBox.Show("Opponent made an invalid move - exiting");
+                Close();
             }
         }
 
@@ -104,9 +123,9 @@ namespace Othello
             Refresh();
         }
 
-        private void EndTurnButton_Click(object sender, EventArgs e)
+        private async void EndTurnButton_Click(object sender, EventArgs e)
         {
-            if (online && GameBoard.PlayerTurn != player)
+            if (online && (!opponentConnected || GameBoard.PlayerTurn != player))
             {
                 string addition = (opponentConnected) ? "are" : "aren't";
                 MessageBox.Show($"Opponent's turn - they {addition} connected");
@@ -117,7 +136,12 @@ namespace Othello
                 if (GameBoard.IsMoveProposed) // Only confirm move if one has been proposed
                 {
                     GameBoard.ConfirmMove();
-                    // Send move to opponent ----------------------------------------------------------------------------------------------------------------------- TODO
+                    if (online)
+                    {
+                        await connection.Start(new LongPollingTransport());
+                        _ = hubProxy.Invoke("Hello", parentMenu.ID);
+                        _ = hubProxy.Invoke("MakeMove", parentMenu.ID, player, GameBoard.ProposedMove.ToString());
+                    }
                     StartTurn();
                     Refresh();
                 }
@@ -147,10 +171,7 @@ namespace Othello
                     x = e.Location.X / 50;
                     y = e.Location.Y / 50;
                     location = new Coordinate(x, y);
-                    if (GameBoard.SearchValidMoves(location))
-                    {
-                        GameBoard.ProposeMove(location);
-                    }
+                    GameBoard.ProposeMove(location);
                     Refresh();
                 }
             }

@@ -19,9 +19,9 @@ namespace Othello
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Uncomment to start an extra version
-            //var thread = new Thread(ThreadStart);
-            //thread.TrySetApartmentState(ApartmentState.STA);
-            //thread.Start();
+            var thread = new Thread(ThreadStart);
+            thread.TrySetApartmentState(ApartmentState.STA);
+            thread.Start();
 
             Application.Run(new OthelloMenu());
 

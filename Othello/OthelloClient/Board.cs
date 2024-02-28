@@ -225,7 +225,7 @@ namespace Othello
         protected abstract void TurnTurners();
         public abstract void ChangeTurners(char player);
 
-        public abstract void ProposeMove(Coordinate location);
+        public abstract bool ProposeMove(Coordinate location);
         public abstract void CancelMove();
         public abstract void ConfirmMove();
 

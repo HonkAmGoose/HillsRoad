@@ -11,7 +11,7 @@ namespace Othello
 {
     public class MyHub : Hub
     {
-        public static Dictionary<string, string> connections = new Dictionary<string, string>(); // Connects key (OthelloMenu Program.ID) with value (SignalR ConnectionID)
+        public static Dictionary<string, string> connectionsDict = new Dictionary<string, string>(); // Connects key (OthelloMenu Program.ID) with value (SignalR ConnectionID)
 
         public void CreateRoom()
         {
@@ -73,7 +73,7 @@ namespace Othello
                 else
                 {
                     string bc = OthelloDB.QueryStrScalar($"SELECT BlackConnection FROM Game_Basic WHERE GameID = {gameID}");
-                    string wc = OthelloDB.QueryStrScalar($"SELECT WhiteConnection FROM Game_Basic WHERE GameID = {roomID}");
+                    string wc = OthelloDB.QueryStrScalar($"SELECT WhiteConnection FROM Game_Basic WHERE GameID = {gameID}");
                     
                     if (bc == wc)
                     {
@@ -112,16 +112,19 @@ namespace Othello
             }
         }
 
-        public void MakeMove(string move)
+        public void MakeMove(string ID, char player, string move)
         {
-            // ------------------------------------------------------------------------------------------------------------------------------------------------------ TODO
+            if (Guid.TryParse(ID, out _))
+            {
+                Clients.Client(connectionsDict[GetOpponentID(ID, player)]).OpponentMove(move);
+            }
         }
 
         public void Hello(string ID)
         {
             if (Guid.TryParse(ID, out _))
             {
-                connections[ID] = Context.ConnectionId;
+                connectionsDict[ID] = Context.ConnectionId;
             }
         }
 
@@ -144,6 +147,15 @@ namespace Othello
         {
             Console.WriteLine($"Client disconnected: {Context.ConnectionId}");
             return base.OnDisconnected(stopCalled);
+        }
+
+        private string GetOpponentID(string ID, char player)
+        {
+            int roomID = OthelloDB.QueryIntScalar($"SELECT RoomID FROM Connection_Basic WHERE ConnectionID = '{ID}'"); // I know this could be insecure DEFINITELY ID - fix
+            int gameID = OthelloDB.QueryIntScalar($"SELECT CurrentGame FROM Room WHERE RoomID = {roomID}");
+
+            string prefix = (player == 'B') ? "Black" : (player == 'W') ? "White" : throw new ArgumentException("Player should be 'B' or 'W'");
+            return OthelloDB.QueryStrScalar($"SELECT {prefix}Connection FROM Game_Basic WHERE GameID = {gameID}");
         }
     }
 }

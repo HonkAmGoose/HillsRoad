@@ -1,3 +1,5 @@
+use OTHELLO_DB;
+
 SELECT * FROM Room;
 SELECT * FROM Connection_Basic;
 SELECT * FROM Game_Basic;

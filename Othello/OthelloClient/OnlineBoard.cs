@@ -171,7 +171,7 @@ namespace Othello
         /// </summary>
         /// <param name="location">Proposed location</param>
         /// <exception cref="ArgumentException">If proposed location is not a valid move</exception>
-        public override void ProposeMove(Coordinate location)
+        public override bool ProposeMove(Coordinate location)
         {
             if (SearchValidMoves(location))
             {
@@ -182,10 +182,11 @@ namespace Othello
                 DisplayTurners();
                 Tiles[location.x, location.y].Status = 'P';
                 Tiles[location.x, location.y].CounterColour = PlayerTurn;
+                return true;
             }
             else
             {
-                throw new ArgumentException("Location must be a valid move");
+                return false;
             }
         }
 
