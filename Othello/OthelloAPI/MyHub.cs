@@ -11,8 +11,14 @@ namespace Othello
 {
     public class MyHub : Hub
     {
-        public static Dictionary<string, string> connectionsDict = new Dictionary<string, string>(); // Connects key (OthelloMenu Program.ID) with value (SignalR ConnectionID)
+        /// <summary>
+        /// Connects key (OthelloMenu Program.ID) with value (SignalR ConnectionID)
+        /// </summary>
+        public static Dictionary<string, string> connectionsDict = new Dictionary<string, string>();
 
+        /// <summary>
+        /// Allows a client wants to create a new room, "returns" roomID and password
+        /// </summary>
         public void CreateRoom()
         {
             Console.WriteLine("debug start CreateRoom");
@@ -31,7 +37,13 @@ namespace Othello
             Clients.Caller.ReturnRoom(roomID, password);
         }
 
-        public void JoinRoom(int roomID, string password, string ID)
+        /// <summary>
+        /// Allows a client to join an existing room, "returns" whether or not it was successful
+        /// </summary>
+        /// <param name="roomID">ID of the room to join</param>
+        /// <param name="password">password of the room to join</param>
+        /// <param name="ID">ID of the client</param>
+        public void JoinRoom(string ID, int roomID, string password)
         {
             if (
                 password.Length == 5
@@ -48,8 +60,14 @@ namespace Othello
             {
                 Clients.Caller.ReturnDenied();
             }
+
         }
 
+        /// <summary>
+        /// Gets information about the currently playing game for a client
+        /// </summary>
+        /// <param name="ID">ID of the client</param>
+        /// <exception cref="Exception">Should not be thrown in theory if the db stays ok</exception>
         public void GetGameInfo(string ID)
         {
             if (Guid.TryParse(ID, out _))
@@ -79,19 +97,6 @@ namespace Othello
                     {
                         throw new Exception("Help");
                     }
-                    else if (bc == null)
-                    {
-                        if (wc == null)
-                        {
-                            OthelloDB.QueryNoResult($"UPDATE Game_Basic SET BlackConnection = '{ID}' WHERE GameID = 1");
-                            player = 'B';
-                            opponentConnected = false;
-                        }
-                        else
-                        {
-                            throw new Exception("Help");
-                        }
-                    }
                     else if (bc == ID)
                     {
                         player = 'B';
@@ -101,7 +106,19 @@ namespace Othello
                     {
                         player = 'W';
                         opponentConnected = bc != null;
-                    }    
+                    }
+                    else if (bc == null)
+                    {
+                        OthelloDB.QueryNoResult($"UPDATE Game_Basic SET BlackConnection = '{ID}' WHERE GameID = {gameID}");
+                        player = 'B';
+                        opponentConnected = false;
+                    }
+                    else if (wc == null)
+                    {
+                        OthelloDB.QueryNoResult($"UPDATE Game_Basic SET WhiteConnection = '{ID}' WHERE GameID = {gameID}");
+                        player = 'W';
+                        opponentConnected = false;
+                    }
                     else
                     {
                         throw new Exception("Help");
@@ -112,6 +129,12 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Allows a client to send a move to the opponent
+        /// </summary>
+        /// <param name="ID">ID of the client</param>
+        /// <param name="player">'B' or 'W' representing which player the client is</param>
+        /// <param name="move">The move to send</param>
         public void MakeMove(string ID, char player, string move)
         {
             if (Guid.TryParse(ID, out _))
@@ -120,6 +143,10 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Used to make sure that the connectionsDict is up-to-date
+        /// </summary>
+        /// <param name="ID">ID of the client</param>
         public void Hello(string ID)
         {
             if (Guid.TryParse(ID, out _))
@@ -128,6 +155,10 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Allows a client to exit gracefully
+        /// </summary>
+        /// <param name="ID">ID of the client</param>
         public void Leaving(string ID)
         {
             if (Guid.TryParse(ID, out _)) 
@@ -137,18 +168,13 @@ namespace Othello
             }
         }
 
-        public override Task OnConnected()
-        {
-            Console.WriteLine($"Client connected: {Context.ConnectionId}");
-            return base.OnConnected();
-        }
-
-        public override Task OnDisconnected(bool stopCalled)
-        {
-            Console.WriteLine($"Client disconnected: {Context.ConnectionId}");
-            return base.OnDisconnected(stopCalled);
-        }
-
+        /// <summary>
+        /// Used in above methods to get an opponent's ID
+        /// </summary>
+        /// <param name="ID">Client ID</param>
+        /// <param name="player">'B' or 'W' representing which player the client is</param>
+        /// <returns>Opponent's client ID</returns>
+        /// <exception cref="ArgumentException">If player isn't valid</exception>
         private string GetOpponentID(string ID, char player)
         {
             int roomID = OthelloDB.QueryIntScalar($"SELECT RoomID FROM Connection_Basic WHERE ConnectionID = '{ID}'"); // I know this could be insecure DEFINITELY ID - fix

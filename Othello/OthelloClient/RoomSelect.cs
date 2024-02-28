@@ -81,7 +81,7 @@ namespace Othello
             }
 
             await connection.Start(new LongPollingTransport());
-            _ = hubProxy.Invoke("JoinRoom", ParentMenu.roomID, ParentMenu.password, ParentMenu.ID);
+            _ = hubProxy.Invoke("JoinRoom", ParentMenu.ID, ParentMenu.roomID, ParentMenu.password);
         }
 
         private async void GetReturnedRoom(int roomID, string password)
@@ -92,12 +92,11 @@ namespace Othello
             MessageBox.Show($"Room successfully made - your room code is {roomID.ToString() + password} (no spaces and capitalisation doesn't matter)");
 
             await connection.Start(new LongPollingTransport());
-            _ = hubProxy.Invoke("JoinRoom", ParentMenu.roomID, ParentMenu.password, ParentMenu.ID);
+            _ = hubProxy.Invoke("JoinRoom", ParentMenu.ID, ParentMenu.roomID, ParentMenu.password);
         }
 
         private void JoinedRoomSuccess()
         {
-            
             if (InvokeRequired)
             {
                 Invoke(new Action(() => ParentMenu.NewOnlineGame(ParentMenu.roomID, ParentMenu.password)));
@@ -112,7 +111,7 @@ namespace Othello
 
         private void JoinedRoomFailed()
         {
-
+            MessageBox.Show("Invalid details");
         }
     }
 }

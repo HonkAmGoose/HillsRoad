@@ -7,6 +7,9 @@ using Owin;
 
 namespace Othello // THIS IS ACTUALLY THE SERVER
 {
+    /// <summary>
+    /// Server program which deals with SignalR connections to clients and database calls
+    /// </summary>
     public class Program
     {
         private const string Url = "http://localhost:9082";
@@ -17,32 +20,21 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
         {
             Console.WriteLine("Server started");
 
-            // Housekeeping
             DeleteOldRoomsAndConns();
 
-            // Start server
+            StartServer();
+        }
+
+        private static void StartServer()
+        {
             using (WebApp.Start(Url, Configuration))
             {
-                string message;
                 bool dc = false;
                 var context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
 
                 Console.WriteLine($"Server running on {Url}");
 
-                do
-                {
-                    message = Console.ReadLine();
-                    if (message.ToLower() == "q")
-                    {
-                        dc = true;
-                        message = "--- SERVER SHUTTING DOWN ---";
-                    }
-
-                    // Send message to all connected clients
-                    context.Clients.All.addMessage("Server", message);
-                } while (dc == false);
-
-                Console.ReadLine();
+                while (true) ;
             }
         }
 

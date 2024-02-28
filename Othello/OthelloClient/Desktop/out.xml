@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Othello</name>
+    </assembly>
+    <members>
+        <member name="T:Othello.Board">
+            <summary>
+            Class to store the board currently in play
+            </summary>
+        </member>
+        <member name="P:Othello.Board.Tiles">
+            <summary>
+            Array of tiles representing the board
+            </summary>
+        </member>
+        <member name="M:Othello.Board.#ctor">
+            <summary>
+            Creates board with empty tiles
+            </summary>
+        </member>
+        <member name="M:Othello.Board.StartTurn">
+            <summary>
+            Changes player and finds valid moves
+            </summary>
+            <returns>Whether there are valid moves</returns>
+        </member>
+        <member name="M:Othello.Board.FindValidMoves">
+            <summary>
+            Looks for valid moves on the board for the current player
+            </summary>
+            <returns>Whether there are any</returns>
+        </member>
+        <member name="M:Othello.Board.SearchValidMoves(Othello.Coordinate)">
+            <summary>
+            Searches for a location in the list of valid moves - must have run FindValidMoves beforehand
+            </summary>
+            <param name="Location">Location to check</param>
+            <returns>Whether it is a valid move</returns>
+        </member>
+        <member name="M:Othello.Board.IsValidMove(Othello.Coordinate)">
+            <summary>
+            Used by FindValidMoves to check a single location to see if it is a valid move
+            </summary>
+            <param name="proposedLocation">Location to check</param>
+            <returns>Whether it is a valid move</returns>
+        </member>
+        <member name="M:Othello.Board.AssignTurningTiles(Othello.Coordinate)">
+            <summary>
+            Checks for tiles that turn in a single location and assignes them to TurningTiles
+            </summary>
+            <param name="proposedLocation">Location to check</param>
+        </member>
+        <member name="T:Othello.Coordinate">
+            <summary>
+            Coordinate class to store locations on the board - enforces maximum values for the size of the board
+            </summary>
+        </member>
+        <member name="M:Othello.Coordinate.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Makes a coordinate from two ints
+            </summary>
+            <param name="x">X-coordinate</param>
+            <param name="y">Y-coordinate</param>
+        </member>
+        <member name="M:Othello.Coordinate.#ctor(System.String)">
+            <summary>
+            Makes a coordinate from a string representation
+            </summary>
+            <param name="coord">String representation in format [1 letter][1-2 numbers]</param>
+            <exception cref="T:System.ArgumentException">If input string is not in correct format</exception>
+        </member>
+        <member name="M:Othello.Coordinate.Construct(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Othello.Game">
+            <summary>
+            The GUI form
+            </summary>
+        </member>
+        <member name="M:Othello.Game.NewGame">
+            <summary>
+            Method to create a new game by generating a new game board and allowing input
+            </summary>
+        </member>
+        <member name="M:Othello.Game.StartTurn">
+            <summary>
+            Method used at the start of the turn to check for the end of the game
+            </summary>
+        </member>
+        <member name="M:Othello.Game.EndGame">
+            <summary>
+            Method to end game by showing a messagebox and disabling input
+            </summary>
+        </member>
+        <member name="M:Othello.Game.UpdateCounterNumbers">
+            <summary>
+            Method to update the counter numbers
+            </summary>
+        </member>
+        <member name="M:Othello.Game.DrawBackground">
+            <summary>
+            Method to draw the background gameboard
+            </summary>
+        </member>
+        <member name="M:Othello.Game.DrawPieces">
+            <summary>
+            Method to draw the pieces onto the board
+            </summary>
+        </member>
+        <member name="F:Othello.Game.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Othello.Game.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Othello.Game.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.#ctor">
+            <summary>
+            Creates a board and calls setup
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.#ctor(System.Char,System.Int32)">
+            <summary>
+            Creates a board with bonus tiles and calls setup
+            </summary>
+            <param name="bonusPlayer">Player to give the bonus</param>
+            <param name="bonusNumber">Number of bonus tiles</param>
+            <exception cref="T:System.ArgumentException">Thrown when arguments are invalid</exception>
+        </member>
+        <member name="M:Othello.OnlineBoard.Setup">
+            <summary>
+            Method to setup the beginning pieces in the centre of the board
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.Reset">
+            <summary>
+            Method to reset the board to initial conditions
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.Reset(System.Char,System.Int32)">
+            <summary>
+            Method to reset the board to initial conditions with bonus tiles
+            </summary>
+            <param name="bonusPlayer">Player to give the bonus</param>
+            <param name="bonusNumber">Number of bonus tiles</param>
+            <exception cref="T:System.ArgumentException">Thrown when arguments are invalid</exception>
+        </member>
+        <member name="M:Othello.OnlineBoard.HintMoves">
+            <summary>
+            Changes valid moves to 'H'inted status
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.UnhintMoves">
+            <summary>
+            Changes valid moves back to 'N'one status
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.DisplayTurners">
+            <summary>
+            Changes turning tiles to 'T'urning status
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.UndisplayTurners">
+            <summary>
+            Changes turning tiles back to 'N'one status
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.TurnTurners">
+            <summary>
+            Turns tiles for the current player
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.ChangeTurners(System.Char)">
+            <summary>
+            Used by UndisplayTurners and TurnTurners to change all turning tiles to a certain player with 'C'onfirmed status
+            </summary>
+            <param name="player">Which player to change the TurningTiles to</param>
+        </member>
+        <member name="M:Othello.OnlineBoard.ProposeMove(Othello.Coordinate)">
+            <summary>
+            Change statuses of tiles for proposing a move
+            </summary>
+            <param name="location">Proposed location</param>
+            <exception cref="T:System.ArgumentException">If proposed location is not a valid move</exception>
+        </member>
+        <member name="M:Othello.OnlineBoard.CancelMove">
+            <summary>
+            Change statuses of tiles for cancelling a proposed move
+            </summary>
+        </member>
+        <member name="M:Othello.OnlineBoard.ConfirmMove">
+            <summary>
+            Change statuses of tiles for confirming a proposed move
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.#ctor">
+            <summary>
+            Creates a board and calls setup
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.#ctor(System.Char,System.Int32)">
+            <summary>
+            Creates a board with bonus tiles and calls setup
+            </summary>
+            <param name="bonusPlayer">Player to give the bonus</param>
+            <param name="bonusNumber">Number of bonus tiles</param>
+            <exception cref="T:System.ArgumentException">Thrown when arguments are invalid</exception>
+        </member>
+        <member name="M:Othello.OfflineBoard.Setup">
+            <summary>
+            Method to setup the beginning pieces in the centre of the board
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.Reset">
+            <summary>
+            Method to reset the board to initial conditions
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.Reset(System.Char,System.Int32)">
+            <summary>
+            Method to reset the board to initial conditions with bonus tiles
+            </summary>
+            <param name="bonusPlayer">Player to give the bonus</param>
+            <param name="bonusNumber">Number of bonus tiles</param>
+            <exception cref="T:System.ArgumentException">Thrown when arguments are invalid</exception>
+        </member>
+        <member name="M:Othello.OfflineBoard.HintMoves">
+            <summary>
+            Changes valid moves to 'H'inted status
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.UnhintMoves">
+            <summary>
+            Changes valid moves back to 'N'one status
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.DisplayTurners">
+            <summary>
+            Changes turning tiles to 'T'urning status
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.UndisplayTurners">
+            <summary>
+            Changes turning tiles back to 'N'one status
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.TurnTurners">
+            <summary>
+            Turns tiles for the current player
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.ChangeTurners(System.Char)">
+            <summary>
+            Used by UndisplayTurners and TurnTurners to change all turning tiles to a certain player with 'C'onfirmed status
+            </summary>
+            <param name="player">Which player to change the TurningTiles to</param>
+        </member>
+        <member name="M:Othello.OfflineBoard.ProposeMove(Othello.Coordinate)">
+            <summary>
+            Change statuses of tiles for proposing a move
+            </summary>
+            <param name="location">Proposed location</param>
+            <exception cref="T:System.ArgumentException">If proposed location is not a valid move</exception>
+        </member>
+        <member name="M:Othello.OfflineBoard.CancelMove">
+            <summary>
+            Change statuses of tiles for cancelling a proposed move
+            </summary>
+        </member>
+        <member name="M:Othello.OfflineBoard.ConfirmMove">
+            <summary>
+            Change statuses of tiles for confirming a proposed move
+            </summary>
+        </member>
+        <member name="F:Othello.OthelloMenu.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Othello.OthelloMenu.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Othello.OthelloMenu.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Othello.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="F:Othello.RoomSelect.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Othello.RoomSelect.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Othello.RoomSelect.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Othello.Test.Main(System.String[])">
+            <summary>
+            Testing Main method
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Othello.Test.MultipleTestRun(System.Action)">
+            <summary>
+            Method to test multiple runs of the same method and take an average of all but the first one
+            </summary>
+            <param name="method"></param>
+        </member>
+        <member name="M:Othello.Test.SingleTestRun(System.Action)">
+            <summary>
+            Function to run a single test and return the time that it took
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Othello.Tile.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Used to create blank/empty tiles
+            </summary>
+            <param name="x">x coordinate</param>
+            <param name="y">y coordinate</param>
+        </member>
+        <member name="M:Othello.Tile.#ctor(System.Int32,System.Int32,System.Char)">
+            <summary>
+            Used for tiles that start with a certain colour
+            </summary>
+            <param name="x">x coordinate</param>
+            <param name="y">y coordinate</param>
+            <param name="player">player colour</param>
+        </member>
+        <member name="T:Othello.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Othello.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Othello.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

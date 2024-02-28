@@ -22,6 +22,11 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public static int QueryIntScalar(string query)
         {
             using (var database = new SqlConnection(connectionString))
