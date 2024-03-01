@@ -172,11 +172,11 @@
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(332, 425);
+            this.StatusLabel.Location = new System.Drawing.Point(279, 425);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(73, 26);
+            this.StatusLabel.Size = new System.Drawing.Size(126, 26);
             this.StatusLabel.TabIndex = 12;
-            this.StatusLabel.Text = "You are black\r\nNo opponent";
+            this.StatusLabel.Text = "You are black\r\nOpponent not connected\r\n";
             this.StatusLabel.Visible = false;
             // 
             // Game

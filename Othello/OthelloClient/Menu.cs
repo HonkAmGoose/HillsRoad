@@ -37,12 +37,9 @@ namespace Othello
         {
             RoomSelect roomSelect = RoomSelect.Instance;
             if (roomSelect == null) (roomSelect = new RoomSelect(this)).Show();
-            roomSelect.BringToFront();
-        }
 
-        private void OthelloMenu_Enter(object sender, EventArgs e)
-        {
-
+            if (InvokeRequired) Invoke(new Action(() => roomSelect.BringToFront()));
+            else roomSelect.BringToFront();
         }
 
         public void NewOnlineGame(int roomID, string password)

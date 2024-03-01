@@ -68,7 +68,8 @@ namespace Othello
             else
             {
                 MessageBox.Show("Opponent made an invalid move - exiting");
-                Close();
+                if (InvokeRequired) Invoke(new Action(() => Close()));
+                else Close();
             }
         }
 
@@ -77,9 +78,15 @@ namespace Othello
             this.opponentConnected = opponentConnected;
             this.player = player;
 
-            string oc = opponentConnected ? "" : "not ";
+            if (InvokeRequired) Invoke(new Action(() => UpdateStatusLabel(opponentConnected, player)));
+            else UpdateStatusLabel(opponentConnected, player);
 
-            MessageBox.Show($"Opponent is {oc}connected, you are player {player}");
+            MessageBox.Show($"Opponent is {(opponentConnected ? "" : "not ")}connected, you are player {player}");
+        }
+
+        private void UpdateStatusLabel(bool opponentConnected, char player)
+        {
+            StatusLabel.Text = $"You are {(player == 'B' ? "black" : player == 'W' ? "white" : throw new Exception("Help"))}\nOpponent {(opponentConnected ? "" : "not ")}connected";
         }
 
         private async void GUI_Load(object sender, EventArgs e)
@@ -125,7 +132,7 @@ namespace Othello
 
         private async void EndTurnButton_Click(object sender, EventArgs e)
         {
-            if (online && (!opponentConnected || GameBoard.PlayerTurn != player))
+            if (online && (/*!opponentConnected ||*/ GameBoard.PlayerTurn != player))
             {
                 string addition = (opponentConnected) ? "are" : "aren't";
                 MessageBox.Show($"Opponent's turn - they {addition} connected");
@@ -135,12 +142,13 @@ namespace Othello
                 EndTurnButton.Enabled = false; // Prevent spam of the button
                 if (GameBoard.IsMoveProposed) // Only confirm move if one has been proposed
                 {
+                    string proposedMove = GameBoard.ProposedMove.ToString();
                     GameBoard.ConfirmMove();
                     if (online)
                     {
                         await connection.Start(new LongPollingTransport());
                         _ = hubProxy.Invoke("Hello", parentMenu.ID);
-                        _ = hubProxy.Invoke("MakeMove", parentMenu.ID, player, GameBoard.ProposedMove.ToString());
+                        _ = hubProxy.Invoke("MakeMove", parentMenu.ID, player, proposedMove);
                     }
                     StartTurn();
                     Refresh();
@@ -205,6 +213,7 @@ namespace Othello
             }
 
             NoValidMovesCounter = 0;
+            GameBoard.StartTurn();
             DisplayPanel.Enabled = true;
             HintButton.Enabled = true;
             EndTurnButton.Enabled = true;

@@ -136,7 +136,6 @@
             this.Controls.Add(this.label1);
             this.Name = "OthelloMenu";
             this.Text = "Menu";
-            this.Enter += new System.EventHandler(this.OthelloMenu_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();
 

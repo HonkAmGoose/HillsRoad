@@ -16,6 +16,7 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
 
         public List<string> messages = new List<string>();
 
+        
         private static void Main(string[] args)
         {
             Console.WriteLine("Server started");
@@ -24,12 +25,19 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
 
             StartServer();
         }
+        
+
+        /*
+        private static void Main(string[] args)
+        {
+            MyHub.GetOpponentID("7e309c85-e20d-476a-a30f-d4ffe7bb9fe8", 'B');
+        }
+        */
 
         private static void StartServer()
         {
             using (WebApp.Start(Url, Configuration))
             {
-                bool dc = false;
                 var context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
 
                 Console.WriteLine($"Server running on {Url}");

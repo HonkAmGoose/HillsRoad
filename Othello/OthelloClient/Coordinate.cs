@@ -36,7 +36,7 @@ namespace Othello
                 )
             {
                 int x = coord[0] - 'A';
-                int y = Convert.ToInt32(coord.Substring(1));
+                int y = Convert.ToInt32(coord.Substring(1)) - 1;
                 Construct(x, y);
             }
             else
@@ -70,7 +70,7 @@ namespace Othello
         /// <returns>The string representation formatted as [1 letter][1-2 numbers]</returns>
         public override string ToString()
         {
-            return $"{char.ConvertFromUtf32('A' + x)}{y}";
+            return $"{char.ConvertFromUtf32('A' + x)}{y + 1}";
         }
     }
 }

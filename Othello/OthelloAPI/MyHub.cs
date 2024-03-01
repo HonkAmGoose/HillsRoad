@@ -175,13 +175,12 @@ namespace Othello
         /// <param name="player">'B' or 'W' representing which player the client is</param>
         /// <returns>Opponent's client ID</returns>
         /// <exception cref="ArgumentException">If player isn't valid</exception>
-        private string GetOpponentID(string ID, char player)
+        public static string GetOpponentID(string ID, char player)
         {
             int roomID = OthelloDB.QueryIntScalar($"SELECT RoomID FROM Connection_Basic WHERE ConnectionID = '{ID}'"); // I know this could be insecure DEFINITELY ID - fix
             int gameID = OthelloDB.QueryIntScalar($"SELECT CurrentGame FROM Room WHERE RoomID = {roomID}");
 
-            string prefix = (player == 'B') ? "Black" : (player == 'W') ? "White" : throw new ArgumentException("Player should be 'B' or 'W'");
-            return OthelloDB.QueryStrScalar($"SELECT {prefix}Connection FROM Game_Basic WHERE GameID = {gameID}");
+            return OthelloDB.QueryStrScalar($"SELECT {((player == 'B') ? "White" : (player == 'W') ? "Black" : throw new ArgumentException("Player should be 'B' or 'W'"))}Connection FROM Game_Basic WHERE GameID = {gameID}");
         }
     }
 }
