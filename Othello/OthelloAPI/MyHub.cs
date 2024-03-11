@@ -9,6 +9,9 @@ using System.Security.Principal;
 
 namespace Othello
 {
+    /// <summary>
+    /// SignalR hub class that defines server methods
+    /// </summary>
     public class MyHub : Hub
     {
         /// <summary>
@@ -23,7 +26,7 @@ namespace Othello
         {
             Console.WriteLine("debug start CreateRoom");
             
-            string[] words = File.ReadAllLines("C:\\Users\\Dom\\My stuff\\SixthForm\\Computer Science\\Code\\Othello\\OthelloClient\\Words.txt");
+            string[] words = File.ReadAllLines("C:\\Users\\Dom\\My stuff\\SixthForm\\Computer Science\\Code\\Othello\\OthelloClient\\Words.txt"); // Found at https://word-lists.com/word-lists/100-most-common-5-letter-words/
             Random random = new Random();
             string password = words[random.Next(words.Length)];
             

@@ -12,14 +12,35 @@ namespace Othello
         /// Array of tiles representing the board
         /// </summary>
         public Tile[,] Tiles { get; protected set; }
-        
+
+        /// <summary>
+        /// Stores which player's turn it is
+        /// </summary>
         public char PlayerTurn { get; protected set; }
+
+        /// <summary>
+        /// Stores how many counters each player has on the board
+        /// </summary>
         public int[] CounterNumbers { get; protected set; }
 
+        /// <summary>
+        /// Stores a list of valid moves for the current player
+        /// </summary>
         public List<Coordinate> ValidMoves { get; protected set; }
+
+        /// <summary>
+        /// Stores a list of tiles that would turn for the currently proposed move
+        /// </summary>
         public List<Coordinate> TurningTiles { get; protected set; }
 
+        /// <summary>
+        /// Stores whether a move is currently being proposed
+        /// </summary>
         public bool IsMoveProposed { get; protected set; }
+
+        /// <summary>
+        /// Stores the currently proposed move
+        /// </summary>
         public Coordinate ProposedMove { get; protected set; }
 
 

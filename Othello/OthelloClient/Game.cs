@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Othello
 {
     /// <summary>
-    /// The GUI form
+    /// The form to actually play the game
     /// </summary>
     public partial class Game : Form
     {
