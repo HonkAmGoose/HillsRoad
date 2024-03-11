@@ -2,15 +2,14 @@
 
 namespace Othello
 {
-    internal class OnlineBoard : Board
+    internal class GameBoard : Board
     {
         /// <summary>
         /// Creates a board and calls setup
         /// </summary>
-        public OnlineBoard() : base()
+        public GameBoard() : base()
         {
             Setup();
-
             CounterNumbers = new int[] { 2, 2 };
         }
 
@@ -20,7 +19,7 @@ namespace Othello
         /// <param name="bonusPlayer">Player to give the bonus</param>
         /// <param name="bonusNumber">Number of bonus tiles</param>
         /// <exception cref="ArgumentException">Thrown when arguments are invalid</exception>
-        public OnlineBoard(char bonusPlayer, int bonusNumber) : base()
+        public GameBoard(char bonusPlayer, int bonusNumber) : base()
         {
             Setup();
 
@@ -53,7 +52,7 @@ namespace Othello
             Tiles[3, 4] = new Tile(3, 4, 'W');
             Tiles[4, 3] = new Tile(4, 3, 'W');
 
-            Console.WriteLine("Online");
+            Console.WriteLine("Offline");
         }
 
         /// <summary>

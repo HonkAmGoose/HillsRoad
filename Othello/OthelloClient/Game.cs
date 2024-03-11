@@ -257,8 +257,7 @@ namespace Othello
         {
             if (BonusComboBox.SelectedIndex == 0) // No bonus
             {
-                if (online) GameBoard = new OnlineBoard();
-                else GameBoard = new OfflineBoard();
+                GameBoard = new GameBoard();
             }
             else
             {
@@ -266,8 +265,7 @@ namespace Othello
                 char player = bonus / 4 == 0 ? 'B' : 'W';
                 bonus = bonus % 4 + 1;
 
-                if (online) GameBoard = new OnlineBoard(player, bonus);
-                else GameBoard = new OfflineBoard(player, bonus); // Black bonuses are first 4 and white the second 4
+                GameBoard = new GameBoard(player, bonus); // Black bonuses are first 4 and white the second 4
             }
 
             NoValidMovesCounter = 0;

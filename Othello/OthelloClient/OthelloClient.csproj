@@ -101,8 +101,7 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
-    <Compile Include="OnlineBoard.cs" />
-    <Compile Include="OfflineBoard.cs" />
+    <Compile Include="GameBoard.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
