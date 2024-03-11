@@ -18,7 +18,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method to test multiple runs of the same method and take an average of all but the first one
+        /// Tests multiple runs of the same method and take an average of all but the first one
         /// </summary>
         /// <param name="method"></param>
         public static void MultipleTestRun(Action method)
@@ -32,7 +32,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Function to run a single test and return the time that it took
+        /// Runs a single test and return the time that it took
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>

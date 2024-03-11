@@ -9,7 +9,7 @@ namespace Othello
         public Coordinate Location { get; private set; }
 
         /// <summary>
-        /// Used to create blank/empty tiles
+        /// Creates a blank/empty tile
         /// </summary>
         /// <param name="x">x coordinate</param>
         /// <param name="y">y coordinate</param>
@@ -19,7 +19,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Used for tiles that start with a certain colour
+        /// Creates a tile of a certain colour
         /// </summary>
         /// <param name="x">x coordinate</param>
         /// <param name="y">y coordinate</param>

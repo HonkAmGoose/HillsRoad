@@ -5,6 +5,10 @@ namespace Othello
 {
     class Program
     {
+        /// <summary>
+        /// Main method for the test client
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             const string connectionString = "Server=localhost; Database=OTHELLO_DB; Trusted_Connection=True;";
@@ -19,6 +23,11 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Test getting usernames
+        /// </summary>
+        /// <param name="connectionString">Database connection string</param>
+        /// <returns></returns>
         public static string[] GetUserNames(string connectionString)  
         {
             List<string> values = new();

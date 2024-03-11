@@ -27,6 +27,11 @@ namespace Othello
 
         SolidBrush[] TileBrushes = new SolidBrush[] { new SolidBrush(Color.Black), new SolidBrush(Color.White), new SolidBrush(Color.Gold) };
 
+        /// <summary>
+        /// Creates a form to play the game of Othello
+        /// </summary>
+        /// <param name="parentMenu">Stores a reference to the Othello.Menu instance that opened this form</param>
+        /// <param name="online">Determines if a game is online or not</param>
         public Game(OthelloMenu parentMenu, bool online)
         {
             InitializeComponent();
@@ -39,6 +44,7 @@ namespace Othello
                 StatusLabel.Visible = true;
                 Text += " - " + (_ = parentMenu.roomID).ToString() + parentMenu.password;
 
+                // Register hub events
                 connection = new HubConnection("http://localhost:9082");
                 hubProxy = connection.CreateHubProxy("MyHub");
                 hubProxy.On<bool, char>("ReturnGameInfo", (opponentConnected, player) => GetReturnedGameInfo(opponentConnected, player));
@@ -51,6 +57,10 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Registered to the hub method OpponentJoin and OpponentLeave, updates opponentConnected
+        /// </summary>
+        /// <param name="joinedOrNot">Whether they joined or left</param>
         private void UpdateOpponentStatus(bool joinedOrNot)
         {
             opponentConnected = joinedOrNot;
@@ -58,6 +68,10 @@ namespace Othello
             MessageBox.Show($"Opponent {prefix}connected");
         }
 
+        /// <summary>
+        /// Registered to the hub method OpponentMove, makes a move for the opponent
+        /// </summary>
+        /// <param name="move"></param>
         private void MakeOpponentMove(string move)
         {
             Coordinate coord = new Coordinate(move);
@@ -71,8 +85,15 @@ namespace Othello
                 if (InvokeRequired) Invoke(new Action(() => Close()));
                 else Close();
             }
+            if (InvokeRequired) Invoke(new Action(() => Refresh()));
+            else Refresh();
         }
 
+        /// <summary>
+        /// Registered to the hub method returnGameInfo, stores the game info returned by the server
+        /// </summary>
+        /// <param name="opponentConnected">Whether the opponent is connected</param>
+        /// <param name="player">What colour the user is playing as</param>
         private void GetReturnedGameInfo(bool opponentConnected, char player)
         {
             this.opponentConnected = opponentConnected;
@@ -84,11 +105,22 @@ namespace Othello
             MessageBox.Show($"Opponent is {(opponentConnected ? "" : "not ")}connected, you are player {player}");
         }
 
+        /// <summary>
+        /// Updates the status label to show whether the opponent is connected
+        /// </summary>
+        /// <param name="opponentConnected">Whether the opponent is connected</param>
+        /// <param name="player">What colour the user is playing as</param>
+        /// <exception cref="ArgumentException">If player is Colour.None</exception>
         private void UpdateStatusLabel(bool opponentConnected, char player)
         {
             StatusLabel.Text = $"You are {(player == 'B' ? "black" : player == 'W' ? "white" : throw new Exception("Help"))}\nOpponent {(opponentConnected ? "" : "not ")}connected";
         }
 
+        /// <summary>
+        /// Called on load, connects to the server and initialises parts of the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void GUI_Load(object sender, EventArgs e)
         {
             DisplayGraphics = DisplayPanel.CreateGraphics(); // Get the graphics object to be referenced
@@ -106,6 +138,11 @@ namespace Othello
             Refresh();
         }
 
+        /// <summary>
+        /// Creates a new game by calling NewGame()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewGameButton_Click(object sender, EventArgs e)
         {
             NewGameButton.Enabled = false; // Don't allow multiple clicks
@@ -124,15 +161,26 @@ namespace Othello
             Refresh();
         }
 
+        /// <summary>
+        /// Hints possible moves to the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HintButton_Click(object sender, EventArgs e)
         {
             GameBoard.HintMoves();
             Refresh();
         }
 
+        /// <summary>
+        /// Ends a player's turn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="Exception">Thrown if Game.player is Colour.None</exception>
         private async void EndTurnButton_Click(object sender, EventArgs e)
         {
-            if (online && (/*!opponentConnected ||*/ GameBoard.PlayerTurn != player))
+            if (online && (/*!opponentConnected ||*/ GameBoard.PlayerTurn != player)) // Change this --------------------------------------------------------------------------
             {
                 string addition = (opponentConnected) ? "are" : "aren't";
                 MessageBox.Show($"Opponent's turn - they {addition} connected");
@@ -157,6 +205,11 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Called when clicking the game area, proposes a move
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DisplayPanel_MouseUp(object sender, MouseEventArgs e)
         {
             if (online && GameBoard.PlayerTurn != player)
@@ -185,6 +238,11 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Draws the game panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DisplayPanel_Paint(object sender, PaintEventArgs e)
         {
             DrawBackground();
@@ -193,7 +251,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method to create a new game by generating a new game board and allowing input
+        /// Creates a new game by generating a new game board and allowing input
         /// </summary>
         private void NewGame()
         {
@@ -220,7 +278,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method used at the start of the turn to check for the end of the game
+        /// Checks for the end of the game at the start of each turn
         /// </summary>
         private void StartTurn()
         {
@@ -269,7 +327,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method to update the counter numbers
+        /// Updates the counter numbers
         /// </summary>
         private void UpdateCounterNumbers()
         {
@@ -278,7 +336,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method to draw the background gameboard
+        /// Draws the background gameboard
         /// </summary>
         private void DrawBackground()
         {
@@ -295,7 +353,7 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method to draw the pieces onto the board
+        /// Draws the pieces onto the board
         /// </summary>
         private void DrawPieces()
         {
@@ -333,16 +391,33 @@ namespace Othello
             }
         }
 
+        /// <summary>
+        /// Draws a counter in a specified place with a specified colour
+        /// </summary>
+        /// <param name="brush"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void DrawCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 7, y * 50 + 7, 40, 40);
         }
 
+        /// <summary>
+        /// Draws a small counter in a specified place with a specified colour
+        /// </summary>
+        /// <param name="brush"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void DrawSmallCounter(SolidBrush brush, int x, int y)
         {
             DisplayGraphics.FillEllipse(brush, x * 50 + 12, y * 50 + 12, 30, 30);
         }
 
+        /// <summary>
+        /// Called when form closes, tells the server that the player is leaving and redisplays the menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Game_FormClosed(object sender, FormClosedEventArgs e)
         {
             using (var connection = new HubConnection(Program.hubConnection))
