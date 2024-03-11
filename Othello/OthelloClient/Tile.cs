@@ -4,12 +4,12 @@ namespace Othello
 {
     internal class Tile
     {
-        public char CounterColour = 'N'; // 'N'one, 'W'hite or 'B'lack
-        public char Status = 'N'; // 'N'one, 'C'onfirmed, 'P'roposed, 'T'urning or 'H'inted
+        public Colour CounterColour = Colour.None;
+        public Status CounterStatus = Status.None;
         public Coordinate Location { get; private set; }
 
         /// <summary>
-        /// Used to create blank/empty tiles
+        /// Creates a blank/empty tile
         /// </summary>
         /// <param name="x">x coordinate</param>
         /// <param name="y">y coordinate</param>
@@ -19,21 +19,16 @@ namespace Othello
         }
 
         /// <summary>
-        /// Used for tiles that start with a certain colour
+        /// Creates a tile of a certain colour
         /// </summary>
         /// <param name="x">x coordinate</param>
         /// <param name="y">y coordinate</param>
         /// <param name="player">player colour</param>
-        public Tile(int x, int y, char player)
+        public Tile(int x, int y, Colour player)
         {
             Location = new Coordinate(x, y);
             CounterColour = player;
-            Status = 'C';
-        }
-
-        public override string ToString()
-        {
-            return $"{Location}, C:{CounterColour}, S:{Status}";
+            CounterStatus = Status.Confirmed;
         }
     }
 }

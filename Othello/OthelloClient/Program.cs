@@ -4,13 +4,40 @@ using System.Windows.Forms;
 
 namespace Othello
 {
+    /// <summary>
+    /// Enum to store the colour of a tile or player
+    /// </summary>
+    public enum Colour
+    {
+        None,
+        Black, 
+        White,
+    }
+
+    /// <summary>
+    /// Enum to store the status of a tile
+    /// </summary>
+    public enum Status
+    {
+        None,
+        Proposed,
+        Confirmed,
+        Turning,
+        Hinted,
+    }
+
+    /// <summary>
+    /// Client program
+    /// </summary>
     internal static class Program
     {
-        public const string connectionString = "Server=localhost; Database=OTHELLO_DB; Trusted_Connection=True;";
+        /// <summary>
+        /// Stores the hubconnection URL
+        /// </summary>
         public const string hubConnection = "http://localhost:9082";
 
         /// <summary>
-        /// The main entry point for the application.
+        /// The main entry point for the application
         /// </summary>
         [STAThread]
         static void Main()
@@ -18,7 +45,7 @@ namespace Othello
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Uncomment to start an extra version
+            // Start an extra version
             var thread = new Thread(ThreadStart);
             thread.TrySetApartmentState(ApartmentState.STA);
             thread.Start();
@@ -26,6 +53,10 @@ namespace Othello
             Application.Run(new OthelloMenu());
 
         }
+
+        /// <summary>
+        /// Starts a second copy of the game
+        /// </summary>
         private static void ThreadStart()
         {
             Application.Run(new OthelloMenu());

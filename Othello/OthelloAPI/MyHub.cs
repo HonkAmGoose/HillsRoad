@@ -9,6 +9,9 @@ using System.Security.Principal;
 
 namespace Othello
 {
+    /// <summary>
+    /// SignalR hub class that defines server methods
+    /// </summary>
     public class MyHub : Hub
     {
         /// <summary>
@@ -23,7 +26,7 @@ namespace Othello
         {
             Console.WriteLine("debug start CreateRoom");
             
-            string[] words = File.ReadAllLines("C:\\Users\\Dom\\My stuff\\SixthForm\\Computer Science\\Code\\Othello\\OthelloClient\\Words.txt");
+            string[] words = File.ReadAllLines("C:\\Users\\Dom\\My stuff\\SixthForm\\Computer Science\\Code\\Othello\\OthelloClient\\Words.txt"); // Found at https://word-lists.com/word-lists/100-most-common-5-letter-words/
             Random random = new Random();
             string password = words[random.Next(words.Length)];
             
@@ -79,54 +82,86 @@ namespace Othello
 
                 if (gameID == -1) // Create new game
                 {
-                    gameID = OthelloDB.QueryIntScalar
-                        (
-                            $"INSERT INTO Game_Basic(NumberOfTurns, BlackConnection) VALUES (0, '{ID}'); " +
-                            $"SELECT TOP 1 GameID FROM Game_Basic ORDER BY GameID DESC;"
-                        );
-                    OthelloDB.QueryNoResult($"UPDATE Room SET CurrentGame = {gameID} WHERE RoomID = {roomID}");
+                    CreateNewGame(ID, roomID);
                     player = 'B';
                     opponentConnected = false;
                 }
                 else
                 {
-                    string bc = OthelloDB.QueryStrScalar($"SELECT BlackConnection FROM Game_Basic WHERE GameID = {gameID}");
-                    string wc = OthelloDB.QueryStrScalar($"SELECT WhiteConnection FROM Game_Basic WHERE GameID = {gameID}");
-                    
-                    if (bc == wc)
-                    {
-                        throw new Exception("Help");
-                    }
-                    else if (bc == ID)
-                    {
-                        player = 'B';
-                        opponentConnected = wc != null;
-                    }
-                    else if (wc == ID)
-                    {
-                        player = 'W';
-                        opponentConnected = bc != null;
-                    }
-                    else if (bc == null)
-                    {
-                        OthelloDB.QueryNoResult($"UPDATE Game_Basic SET BlackConnection = '{ID}' WHERE GameID = {gameID}");
-                        player = 'B';
-                        opponentConnected = false;
-                    }
-                    else if (wc == null)
-                    {
-                        OthelloDB.QueryNoResult($"UPDATE Game_Basic SET WhiteConnection = '{ID}' WHERE GameID = {gameID}");
-                        player = 'W';
-                        opponentConnected = false;
-                    }
-                    else
-                    {
-                        throw new Exception("Help");
-                    }
+                    (opponentConnected, player) = DecideStatus(ID, gameID);
                 }
 
                 Clients.Caller.ReturnGameInfo(opponentConnected, player);
             }
+        }
+
+        /// <summary>
+        /// Resets the game in the current room
+        /// </summary>
+        /// <param name="ID">ID of the client</param>
+        public void ResetGame(string ID)
+        {
+            int roomID = OthelloDB.QueryIntScalar($"SELECT RoomID FROM Connection_Basic WHERE ConnectionID = '{ID}'"); // I know this could be insecure DEFINITELY ID - fix
+            CreateNewGame(ID, roomID);
+        }
+
+        /// <summary>
+        /// Creates a new game and assigns it to the current room
+        /// </summary>
+        /// <param name="ID">ID of the client</param>
+        /// <param name="roomID">ID of the room</param>
+        private static void CreateNewGame(string ID, int roomID)
+        {
+            int gameID = OthelloDB.QueryIntScalar($"INSERT INTO Game_Basic(NumberOfTurns, BlackConnection) VALUES (0, '{ID}'); " +
+                                                  $"SELECT TOP 1 GameID FROM Game_Basic ORDER BY GameID DESC;");
+            OthelloDB.QueryNoResult($"UPDATE Room SET CurrentGame = {gameID} WHERE RoomID = {roomID}");
+        }
+
+        /// <summary>
+        /// Decides whether the opponent is connected and what colour the player is
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="gameID"></param>
+        /// <exception cref="Exception"></exception>
+        private static (bool, char) DecideStatus(string ID, int gameID)
+        {
+            bool opponentConnected;
+            char player;
+
+            string bc = OthelloDB.QueryStrScalar($"SELECT BlackConnection FROM Game_Basic WHERE GameID = {gameID}");
+            string wc = OthelloDB.QueryStrScalar($"SELECT WhiteConnection FROM Game_Basic WHERE GameID = {gameID}");
+
+            if (bc == wc)
+            {
+                throw new Exception("Help");
+            }
+            else if (bc == ID)
+            {
+                player = 'B';
+                opponentConnected = wc != null;
+            }
+            else if (wc == ID)
+            {
+                player = 'W';
+                opponentConnected = bc != null;
+            }
+            else if (bc == null)
+            {
+                OthelloDB.QueryNoResult($"UPDATE Game_Basic SET BlackConnection = '{ID}' WHERE GameID = {gameID}");
+                player = 'B';
+                opponentConnected = false;
+            }
+            else if (wc == null)
+            {
+                OthelloDB.QueryNoResult($"UPDATE Game_Basic SET WhiteConnection = '{ID}' WHERE GameID = {gameID}");
+                player = 'W';
+                opponentConnected = false;
+            }
+            else
+            {
+                throw new Exception("Help");
+            }
+            return (opponentConnected, player);
         }
 
         /// <summary>

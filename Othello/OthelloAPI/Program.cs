@@ -5,7 +5,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Hosting;
 using Owin;
 
-namespace Othello // THIS IS ACTUALLY THE SERVER
+namespace Othello
 {
     /// <summary>
     /// Server program which deals with SignalR connections to clients and database calls
@@ -14,9 +14,10 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
     {
         private const string Url = "http://localhost:9082";
 
-        public List<string> messages = new List<string>();
-
-        
+        /// <summary>
+        /// Main method to clean up database and start the server
+        /// </summary>
+        /// <param name="args"></param>
         private static void Main(string[] args)
         {
             Console.WriteLine("Server started");
@@ -26,7 +27,7 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
             StartServer();
         }
         
-
+        // Testing main
         /*
         private static void Main(string[] args)
         {
@@ -34,6 +35,9 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
         }
         */
 
+        /// <summary>
+        /// Starts the server using SignalR
+        /// </summary>
         private static void StartServer()
         {
             using (WebApp.Start(Url, Configuration))
@@ -46,10 +50,13 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
             }
         }
 
+        /// <summary>
+        /// Deletes rooms older than 2 days
+        /// </summary>
         private static void DeleteOldRoomsAndConns()
         {
             int date = DateTime.Now.DayOfYear;
-            string query = "DELETE FROM Room WHERE DateCreated <= " + (date - 2).ToString();
+            string query = "DELETE FROM Connection_Basic; DELETE FROM Room WHERE DateCreated <= " + (date - 2).ToString();
             if (date <= 2)
             {
                 query += "OR DateCreated >= " + (date + 363).ToString();
@@ -59,6 +66,10 @@ namespace Othello // THIS IS ACTUALLY THE SERVER
             OthelloDB.QueryNoResult("DELETE FROM Connection_Basic WHERE RoomID < (SELECT TOP 1 RoomID FROM Room)");
         }
 
+        /// <summary>
+        /// Configures SignalR
+        /// </summary>
+        /// <param name="app"></param>
         public static void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
