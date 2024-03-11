@@ -113,7 +113,8 @@
             "White 1",
             "White 2",
             "White 3",
-            "White 4"});
+            "White 4",
+            "Anti variant"});
             this.BonusComboBox.Location = new System.Drawing.Point(332, 425);
             this.BonusComboBox.Name = "BonusComboBox";
             this.BonusComboBox.Size = new System.Drawing.Size(80, 21);

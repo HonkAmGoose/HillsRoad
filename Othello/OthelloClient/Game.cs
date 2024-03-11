@@ -16,6 +16,7 @@ namespace Othello
         Board GameBoard;
 
         bool online = false;
+        bool anti = false;
         int NoValidMovesCounter; // Used to end the game when both players have no valid moves
         int BlackWins = 0, WhiteWins = 0;
 
@@ -257,6 +258,12 @@ namespace Othello
         {
             if (BonusComboBox.SelectedIndex == 0) // No bonus
             {
+                anti = false;
+                GameBoard = new GameBoard();
+            }
+            else if (BonusComboBox.SelectedIndex == 9)
+            {
+                anti = true;
                 GameBoard = new GameBoard();
             }
             else
@@ -265,6 +272,7 @@ namespace Othello
                 char player = bonus / 4 == 0 ? 'B' : 'W';
                 bonus = bonus % 4 + 1;
 
+                anti = false;
                 GameBoard = new GameBoard(player, bonus); // Black bonuses are first 4 and white the second 4
             }
 
@@ -305,31 +313,7 @@ namespace Othello
             if (InvokeRequired) Invoke(new Action(() => Refresh()));
             else Refresh();
 
-            if (GameBoard.CounterNumbers[0] > GameBoard.CounterNumbers[1])
-            {
-                if (InvokeRequired) Invoke(new Action(() => BlackWinLabel.Text = (++BlackWins).ToString()));
-                else BlackWinLabel.Text = (++BlackWins).ToString();
-
-                MessageBox.Show("Game Over - Black wins!");
-                if (online && player == 'W')
-                {
-                    await connection.Start(new LongPollingTransport());
-                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'B');
-                }
-            }
-            else if (GameBoard.CounterNumbers[0] < GameBoard.CounterNumbers[1])
-            {
-                if (InvokeRequired) Invoke(new Action(() => WhiteWinLabel.Text = (++WhiteWins).ToString()));
-                else WhiteWinLabel.Text = (++WhiteWins).ToString();
-
-                MessageBox.Show("Game Over - White wins!");
-                if (online && player == 'B')
-                {
-                    await connection.Start(new LongPollingTransport());
-                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'W');
-                }
-            }
-            else
+            if (GameBoard.CounterNumbers[0] == GameBoard.CounterNumbers[1])
             {
                 if (InvokeRequired)
                 {
@@ -348,6 +332,36 @@ namespace Othello
                     await connection.Start(new LongPollingTransport());
                     _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'D');
                 }
+            }
+            // Using != as an XOR operator
+            else if (anti != GameBoard.CounterNumbers[0] > GameBoard.CounterNumbers[1])
+            {
+                if (InvokeRequired) Invoke(new Action(() => BlackWinLabel.Text = (++BlackWins).ToString()));
+                else BlackWinLabel.Text = (++BlackWins).ToString();
+
+                MessageBox.Show("Game Over - Black wins!");
+                if (online && player == 'W')
+                {
+                    await connection.Start(new LongPollingTransport());
+                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'B');
+                }
+            }
+            // Using != as an XOR operator
+            else if (anti != GameBoard.CounterNumbers[0] < GameBoard.CounterNumbers[1])
+            {
+                if (InvokeRequired) Invoke(new Action(() => WhiteWinLabel.Text = (++WhiteWins).ToString()));
+                else WhiteWinLabel.Text = (++WhiteWins).ToString();
+
+                MessageBox.Show("Game Over - White wins!");
+                if (online && player == 'B')
+                {
+                    await connection.Start(new LongPollingTransport());
+                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'W');
+                }
+            }
+            else
+            {
+                throw new Exception("Help - this should be unreachable");
             }
             DisplayPanel.Enabled = false;
             HintButton.Enabled = false;
