@@ -85,6 +85,7 @@ namespace Othello
                 if (InvokeRequired) Invoke(new Action(() => Close()));
                 else Close();
             }
+            StartTurn();
             if (InvokeRequired) Invoke(new Action(() => Refresh()));
             else Refresh();
         }
@@ -180,10 +181,9 @@ namespace Othello
         /// <exception cref="Exception">Thrown if Game.player is Colour.None</exception>
         private async void EndTurnButton_Click(object sender, EventArgs e)
         {
-            if (online && (/*!opponentConnected ||*/ GameBoard.PlayerTurn != player)) // Change this --------------------------------------------------------------------------
+            if (online && GameBoard.PlayerTurn != player)
             {
-                string addition = (opponentConnected) ? "are" : "aren't";
-                MessageBox.Show($"Opponent's turn - they {addition} connected");
+                MessageBox.Show($"Opponent's turn");
             }
             else
             {
@@ -298,26 +298,56 @@ namespace Othello
         }
 
         /// <summary>
-        /// Method to end game by showing a messagebox and disabling input
+        /// Method to end game by showing a messagebox and disabling input, and reporting if the opponent won to the server
         /// </summary>
-        private void EndGame()
+        private async void EndGame()
         {
-            Refresh();
+            if (InvokeRequired) Invoke(new Action(() => Refresh()));
+            else Refresh();
+
             if (GameBoard.CounterNumbers[0] > GameBoard.CounterNumbers[1])
             {
-                BlackWinLabel.Text = (++BlackWins).ToString();
+                if (InvokeRequired) Invoke(new Action(() => BlackWinLabel.Text = (++BlackWins).ToString()));
+                else BlackWinLabel.Text = (++BlackWins).ToString();
+
                 MessageBox.Show("Game Over - Black wins!");
+                if (online && player == 'W')
+                {
+                    await connection.Start(new LongPollingTransport());
+                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'B');
+                }
             }
             else if (GameBoard.CounterNumbers[0] < GameBoard.CounterNumbers[1])
             {
-                WhiteWinLabel.Text = (++WhiteWins).ToString();
+                if (InvokeRequired) Invoke(new Action(() => WhiteWinLabel.Text = (++WhiteWins).ToString()));
+                else WhiteWinLabel.Text = (++WhiteWins).ToString();
+
                 MessageBox.Show("Game Over - White wins!");
+                if (online && player == 'B')
+                {
+                    await connection.Start(new LongPollingTransport());
+                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'W');
+                }
             }
             else
             {
-                BlackWinLabel.Text = (++BlackWins).ToString();
-                WhiteWinLabel.Text = (++WhiteWins).ToString();
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(() => BlackWinLabel.Text = (++BlackWins).ToString()));
+                    Invoke(new Action(() => WhiteWinLabel.Text = (++WhiteWins).ToString()));
+                }
+                else
+                {
+                    BlackWinLabel.Text = (++BlackWins).ToString();
+                    WhiteWinLabel.Text = (++WhiteWins).ToString();
+                }
+
                 MessageBox.Show("Game Over - Draw!");
+                if (online && player == 'B')
+                {
+                    await connection.Start(new LongPollingTransport());
+                    _ = hubProxy.Invoke("EndGame", parentMenu.ID, 'D');
+                }
             }
             DisplayPanel.Enabled = false;
             HintButton.Enabled = false;

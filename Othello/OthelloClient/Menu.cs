@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Hubs;
 using Microsoft.AspNet.SignalR.Client.Transports;
+using Microsoft.AspNet.SignalR.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +24,9 @@ namespace Othello
         public string password = "";
         public readonly string ID;
 
+        HubConnection connection;
+        IHubProxy hubProxy;
+
         /// <summary>
         /// Create form and initialise values
         /// </summary>
@@ -30,6 +36,11 @@ namespace Othello
 
             Random rand = new Random();
             ID = Guid.NewGuid().ToString();
+
+            // Register hub events
+            connection = new HubConnection("http://localhost:9082");
+            hubProxy = connection.CreateHubProxy("MyHub");
+            hubProxy.On<int, int, int, int>("ReturnStats", (blackGames, whiteGames, blackWins, whiteWins) => GetReturnedStats(blackGames, whiteGames, blackWins, whiteWins));
         }
 
         /// <summary>
@@ -67,6 +78,17 @@ namespace Othello
             game.Show();
             //if (InvokeRequired) Invoke(new Action(() => Hide()));
             Hide();
-        } 
+        }
+
+        private async void StatisticsButton_Click(object sender, EventArgs e)
+        {
+            await connection.Start(new LongPollingTransport());
+            _ = hubProxy.Invoke("GetStats", ID);
+        }
+
+        private void GetReturnedStats(int blackGames, int whiteGames, int blackWins, int whiteWins)
+        {
+            MessageBox.Show($"Games played - Black: {blackGames}, White: {whiteGames}\nGames won - Black: {blackWins}, White: {whiteWins}");
+        }
     }
 }

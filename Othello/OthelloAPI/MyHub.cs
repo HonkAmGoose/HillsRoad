@@ -174,7 +174,7 @@ namespace Othello
         /// <summary>
         /// Used in above methods to get an opponent's ID
         /// </summary>
-        /// <param name="ID">Client ID</param>
+        /// <param name="ID">ID of the client</param>
         /// <param name="player">'B' or 'W' representing which player the client is</param>
         /// <returns>Opponent's client ID</returns>
         /// <exception cref="ArgumentException">If player isn't valid</exception>
@@ -184,6 +184,35 @@ namespace Othello
             int gameID = OthelloDB.QueryIntScalar($"SELECT CurrentGame FROM Room WHERE RoomID = {roomID}");
 
             return OthelloDB.QueryStrScalar($"SELECT {((player == 'B') ? "White" : (player == 'W') ? "Black" : throw new ArgumentException("Player should be 'B' or 'W'"))}Connection FROM Game_Basic WHERE GameID = {gameID}");
+        }
+
+        /// <summary>
+        /// Stores information about the winner at the end of the game
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="winner"></param>
+        public void EndGame(string ID, char winner)
+        {
+            int roomID = OthelloDB.QueryIntScalar($"SELECT RoomID FROM Connection_Basic WHERE ConnectionID = '{ID}'"); // I know this could be insecure DEFINITELY ID - fix
+            int gameID = OthelloDB.QueryIntScalar($"SELECT CurrentGame FROM Room WHERE RoomID = {roomID}");
+            OthelloDB.QueryNoResult($"UPDATE Game_Basic SET Winner = '{winner}' WHERE GameID = {gameID}");
+        }
+
+        /// <summary>
+        /// Gets statistics for a client ID
+        /// </summary>
+        /// <param name="ID">ID of client</param>
+        public void GetStats(string ID)
+        {
+            if (Guid.TryParse(ID, out _))
+            {
+                int blackGames = OthelloDB.QueryIntScalar($"SELECT COUNT(BlackConnection) FROM Game_Basic WHERE BlackConnection = '{ID}'");
+                int whiteGames = OthelloDB.QueryIntScalar($"SELECT COUNT(WhiteConnection) FROM Game_Basic WHERE WhiteConnection = '{ID}'");
+                int blackWins = OthelloDB.QueryIntScalar($"SELECT COUNT(BlackConnection) FROM Game_Basic WHERE BlackConnection = '{ID}' AND Winner = 'B'");
+                int whiteWins = OthelloDB.QueryIntScalar($"SELECT COUNT(WhiteConnection) FROM Game_Basic WHERE WhiteConnection = '{ID}' AND Winner = 'W'");
+
+                Clients.Caller.ReturnStats(blackGames, whiteGames, blackWins, whiteWins);
+            }
         }
     }
 }
