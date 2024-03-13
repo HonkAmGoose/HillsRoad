@@ -233,22 +233,5 @@ namespace Othello
                 }
             }
         }
-
-        protected abstract void Setup();
-        public abstract void Reset();
-        public abstract void Reset(char bonusPlayer, int bonusNumber);
-
-        public abstract void HintMoves();
-        public abstract void UnhintMoves();
-
-        protected abstract void DisplayTurners();
-        protected abstract void UndisplayTurners();
-        protected abstract void TurnTurners();
-        public abstract void ChangeTurners(char player);
-
-        public abstract bool ProposeMove(Coordinate location);
-        public abstract void CancelMove();
-        public abstract void ConfirmMove();
-
     }
 }

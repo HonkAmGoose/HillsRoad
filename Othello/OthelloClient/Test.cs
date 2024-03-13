@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Othello
 {
+    /// <summary>
+    /// Program to test certain things
+    /// </summary>
     internal class Test
     {
         /// <summary>

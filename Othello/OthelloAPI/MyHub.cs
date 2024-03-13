@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 
 namespace Othello
 {
@@ -114,17 +111,21 @@ namespace Othello
                     {
                         OthelloDB.QueryNoResult($"UPDATE Game_Basic SET BlackConnection = '{ID}' WHERE GameID = {gameID}");
                         player = 'B';
-                        opponentConnected = false;
+                        opponentConnected = wc != null;
                     }
                     else if (wc == null)
                     {
                         OthelloDB.QueryNoResult($"UPDATE Game_Basic SET WhiteConnection = '{ID}' WHERE GameID = {gameID}");
                         player = 'W';
-                        opponentConnected = false;
+                        opponentConnected = bc != null;
                     }
                     else
                     {
                         throw new Exception("Help");
+                    }
+                    if (opponentConnected)
+                    {
+                        Clients.Client(connectionsDict[GetOpponentID(ID, player)]).OpponentJoin();
                     }
                 }
 
@@ -162,10 +163,11 @@ namespace Othello
         /// Allows a client to exit gracefully
         /// </summary>
         /// <param name="ID">ID of the client</param>
-        public void Leaving(string ID)
+        public void Leaving(string ID, char player)
         {
             if (Guid.TryParse(ID, out _)) 
             {
+                Clients.Client(connectionsDict[GetOpponentID(ID, player)]).OpponentLeave();
                 OthelloDB.QueryNoResult($"DELETE FROM Connection_Basic WHERE ConnectionID = '{ID}'"); // I know this could be insecure DEFINITELY ID - fix
                 Console.WriteLine($"{ID} is leaving");
             }

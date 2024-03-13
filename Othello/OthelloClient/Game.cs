@@ -7,13 +7,13 @@ using System.Windows.Forms;
 namespace Othello
 {
     /// <summary>
-    /// The form to actually play the game
+    /// Form to actually play the game
     /// </summary>
     public partial class Game : Form
     {
         OthelloMenu parentMenu;
         Graphics DisplayGraphics;
-        Board GameBoard;
+        GameBoard GameBoard;
 
         bool online = false;
         bool anti = false;
@@ -48,13 +48,10 @@ namespace Othello
                 // Register hub events
                 connection = new HubConnection("http://localhost:9082");
                 hubProxy = connection.CreateHubProxy("MyHub");
-                hubProxy.On<bool, char>("ReturnGameInfo", (opponentConnected, player) => GetReturnedGameInfo(opponentConnected, player));
+                hubProxy.On<bool, char>("ReturnGameInfo", (_opponentConnected, _player) => GetReturnedGameInfo(_opponentConnected, _player));
                 hubProxy.On("OpponentJoin", () => UpdateOpponentStatus(true));
                 hubProxy.On("OpponentLeave", () => UpdateOpponentStatus(false));
                 hubProxy.On<string>("OpponentMove", (move) => MakeOpponentMove(move));
-                // -------------------------------------------------------------------------------------------------------------------------------------------- TODO
-                //hubProxy.On("ReturnJoined", () => );
-                //hubProxy.On("ReturnDenied", () => );
             }
         }
 
@@ -67,6 +64,16 @@ namespace Othello
             opponentConnected = joinedOrNot;
             string prefix = joinedOrNot ? "" : "dis";
             MessageBox.Show($"Opponent {prefix}connected");
+            if (InvokeRequired) Invoke(new Action(() =>
+            {
+                UpdateStatusLabel();
+                NewGame();
+            }));
+            else
+            {
+                UpdateStatusLabel();
+                NewGame();
+            }
         }
 
         /// <summary>
@@ -94,17 +101,17 @@ namespace Othello
         /// <summary>
         /// Registered to the hub method returnGameInfo, stores the game info returned by the server
         /// </summary>
-        /// <param name="opponentConnected">Whether the opponent is connected</param>
-        /// <param name="player">What colour the user is playing as</param>
-        private void GetReturnedGameInfo(bool opponentConnected, char player)
+        /// <param name="_opponentConnected">Whether the opponent is connected</param>
+        /// <param name="_player">What colour the user is playing as</param>
+        private void GetReturnedGameInfo(bool _opponentConnected, char _player)
         {
-            this.opponentConnected = opponentConnected;
-            this.player = player;
+            opponentConnected = _opponentConnected;
+            player = _player;
 
-            if (InvokeRequired) Invoke(new Action(() => UpdateStatusLabel(opponentConnected, player)));
-            else UpdateStatusLabel(opponentConnected, player);
+            if (InvokeRequired) Invoke(new Action(() => UpdateStatusLabel()));
+            else UpdateStatusLabel();
 
-            MessageBox.Show($"Opponent is {(opponentConnected ? "" : "not ")}connected, you are player {player}");
+            MessageBox.Show($"Opponent is {(_opponentConnected ? "" : "not ")}connected, you are player {_player}");
         }
 
         /// <summary>
@@ -113,9 +120,9 @@ namespace Othello
         /// <param name="opponentConnected">Whether the opponent is connected</param>
         /// <param name="player">What colour the user is playing as</param>
         /// <exception cref="ArgumentException">If player is Colour.None</exception>
-        private void UpdateStatusLabel(bool opponentConnected, char player)
+        private void UpdateStatusLabel()
         {
-            StatusLabel.Text = $"You are {(player == 'B' ? "black" : player == 'W' ? "white" : throw new Exception("Help"))}\nOpponent {(opponentConnected ? "" : "not ")}connected";
+            StatusLabel.Text = $"Playing as {(player == 'B' ? "black" : player == 'W' ? "white" : throw new Exception("Help"))}\nOpponent {(opponentConnected ? "" : "not ")}connected";
         }
 
         /// <summary>
@@ -363,9 +370,20 @@ namespace Othello
             {
                 throw new Exception("Help - this should be unreachable");
             }
-            DisplayPanel.Enabled = false;
-            HintButton.Enabled = false;
-            EndTurnButton.Enabled = false;
+
+            if (InvokeRequired) Invoke(new Action(() =>
+            {
+                DisplayPanel.Enabled = false;
+                HintButton.Enabled = false;
+                EndTurnButton.Enabled = false;
+            }
+            ));
+            else
+            {
+                DisplayPanel.Enabled = false;
+                HintButton.Enabled = false;
+                EndTurnButton.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -462,15 +480,18 @@ namespace Othello
         /// <param name="e"></param>
         private async void Game_FormClosed(object sender, FormClosedEventArgs e)
         {
-            using (var connection = new HubConnection(Program.hubConnection))
+            if (online)
             {
-                var hubProxy = connection.CreateHubProxy("MyHub");
+                using (var connection = new HubConnection(Program.hubConnection))
+                {
+                    var hubProxy = connection.CreateHubProxy("MyHub");
 
-                // Start listening
-                await connection.Start(new LongPollingTransport());
+                    // Start listening
+                    await connection.Start(new LongPollingTransport());
 
-                // Send a message to server / other clients
-                _ = hubProxy.Invoke("Leaving", parentMenu.ID);
+                    // Send a message to server / other clients
+                    _ = hubProxy.Invoke("Leaving", parentMenu.ID, player);
+                }
             }
 
             parentMenu.Show();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Hosting;
 using Owin;
@@ -13,8 +11,6 @@ namespace Othello
     public class Program
     {
         private const string Url = "http://localhost:9082";
-
-        public List<string> messages = new List<string>();
 
         /// <summary>
         /// Main method to clean up database and start the server

@@ -2,6 +2,9 @@
 
 namespace Othello
 {
+    /// <summary>
+    /// Class to store the status of a tile on a board
+    /// </summary>
     internal class Tile
     {
         public char CounterColour = 'N'; // 'N'one, 'W'hite or 'B'lack

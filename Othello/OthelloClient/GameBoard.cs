@@ -2,6 +2,9 @@
 
 namespace Othello
 {
+    /// <summary>
+    /// Class to extend board by allowing turns to be taken
+    /// </summary>
     internal class GameBoard : Board
     {
         /// <summary>
@@ -44,7 +47,7 @@ namespace Othello
         /// <summary>
         /// Method to setup the beginning pieces in the centre of the board
         /// </summary>
-        protected override void Setup()
+        protected void Setup()
         {
             PlayerTurn = 'W'; // Will be changed by StartTurn() to black
             Tiles[3, 3] = new Tile(3, 3, 'B');
@@ -58,7 +61,7 @@ namespace Othello
         /// <summary>
         /// Method to reset the board to initial conditions
         /// </summary>
-        public override void Reset()
+        public void Reset()
         {
             for (int x = 0; x <= Coordinate.maxX; x++)
             {
@@ -79,7 +82,7 @@ namespace Othello
         /// <param name="bonusPlayer">Player to give the bonus</param>
         /// <param name="bonusNumber">Number of bonus tiles</param>
         /// <exception cref="ArgumentException">Thrown when arguments are invalid</exception>
-        public override void Reset(char bonusPlayer, int bonusNumber)
+        public void Reset(char bonusPlayer, int bonusNumber)
         {
             Reset();
 
@@ -101,7 +104,7 @@ namespace Othello
         /// <summary>
         /// Changes valid moves to 'H'inted status
         /// </summary>
-        public override void HintMoves()
+        public void HintMoves()
         {
             UndisplayTurners();
             foreach (Coordinate location in ValidMoves)
@@ -114,7 +117,7 @@ namespace Othello
         /// <summary>
         /// Changes valid moves back to 'N'one status
         /// </summary>
-        public override void UnhintMoves()
+        public void UnhintMoves()
         {
             foreach (Coordinate location in ValidMoves)
             {
@@ -126,7 +129,7 @@ namespace Othello
         /// <summary>
         /// Changes turning tiles to 'T'urning status
         /// </summary>
-        protected override void DisplayTurners()
+        protected void DisplayTurners()
         {
             foreach (Coordinate location in TurningTiles)
             {
@@ -138,7 +141,7 @@ namespace Othello
         /// <summary>
         /// Changes turning tiles back to 'N'one status
         /// </summary>
-        protected override void UndisplayTurners()
+        protected void UndisplayTurners()
         {
             ChangeTurners(PlayerTurn == 'W' ? 'B' : 'W');
         }
@@ -146,7 +149,7 @@ namespace Othello
         /// <summary>
         /// Turns tiles for the current player
         /// </summary>
-        protected override void TurnTurners()
+        protected void TurnTurners()
         {
             ChangeTurners(PlayerTurn);
         }
@@ -155,7 +158,7 @@ namespace Othello
         /// Used by UndisplayTurners and TurnTurners to change all turning tiles to a certain player with 'C'onfirmed status
         /// </summary>
         /// <param name="player">Which player to change the TurningTiles to</param>
-        public override void ChangeTurners(char player)
+        public void ChangeTurners(char player)
         {
             foreach (Coordinate location in TurningTiles)
             {
@@ -170,7 +173,7 @@ namespace Othello
         /// </summary>
         /// <param name="location">Proposed location</param>
         /// <exception cref="ArgumentException">If proposed location is not a valid move</exception>
-        public override bool ProposeMove(Coordinate location)
+        public bool ProposeMove(Coordinate location)
         {
             if (SearchValidMoves(location))
             {
@@ -192,7 +195,7 @@ namespace Othello
         /// <summary>
         /// Change statuses of tiles for cancelling a proposed move
         /// </summary>
-        public override void CancelMove()
+        public void CancelMove()
         {
             Coordinate location = ProposedMove;
 
@@ -207,7 +210,7 @@ namespace Othello
         /// <summary>
         /// Change statuses of tiles for confirming a proposed move
         /// </summary>
-        public override void ConfirmMove()
+        public void ConfirmMove()
         {
             Coordinate location = ProposedMove;
 

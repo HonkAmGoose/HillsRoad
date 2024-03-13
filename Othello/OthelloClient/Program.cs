@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace Othello
 {
     /// <summary>
-    /// Client program
+    /// Client program to run the GUI
     /// </summary>
     internal static class Program
     {
